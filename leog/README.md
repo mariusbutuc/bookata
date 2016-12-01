@@ -17,6 +17,9 @@
         - exploiting invariants
             + a `sort` function always sorts elements in order
             + a monotonically increasing function is always such that the former element is less than or equal to the next element
+        - test against an existing implementation
+            + compare a (custom) implementation with [one from Erlang][thomas-arts-2015]
 
   [book]: https://www.manning.com/books/the-little-elixir-and-otp-guidebook
   [eqc_ex]: https://github.com/Quviq/eqc_ex
+  [thomas-arts-2015]: http://www.erlang-factory.com/static/upload/media/144897884167052thomasartserlangfactoryberlin2015.pdf
