@@ -19,6 +19,22 @@
             + a monotonically increasing function is always such that the former element is less than or equal to the next element
         - test against an existing implementation
             + compare a (custom) implementation with [one from Erlang][thomas-arts-2015]
+        - using a simpler implementation to test a more complicated one
+        - performing operations in different orders
+        - idempotent operations
+    * Custom generators
+        - `string_with_commas`
+            + it has to be 1–10 characters long
+            + the string should contain lowercase letters
+            + the string should contain commas
+            + commas should appear less frequently than letters
+        - `collect` reports statistics for the generated data
+        - `:eqc.classify/3` used to check the distribution of test data
+        - exercise for the reader
+            + a DNA sequence consisting of only As, Ts, Gs, and Cs. An example is ACGTGGTCTTAA.
+            + a hexadecimal sequence including only the numbers 0–9 and the letters A–F. Two examples are 0FF1CE and CAFEBEEF.
+            + a sorted and unique sequence of numbers, such as -4, 10, 12, 35, 100.
+
 
   [book]: https://www.manning.com/books/the-little-elixir-and-otp-guidebook
   [eqc_ex]: https://github.com/Quviq/eqc_ex
