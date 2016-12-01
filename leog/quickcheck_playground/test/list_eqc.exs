@@ -14,4 +14,17 @@ defmodule ListEQC do
       ensure expected == actual
     end
   end
+
+  property "sorting works" do
+    forall l <- list(int) do
+      ensure l |> Enum.sort |> is_sorted == true
+    end
+  end
+
+  defp is_sorted([]), do: true
+  defp is_sorted(list) do
+    list
+    |> Enum.zip(tl(list))
+    |> Enum.all?(fn {x, y} -> x <= y end)
+  end
 end

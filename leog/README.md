@@ -14,6 +14,9 @@
             + Serializing and deserializing
             + Splitting and joining
             + Setting and getting
+        - exploiting invariants
+            + a `sort` function always sorts elements in order
+            + a monotonically increasing function is always such that the former element is less than or equal to the next element
 
   [book]: https://www.manning.com/books/the-little-elixir-and-otp-guidebook
   [eqc_ex]: https://github.com/Quviq/eqc_ex
