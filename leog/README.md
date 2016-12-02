@@ -34,15 +34,24 @@
             + commas should appear less frequently than letters
         - `collect` reports statistics for the generated data
         - `:eqc.classify/3` used to check the distribution of test data
-        - exercise for the reader
+        - _exercise for the reader_
             + a DNA sequence consisting of only As, Ts, Gs, and Cs. An example is ACGTGGTCTTAA.
             + a hexadecimal sequence including only the numbers 0–9 and the letters A–F. Two examples are 0FF1CE and CAFEBEEF.
             + a sorted and unique sequence of numbers, such as -4, 10, 12, 35, 100.
     * Recursive generators
-        - Generating arbitrarily nested lists
+        - generating arbitrarily nested lists
             + `sized/2` provides access to the current size parameter of the test data being generated. Standard way to handle recursive generators in QuickCheck
             + `oneof/1` generates a value using a randomly chosen element from the list of generators
             + `lazy/1` wrapper to use lazy evaluation
+            + `:eqc_gen.sample EQCGen.nested_list(:eqc_gen.int)`
+        - generating a balanced tree
+            + a balanced tree is one such that the following are true:
+                * the left and right subtrees’ heights differ by at most one
+                * the left and right subtree are both balanced
+            + `:eqc_gen.sample EQCGen.balanced_tree(:eqc_gen.int)`
+        - _exercise for the reader_
+            + an unbalanced tree
+            + JSON
 
 
   [book]: https://www.manning.com/books/the-little-elixir-and-otp-guidebook

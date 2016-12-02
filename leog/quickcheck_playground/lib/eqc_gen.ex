@@ -1,6 +1,26 @@
 defmodule EQCGen do
   use EQC.ExUnit
 
+  def balanced_tree(generator) do
+    sized size do
+      balanced_tree(size, generator)
+    end
+  end
+
+  defp balanced_tree(0, generator) do
+    {:leaf, generator}
+  end
+  defp balanced_tree(size, generator) do
+    lazy do
+      {
+        :node,
+        generator,
+        balanced_tree(div(size, 2), generator),
+        balanced_tree(div(size, 2), generator)
+      }
+    end
+  end
+
   def nested_list(generator) do
     sized size do
       nested_list(size, generator)
