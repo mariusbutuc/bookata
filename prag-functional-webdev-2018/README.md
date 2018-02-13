@@ -11,9 +11,9 @@
 ### Part I. Define the Functional Core in Elixir
 
 #### 2. Model Data and Behavior
-  - [ ] The Benefits
-  - [ ] Let’s Build It
-  - [ ] Discover the Entities and Model the Domain
+  - [x] The Benefits
+  - [x] Let’s Build It
+  - [x] Discover the Entities and Model the Domain
   - [ ] Transforming Data
   - [ ] Putting the Pieces Together
   - [ ] Wrapping Up
