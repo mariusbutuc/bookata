@@ -5,24 +5,45 @@ defmodule IslandsEngine.GuessesTest do
   doctest Guesses
 
   setup do
-    guesses = Guesses.new()
+    {:ok, guesses: Guesses.new()}
+  end
+
+  test "records multiple guesses", %{guesses: guesses} do
     {:ok, coordinate1} = Coordinate.new(1, 1)
     {:ok, coordinate2} = Coordinate.new(2, 2)
 
-    {:ok, guesses: guesses, coordinate1: coordinate1, coordinate2: coordinate2}
+    guesses = update_in(guesses.hits, &MapSet.put(&1, coordinate1))
+    guesses = update_in(guesses.hits, &MapSet.put(&1, coordinate2))
+
+    assert Enum.count(guesses.hits) == 2
   end
 
-  test "records multiple hits", %{guesses: g, coordinate1: c1, coordinate2: c2} do
-    g = update_in(g.hits, &MapSet.put(&1, c1))
-    g = update_in(g.hits, &MapSet.put(&1, c2))
+  test "records duplicate guesses only once", %{guesses: guesses} do
+    {:ok, coordinate1} = Coordinate.new(1, 1)
 
-    assert Enum.count(g.hits) == 2
+    guesses = update_in(guesses.hits, &MapSet.put(&1, coordinate1))
+    guesses = update_in(guesses.hits, &MapSet.put(&1, coordinate1))
+
+    assert Enum.count(guesses.hits) == 1
   end
 
-  test "records unique guesses", %{guesses: g, coordinate1: c1} do
-    g = update_in(g.hits, &MapSet.put(&1, c1))
-    g = update_in(g.hits, &MapSet.put(&1, c1))
+  describe "Guesses.add/3" do
+    test "tracks hit coordinates in the hits set", %{guesses: guesses} do
+      {:ok, coordinate} = Coordinate.new(8, 3)
 
-    assert Enum.count(g.hits) == 1
+      expected = %Guesses{hits: MapSet.new([coordinate]), misses: MapSet.new()}
+      guessed = Guesses.add(guesses, :hit, coordinate)
+
+      assert guessed == expected
+    end
+
+    test "tracks missed coordinates in the misses set", %{guesses: guesses} do
+      {:ok, coordinate} = Coordinate.new(1, 2)
+
+      expected = %Guesses{hits: MapSet.new(), misses: MapSet.new([coordinate])}
+      guessed = Guesses.add(guesses, :miss, coordinate)
+
+      assert guessed == expected
+    end
   end
 end

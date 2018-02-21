@@ -14,9 +14,9 @@
   - [x] The Benefits
   - [x] Let’s Build It
   - [x] Discover the Entities and Model the Domain
-  - [ ] Transforming Data
-  - [ ] Putting the Pieces Together
-  - [ ] Wrapping Up
+  - [x] Transforming Data
+  - [x] Putting the Pieces Together
+  - [x] Wrapping Up
 
 #### 3. Manage State with a State Machine
   - [ ] A Quick Look at State

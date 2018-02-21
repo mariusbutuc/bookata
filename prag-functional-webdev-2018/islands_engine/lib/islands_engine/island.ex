@@ -10,34 +10,7 @@ defmodule IslandsEngine.Island do
   @enforce_keys [:coordinates, :hit_coordinates]
   defstruct [:coordinates, :hit_coordinates]
 
-  @doc """
-  Convenience function that returns an `Island` struct given a valid island type
-  and a valid upper-left coordinate.
-
-  ## Examples
-
-      iex> {:ok, coordinate} = Coordinate.new(4, 6)
-      iex> Island.new(:l_shape, coordinate)
-      {:ok,
-        %Island{
-          coordinates: [
-            %Coordinate{col: 6, row: 4},
-            %Coordinate{col: 6, row: 5},
-            %Coordinate{col: 6, row: 6},
-            %Coordinate{col: 7, row: 6}
-          ] |> Enum.into(MapSet.new()),
-          hit_coordinates: MapSet.new()
-        }}
-
-      iex> {:ok, coordinate} = Coordinate.new(4, 6)
-      iex(4)> Island.new(:wrong, coordinate)
-      {:error, :invalid_island_type}
-
-      iex(5)> {:ok, coordinate} = Coordinate.new(10, 10)
-      iex(6)> Island.new(:l_shape, coordinate)
-      {:error, :invalid_coordinate}
-
-  """
+  @doc "Return an island, given a valid type and a valid upper-left coordinate."
   def new(type, %Coordinate{} = upper_left) do
     with [_ | _] = offsets <- offsets(type),
          %MapSet{} = coordinates <- add_coordinates(offsets, upper_left) do
@@ -46,6 +19,36 @@ defmodule IslandsEngine.Island do
       error -> error
     end
   end
+
+  @doc """
+  Check if an island is forrested, that is if the other player has planted a
+  palm tree on every coordinate of the island.
+  """
+  def forested?(island), do: MapSet.equal?(island.coordinates, island.hit_coordinates)
+
+  @doc """
+  Guess if a coordinate is contained within the island.
+
+  If the guess is a `:hit`, transform the island to add the coordinate to the
+  hit coordinates set. If it is a `:miss`, communicate this.
+  """
+  def guess(island, coordinate) do
+    case MapSet.member?(island.coordinates, coordinate) do
+      true ->
+        hit_coordinates = MapSet.put(island.hit_coordinates, coordinate)
+        {:hit, %{island | hit_coordinates: hit_coordinates}}
+
+      false ->
+        :miss
+    end
+  end
+
+  @doc "Check if two islands overlap."
+  def overlaps?(existing_island, new_island),
+    do: not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
+
+  @doc "Return the list of valid island types."
+  def types, do: [:atoll, :dot, :l_shape, :s_shape, :square]
 
   defp offsets(:square), do: [{0, 0}, {0, 1}, {1, 1}, {1, 0}]
   defp offsets(:atoll), do: [{0, 0}, {0, 1}, {1, 1}, {2, 1}, {2, 0}]
