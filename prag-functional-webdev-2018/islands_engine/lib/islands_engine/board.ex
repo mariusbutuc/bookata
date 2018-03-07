@@ -49,7 +49,8 @@ defmodule IslandsEngine.Board do
   Check that the player has positioned an `Island` for all available types
   before declaring their `Island` set.
   """
-  def all_islands_positioned?(board), do: Enum.all?(Island.types(), &Map.has_key?(board, &1))
+  def all_islands_positioned?(board),
+    do: Enum.all?(Island.types(), &Map.has_key?(board, &1))
 
   @doc """
   Check the `Board` to see if the given `Coordinate` matches any in an `Island`.

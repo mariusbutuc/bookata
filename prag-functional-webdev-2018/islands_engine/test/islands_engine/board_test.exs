@@ -30,7 +30,8 @@ defmodule IslandsEngine.BoardTest do
 
       {:ok, dot} = Island.new(:dot, overlapping_coordinate)
 
-      assert {:error, :overlapping_island} == Board.position_island(board, :dot, dot)
+      assert {:error, :overlapping_island} ==
+               Board.position_island(board, :dot, dot)
     end
   end
 
@@ -52,7 +53,9 @@ defmodule IslandsEngine.BoardTest do
     end
 
     test "guess for a win", %{board: board} do
-      [win_coordinate | almost_win_coordinatees] = MapSet.to_list(board.square.coordinates)
+      [win_coordinate | almost_win_coordinatees] =
+        MapSet.to_list(board.square.coordinates)
+
       hit_coordinates = Enum.into(almost_win_coordinatees, MapSet.new())
       square = %{board.square | hit_coordinates: hit_coordinates}
       board = Board.position_island(board, :square, square)

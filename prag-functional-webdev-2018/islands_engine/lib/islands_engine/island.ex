@@ -24,7 +24,8 @@ defmodule IslandsEngine.Island do
   Check if an island is forrested, that is if the other player has planted a
   palm tree on every coordinate of the island.
   """
-  def forested?(island), do: MapSet.equal?(island.coordinates, island.hit_coordinates)
+  def forested?(island),
+    do: MapSet.equal?(island.coordinates, island.hit_coordinates)
 
   @doc """
   Guess if a coordinate is contained within the island.
@@ -44,8 +45,9 @@ defmodule IslandsEngine.Island do
   end
 
   @doc "Check if two islands overlap."
-  def overlaps?(existing_island, new_island),
-    do: not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
+  def overlaps?(existing_island, new_island) do
+    not MapSet.disjoint?(existing_island.coordinates, new_island.coordinates)
+  end
 
   @doc "Return the list of valid island types."
   def types, do: [:atoll, :dot, :l_shape, :s_shape, :square]
@@ -63,7 +65,11 @@ defmodule IslandsEngine.Island do
     end)
   end
 
-  defp add_coordinate(coordinates, %Coordinate{row: row, col: col}, {row_offset, col_offset}) do
+  defp add_coordinate(
+         coordinates,
+         %Coordinate{row: row, col: col},
+         {row_offset, col_offset}
+       ) do
     case Coordinate.new(row + row_offset, col + col_offset) do
       {:ok, coordinate} ->
         {:cont, MapSet.put(coordinates, coordinate)}
