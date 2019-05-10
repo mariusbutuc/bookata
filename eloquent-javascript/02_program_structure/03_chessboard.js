@@ -26,31 +26,34 @@ const black = "#";
 
 let size = 8;
 let board = "";
-for (let rowIndex = 0; rowIndex < size; rowIndex++) {
+/**
+ * Variable naming decision
+ *
+ *   * `x` was chosen over `rowIndex` as it matches the x-axis
+ *   * `y` was chosen over `columnIndex` as it matches the y-axis
+ *
+ * If the more verbose variable names are considered more readable / meaningful,
+ * a search and replace should bring them back in use.
+ */
+for (let x = 0; x < size; x++) {
   let row = "";
 
-  if (rowIndex % 2 === 0) {
-    // start with white
-    for (let columnIndex = 0; columnIndex < size; columnIndex++) {
-      if (columnIndex % 2 === 0) {
-        row += white;
-      } else {
-        row += black;
-      }
-    }
-  } else {
-    // start with black
-    for (let columnIndex = 0; columnIndex < size; columnIndex++) {
-      if (columnIndex % 2 === 0) {
-        row += black;
-      } else {
-        row += white;
-      }
+  for (let y = 0; y < size; y++) {
+    /**
+     * Observation / optimization to reduce duplication and improve readability
+     *
+     * A "tile" on the chessboard is
+     *   * white if (row = even && column = even) || (row = odd && column = odd)
+     *   * black if (row = even && column = odd) || (row = odd && column = even)
+     */
+    if (((x % 2 === 0) && (y % 2 === 0)) || ((x % 2 !== 0) && (y % 2 !== 0))) {
+      row += white;
+    } else {
+      row += black;
     }
   }
 
   board += `${row}\n`;
 }
 
-// Really wish I had access to arrays and functions by now…
 console.log(board);
