@@ -24,7 +24,7 @@
  * @return {boolean}
  */
 function isEven(number) {
-  positiveInteger = _guardPositiveInteger(number);
+  const positiveInteger = _guardPositiveInteger(number);
 
   if (!positiveInteger) {
     return false;
@@ -45,7 +45,7 @@ function isEven(number) {
  *    otherwise NaN
  */
 function _guardPositiveInteger(anything) {
-  positiveInteger = Math.abs(parseInt(anything));
+  const positiveInteger = Math.abs(parseInt(anything));
 
   if (Number.isInteger(positiveInteger)) {
     return positiveInteger;

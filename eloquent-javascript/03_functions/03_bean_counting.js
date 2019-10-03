@@ -26,7 +26,7 @@
  */
 function countBs(string) {
   const characterToBeCounted = "B";
-  occurrences = countChar(string, characterToBeCounted);
+  const occurrences = countChar(string, characterToBeCounted);
 
   return occurrences;
 }
@@ -41,11 +41,7 @@ function countBs(string) {
 function countChar(string, characterToBeCounted) {
   let occurrences = 0;
 
-  for (
-    let nthCharacter = 0;
-    nthCharacter <= string.length - 1;
-    nthCharacter++
-  ) {
+  for (let nthCharacter = 0; nthCharacter < string.length; nthCharacter++) {
     if (string[nthCharacter] === characterToBeCounted) {
       occurrences++;
     }
