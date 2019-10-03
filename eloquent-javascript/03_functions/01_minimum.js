@@ -11,9 +11,14 @@
  *
  * @param {number} a The first number
  * @param {number} b The second number
+ * @return {number} the smaller of the two arguments
  */
-const min = (a, b) => {
-    // Your code here.
+function min(a, b) {
+  if (a <= b) {
+    return a;
+  } else {
+    return b;
+  }
 }
 
 console.log(min(0, 10));
