@@ -20,10 +20,41 @@
 /**
  * Test whether a number is even or odd.
  *
- * @param {number} positiveInteger
+ * @param {number} number a number that we "expect" to be positive and whole
+ * @return {boolean}
  */
-const isEven = (positiveInteger) => {
-    // Your code here.
+function isEven(number) {
+  positiveInteger = _guardPositiveInteger(number);
+
+  if (!positiveInteger) {
+    return false;
+  } else if (positiveInteger === 0) {
+    return true;
+  } else if (positiveInteger === 1) {
+    return false;
+  } else {
+    return isEven(positiveInteger - 2);
+  }
+}
+
+/**
+ * Convert a value into a positive integer. Return `NaN` if it is impossible.
+ *
+ * @param {any} anything any value
+ * @return {number | NaN} a positive integer if the conversion was possible,
+ *    otherwise NaN
+ */
+function _guardPositiveInteger(anything) {
+  positiveInteger = Math.abs(parseInt(anything));
+
+  if (Number.isInteger(positiveInteger)) {
+    return positiveInteger;
+  } else {
+    console.log(`
+      Nice try, ${anything} is definitely not even. 😉
+      Please try a whole number (integer).`);
+    return NaN;
+  }
 }
 
 console.log(isEven(50));
@@ -31,4 +62,9 @@ console.log(isEven(50));
 console.log(isEven(75));
 // → false
 console.log(isEven(-1));
-// → ??
+// → ?? -> false
+console.log(isEven("bananas"));
+// →
+// →       Nice try, bananas is definitely not even. 😉
+// →       Please try a whole number (integer).
+// → false
