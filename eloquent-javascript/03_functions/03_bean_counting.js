@@ -26,7 +26,20 @@
  */
 function countBs(string) {
   const characterToBeCounted = "B";
-  let occurences = 0;
+  occurrences = countChar(string, characterToBeCounted);
+
+  return occurrences;
+}
+
+/**
+ * Count how many `characterToBeCounted` characters are in a given `string`.
+ *
+ * @param {string} string the string to be evaluated
+ * @param {string} characterToBeCounted the character to be found in the string
+ * @return {number} number of occurrences of the given character in the string
+ */
+function countChar(string, characterToBeCounted) {
+  let occurrences = 0;
 
   for (
     let nthCharacter = 0;
@@ -34,21 +47,11 @@ function countBs(string) {
     nthCharacter++
   ) {
     if (string[nthCharacter] === characterToBeCounted) {
-      occurences++;
+      occurrences++;
     }
   }
 
-  return occurences;
-}
-
-/**
- * Count how many `characterToBeCounted` characters are in a given `string`.
- *
- * @param {*} string
- * @param {*} characterToBeCounted
- */
-function countChar(string, characterToBeCounted) {
-  // Your code here.
+  return occurrences;
 }
 
 console.log(countBs("BBC"));
