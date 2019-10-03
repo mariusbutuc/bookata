@@ -27,12 +27,12 @@
 
   - Document the intent behind the implemented code using [JSDoc].
   - Follow the community style guidelines by using
-    [vscode's prettier extension][vscode-prettier] to automatically format the
-    code when saving a file.
+    [vscode's prettier extension][prettier] to automatically format the code
+    when saving a file.
   - Shorten the feedback loop by using [nodemon] to automatically run the code
     for the exercise everytime the file is saved.
 
-- [ ] 4. Data Structures: Objects and Arrays
+- [ ] 4. [Data Structures: Objects and Arrays][ch04]
 - [ ] 5. Higher-order Functions
 - [ ] 6. The Secret Life of Objects
 - [ ] 7. Project: A Robot
@@ -61,7 +61,8 @@
   [ch01]: https://eloquentjavascript.net/01_values.html
   [ch02]: https://eloquentjavascript.net/02_program_structure.html
   [ch03]: https://eloquentjavascript.net/03_functions.html
+  [ch04]: https://eloquentjavascript.net/04_data.html
 
   [JSDoc]: https://en.wikipedia.org/wiki/JSDoc
-  [vscode-prettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+  [prettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
   [nodemon]: https://nodemon.io/
