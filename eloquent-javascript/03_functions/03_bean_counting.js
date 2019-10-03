@@ -21,10 +21,24 @@
 /**
  * Count how many uppercase “B” characters there are in a given `string`.
  *
- * @param {string} string
+ * @param {string} string the string to be evaluated
+ * @return {number} the number of uppercase “B” characters in the given string
  */
 function countBs(string) {
-    // Your code here.
+  const characterToBeCounted = "B";
+  let occurences = 0;
+
+  for (
+    let nthCharacter = 0;
+    nthCharacter <= string.length - 1;
+    nthCharacter++
+  ) {
+    if (string[nthCharacter] === characterToBeCounted) {
+      occurences++;
+    }
+  }
+
+  return occurences;
 }
 
 /**
@@ -34,7 +48,7 @@ function countBs(string) {
  * @param {*} characterToBeCounted
  */
 function countChar(string, characterToBeCounted) {
-    // Your code here.
+  // Your code here.
 }
 
 console.log(countBs("BBC"));
