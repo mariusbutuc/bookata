@@ -33,9 +33,31 @@
  *    (and including) `end`
  */
 function range(start, end, step = 1) {
-  elements = [];
+  if ((start <= end) && (step >= 1)) {
+    return _ascending_range(start, end, step);
+  } else {
+    return _descending_range(start, end, step);
+  }
+}
+
+function _ascending_range(start, end, step) {
+  if ((start > end) || (step < 0)) throw new Error("TODO: Debug time… 😉")
+
+  let elements = [];
 
   for (let element = start; element <= end; element = element + step) {
+    elements.push(element);
+  }
+
+  return elements;
+}
+
+function _descending_range(start, end, step) {
+  if ((start <= end) && (step >= 1)) throw new Error("TODO: Debug time… 😉")
+
+  let elements = [];
+
+  for (let element = start; element >= end; element = element + step) {
     elements.push(element);
   }
 
@@ -64,7 +86,7 @@ console.log(range(1, 10));
 console.log(range(1, 10, 2));
 // → [1, 3, 5, 7, 9]
 
-// console.log(range(5, 2, -1));
+console.log(range(5, 2, -1));
 // → [5, 4, 3, 2]
 
 console.log(sum(range(1, 10)));
