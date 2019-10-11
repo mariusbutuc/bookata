@@ -42,7 +42,15 @@ function reverseArray(array) {
  *    elements.
  */
 function reverseArrayInPlace(array) {
-  // Your code here.
+  for (let arrayIndex = 0; arrayIndex < Math.floor(array.length / 2); arrayIndex++) {
+    let lowIndex = arrayIndex;
+    let highIndex = array.length - arrayIndex - 1;
+    let lowValue = array[lowIndex];
+    let highValue = array[highIndex];
+
+    array[lowIndex] = highValue;
+    array[highIndex] = lowValue;
+  }
 }
 
 console.log(reverseArray(["A", "B", "C"]));
@@ -50,5 +58,5 @@ console.log(reverseArray(["A", "B", "C"]));
 
 let arrayValue = [1, 2, 3, 4, 5];
 reverseArrayInPlace(arrayValue);
-// console.log(arrayValue);
+console.log(arrayValue);
 // → [5, 4, 3, 2, 1]
