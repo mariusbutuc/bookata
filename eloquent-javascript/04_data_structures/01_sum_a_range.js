@@ -32,7 +32,13 @@
  *    (and including) `end`
  */
 function range(start, end) {
-  // Your code here.
+  elements = [];
+
+  for (let element = start; element <= end; element++) {
+    elements.push(element);
+  }
+
+  return elements;
 }
 
 /**
@@ -42,16 +48,22 @@ function range(start, end) {
  * @returns {number} the sum of the numbers in the given array
  */
 function sum(numbers) {
-  // Your code here.
+  sumOfNumbers = 0;
+
+  for (let number of numbers) {
+    sumOfNumbers += number;
+  }
+
+  return sumOfNumbers;
 }
 
 console.log(range(1, 10));
 // → [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-console.log(range(1, 10, 2));
+// console.log(range(1, 10, 2));
 // → [1, 3, 5, 7, 9]
 
-console.log(range(5, 2, -1));
+// console.log(range(5, 2, -1));
 // → [5, 4, 3, 2]
 
 console.log(sum(range(1, 10)));
