@@ -17,7 +17,7 @@
  * As a bonus assignment, modify your `range` function to take an optional third
  * argument that indicates the “step” value used when building the array. If no
  * step is given, the elements go up by increments of one, corresponding to the
- * old behavior. The function call `range(1, 10, 2)` should return
+ * old behaviour. The function call `range(1, 10, 2)` should return
  * `[1, 3, 5, 7, 9]`. Make sure it also works with negative step values so that
  * `range(5, 2, -1)` produces `[5, 4, 3, 2]`.
  */
@@ -28,13 +28,14 @@
  *
  * @param {number} start the beginning of the range
  * @param {number} end the end of the range
+ * @param {number} step (optional) the “step” value used when building the array
  * @returns {Array<number>} the array containing the integers from `start` up to
  *    (and including) `end`
  */
-function range(start, end) {
+function range(start, end, step = 1) {
   elements = [];
 
-  for (let element = start; element <= end; element++) {
+  for (let element = start; element <= end; element = element + step) {
     elements.push(element);
   }
 
@@ -60,7 +61,7 @@ function sum(numbers) {
 console.log(range(1, 10));
 // → [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-// console.log(range(1, 10, 2));
+console.log(range(1, 10, 2));
 // → [1, 3, 5, 7, 9]
 
 // console.log(range(5, 2, -1));
