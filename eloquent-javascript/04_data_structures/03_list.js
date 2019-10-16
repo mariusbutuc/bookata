@@ -46,7 +46,18 @@
  * @return {object} the list structure
  */
 function arrayToList(array) {
-  // Your code here.
+  let listObject = null;
+
+  for (let arrayIndex = array.length - 1; arrayIndex >= 0; arrayIndex--) {
+    let element = array[arrayIndex];
+    listObject = _addToList(element, listObject);
+  }
+
+  return listObject;
+}
+
+function _addToList(element, listObject) {
+  return { value: element, rest: listObject };
 }
 
 /**
@@ -88,9 +99,9 @@ function nth(list, position) {
 
 console.log(arrayToList([10, 20]));
 // → {value: 10, rest: {value: 20, rest: null}}
-console.log(listToArray(arrayToList([10, 20, 30])));
+// console.log(listToArray(arrayToList([10, 20, 30])));
 // → [10, 20, 30]
-console.log(prepend(10, prepend(20, null)));
+// console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
-console.log(nth(arrayToList([10, 20, 30]), 1));
+// console.log(nth(arrayToList([10, 20, 30]), 1));
 // → 20
