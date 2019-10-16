@@ -50,14 +50,10 @@ function arrayToList(array) {
 
   for (let arrayIndex = array.length - 1; arrayIndex >= 0; arrayIndex--) {
     let element = array[arrayIndex];
-    listObject = _addToList(element, listObject);
+    listObject = prepend(element, listObject);
   }
 
   return listObject;
-}
-
-function _addToList(element, listObject) {
-  return { value: element, rest: listObject };
 }
 
 /**
@@ -89,10 +85,10 @@ function _listToArray({ value: head, rest: tail }, array) {
  *
  * @param {any} element the element to be prepended to the input list
  * @param {object} list the list that the input element is prepended to
- * @return {object} the new list
+ * @return {object} the new list object
  */
 function prepend(element, list) {
-  // Your code here.
+  return { value: element, rest: list };
 }
 
 /**
@@ -115,7 +111,7 @@ console.log(arrayToList([10, 20]));
 // → {value: 10, rest: {value: 20, rest: null}}
 console.log(listToArray(arrayToList([10, 20, 30])));
 // → [10, 20, 30]
-// console.log(prepend(10, prepend(20, null)));
+console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
 // console.log(nth(arrayToList([10, 20, 30]), 1));
 // → 20
