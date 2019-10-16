@@ -43,7 +43,7 @@
  * Build up a list structure from a given array.
  *
  * @param {Array<any>} array an array with elements of any type
- * @return {object} the list structure
+ * @return {object} the list object
  */
 function arrayToList(array) {
   let listObject = null;
@@ -61,13 +61,27 @@ function _addToList(element, listObject) {
 }
 
 /**
- * Produce an array from a given list
+ * Produce an array from a given list object
  *
- * @param {object} list a list structure
+ * @param {object} list a list object
  * @return {Array<any>} the array representation of the given list
  */
 function listToArray(list) {
-  // Your code here.
+  let array = [];
+
+  array = _listToArray(list, array);
+
+  return array;
+}
+
+function _listToArray({ value: head, rest: tail }, array) {
+  array.push(head);
+
+  if (tail === null) {
+    return array;
+  } else {
+    return _listToArray(tail, array);
+  }
 }
 
 /**
@@ -99,7 +113,7 @@ function nth(list, position) {
 
 console.log(arrayToList([10, 20]));
 // → {value: 10, rest: {value: 20, rest: null}}
-// console.log(listToArray(arrayToList([10, 20, 30])));
+console.log(listToArray(arrayToList([10, 20, 30])));
 // → [10, 20, 30]
 // console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
