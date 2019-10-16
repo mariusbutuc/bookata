@@ -98,13 +98,23 @@ function prepend(element, list) {
  *
  * @param {object} list the list that may contain an element at the given
  *    `position`
- * @param {number} position the position from which to get an elemend from the
+ * @param {number} position the position from which to get an element from the
  *    `list`
  * @return {list_element | undefined} the list element residing at `position` or
  *    `undefined` if the position is not within the `list`
  */
 function nth(list, position) {
-  // Your code here.
+  let element = null;
+
+  if (position === 0) {
+    element = list.value;
+  } else if (list.rest === null) {
+    element = undefined;
+  } else {
+    element = nth(list.rest, position - 1);
+  }
+
+  return element;
 }
 
 console.log(arrayToList([10, 20]));
@@ -113,5 +123,7 @@ console.log(listToArray(arrayToList([10, 20, 30])));
 // → [10, 20, 30]
 console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
-// console.log(nth(arrayToList([10, 20, 30]), 1));
+console.log(nth(arrayToList([10, 20, 30]), 1));
 // → 20
+console.log(nth(arrayToList([10, 20, 30]), 17));
+// → undefined
