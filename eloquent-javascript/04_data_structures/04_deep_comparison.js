@@ -23,49 +23,50 @@
 /**
  * Compare objects or primitive/atomic values for (deep) equality.
  *
- * @param {any} left_comparable atomic value ot object to be compared
- * @param {any} right_comparable atomic value ot object to be compared
+ * @param {any} leftComparable atomic value ot object to be compared
+ * @param {any} rightComparable atomic value ot object to be compared
  * @returns {boolean} are the comparables deeply equal?
  */
-function deepEqual(left_comparable, right_comparable) {
+function deepEqual(leftComparable, rightComparable) {
   let equalityTable = [];
 
   // TODO: Consider digesting this spaghetti code into something more refined.
-  if (_isNull(left_comparable) && _isNull(right_comparable)) {
-    equalityTable.push(true);
-  } else if (_isNull(left_comparable) || _isNull(right_comparable)) {
-    equalityTable.push(false);
-  } else if ((_isObject(left_comparable)) && (_isObject(right_comparable))) {
+  if (_isObject(leftComparable) && _isObject(rightComparable)) {
     // deepEquality case
-    let leftKeys = Object.keys(left_comparable)
-    let rightKeys = Object.keys(right_comparable)
+    let leftProperties = Object.keys(leftComparable);
+    let rightProperties = Object.keys(rightComparable);
 
-    for (let key of leftKeys) {
-      if (_isIncluded(key, rightKeys) && (deepEqual(left_comparable[key], right_comparable[key]))) {
+    for (let property of leftProperties) {
+      if (
+        _isIncluded(property, rightProperties) &&
+        deepEqual(leftComparable[property], rightComparable[property])
+      ) {
         equalityTable.push(true);
       } else {
         equalityTable.push(false);
       }
     }
-
   } else {
     // primitive values
-    equalityTable.push(left_comparable === right_comparable);
+    equalityTable.push(leftComparable === rightComparable);
   }
 
   return _areAllTrue(equalityTable);
 }
 
-function _isNull(value) {
-  return (null === value)
-}
-
 function _isObject(value) {
-  return ((null !== value) && (typeof (value) === 'object'))
+  // Hint: Your test for whether you are dealing with a real object will look
+  //       something like `typeof x == "object” && x != null`.
+  //
+  // TODO: Refine understanding of "double equality (`==`)" relative to "triple
+  //       equality (`===`)".
+  //       1. Why is the `==` check good enough here?
+  //       2. What semantics are missed in communication when relying more on ===?
+  return null !== value && typeof value === "object";
 }
 
-function _isIncluded(element, array) {
-  return (array.indexOf(element) >= 0)
+function _isIncluded(property, properties) {
+  return properties.indexOf(property) >= 0;
 }
 
 function _areAllTrue(truthTable) {
@@ -79,32 +80,3 @@ console.log(deepEqual(obj, { here: 1, object: 2 }));
 // → false
 console.log(deepEqual(obj, { here: { is: "an" }, object: 2 }));
 // → true
-
-console.log('\n*** Primitive values')
-console.log('\n1. Numbers')
-console.log(deepEqual(17, 17));
-// → true
-console.log(deepEqual(17, 18));
-// → false
-console.log(deepEqual(17, -17));
-// → false
-
-console.log('\n2. Strings')
-console.log(deepEqual('foo', 'foo'));
-// → true
-console.log(deepEqual('foo', 'bar'));
-// → false
-console.log(deepEqual('17', 17));
-// → false
-
-console.log('\n3. Booleans')
-console.log(deepEqual(true, true));
-// → true
-console.log(deepEqual(true, false));
-// → false
-
-console.log('\n*** Array (⚠️ internally represented as Objects)')
-console.log(deepEqual([1, 'foo'], [1, 'foo']));
-// → true
-console.log(deepEqual([1, 'foo'], [1, 'bar']));
-// → false
