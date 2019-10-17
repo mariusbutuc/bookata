@@ -36,6 +36,10 @@ function deepEqual(leftComparable, rightComparable) {
     let leftProperties = Object.keys(leftComparable);
     let rightProperties = Object.keys(rightComparable);
 
+    if (leftProperties.length != rightProperties.length) {
+      equalityTable.push(false);
+    }
+
     for (let property of leftProperties) {
       if (
         _isIncluded(property, rightProperties) &&
@@ -80,3 +84,5 @@ console.log(deepEqual(obj, { here: 1, object: 2 }));
 // → false
 console.log(deepEqual(obj, { here: { is: "an" }, object: 2 }));
 // → true
+console.log(deepEqual({ foo: 1 }, { foo: 1, bar: 2, baz: 3 }));
+// → false
