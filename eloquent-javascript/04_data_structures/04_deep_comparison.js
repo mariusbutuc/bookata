@@ -28,34 +28,11 @@
  * @returns {boolean} are the comparables deeply equal?
  */
 function deepEqual(leftComparable, rightComparable) {
-  let equalityTable = [];
-
-  // TODO: Consider digesting this spaghetti code into something more refined.
   if (_isObject(leftComparable) && _isObject(rightComparable)) {
-    // deepEquality case
-    let leftProperties = Object.keys(leftComparable);
-    let rightProperties = Object.keys(rightComparable);
-
-    if (leftProperties.length != rightProperties.length) {
-      equalityTable.push(false);
-    }
-
-    for (let property of leftProperties) {
-      if (
-        _isIncluded(property, rightProperties) &&
-        deepEqual(leftComparable[property], rightComparable[property])
-      ) {
-        equalityTable.push(true);
-      } else {
-        equalityTable.push(false);
-      }
-    }
+    return _areObjectsDeepEqual(leftComparable, rightComparable);
   } else {
-    // primitive values
-    equalityTable.push(leftComparable === rightComparable);
+    return leftComparable === rightComparable;
   }
-
-  return _areAllTrue(equalityTable);
 }
 
 function _isObject(value) {
@@ -69,12 +46,28 @@ function _isObject(value) {
   return null !== value && typeof value === "object";
 }
 
-function _isIncluded(property, properties) {
-  return properties.indexOf(property) >= 0;
+function _areObjectsDeepEqual(leftObject, rightObject) {
+  let leftProperties = Object.keys(leftObject);
+  let rightProperties = Object.keys(rightObject);
+
+  if (leftProperties.length != rightProperties.length) {
+    return false;
+  }
+
+  for (let property of leftProperties) {
+    if (
+      _isMissing(property, rightProperties) ||
+      !deepEqual(leftObject[property], rightObject[property])
+    ) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
-function _areAllTrue(truthTable) {
-  return truthTable.every(truthValue => truthValue === true);
+function _isMissing(property, properties) {
+  return properties.indexOf(property) === -1;
 }
 
 let obj = { here: { is: "an" }, object: 2 };
