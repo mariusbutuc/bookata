@@ -10,11 +10,20 @@
  * as parameters. Write two versions, one using a loop and one using the `some`
  * method.
  *
- * @param {number[]} array
- * @param {Function} test
+ * @param {number[]} array Values to verify if every element satisfies the test
+ * @param {Function} test Predicate function to test values
  */
 function every(array, test) {
-  // Your code here.
+  for (let element of array) {
+    if (test(element) === false) return false;
+  }
+  return true;
+}
+
+function every(array, test) {
+  return !array.some(element => {
+    return !test(element);
+  });
 }
 
 console.log(every([1, 3, 5], n => n < 10));
