@@ -12,10 +12,12 @@
  *
  * @param {number[]} array Values to verify if every element satisfies the test
  * @param {Function} test Predicate function to test values
+ * @return {boolean} Does the `test` predicate function return `true` for all
+ *  the values in the given `array`?
  */
 function every(array, test) {
   for (let element of array) {
-    if (test(element) === false) return false;
+    if (!test(element)) return false;
   }
   return true;
 }
