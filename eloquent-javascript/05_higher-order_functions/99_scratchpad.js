@@ -127,7 +127,7 @@ for (let script of SCRIPTS) {
 }
 // console.log(biggest);
 
-// # Strings and Caharacter Codes
+// # Strings and Character Codes
 function characterScript(code) {
   for (let script of SCRIPTS) {
     let codeBelongsToScript = script.ranges.some(([from, to]) => {
