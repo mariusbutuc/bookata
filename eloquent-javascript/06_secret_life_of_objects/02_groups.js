@@ -27,21 +27,38 @@ class Group {
     this.values = [];
   }
 
-  add(element) {
+  initialAdd(element) {
     if (this.values.indexOf(element) === -1) {
       this.values.push(element)
     }
   }
 
-  has(element) {
+  initialHas(element) {
     return this.values.indexOf(element) >= 0
+  }
+
+  initialDelete(element) {
+    if (this.initialHas(element)) {
+      let elementIndex = this.values.indexOf(element);
+      this.values.splice(elementIndex, 1);
+    }
+  }
+
+  add(element) {
+    if (!this.has(element)) {
+      this.values.push(element)
+    }
   }
 
   delete(element) {
     if (this.has(element)) {
-      let elementIndex = this.values.indexOf(element);
-      this.values.splice(elementIndex, 1);
+      let remainingValues = this.values.filter(groupElement => groupElement != element)
+      this.values = remainingValues;
     }
+  }
+
+  has(element) {
+    return this.values.includes(element);
   }
 
   static from(iterable) {
@@ -57,11 +74,8 @@ class Group {
 }
 
 let group = Group.from([10, 20]);
-console.log(group.has(10));
-// → true
-console.log(group.has(30));
-// → false
+console.log('Expect true:', group.has(10));
+console.log('Expect false:', group.has(30));
 group.add(10);
 group.delete(10);
-console.log(group.has(10));
-// → false
+console.log('Expect false:', group.has(10));
