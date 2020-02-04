@@ -54,16 +54,17 @@ class GroupIterator {
   }
 
   next() {
-    if (this.values.length === 0) return {done: true};
+    if (this.index >= this.values.length) return { done: true };
 
-    let value = this.values.shift();
-    return {value, done: false};
+    let value = this.values[this.index];
+    this.index++;
+    return { value, done: false };
   }
 }
 
 Group.prototype[Symbol.iterator] = function() {
   return new GroupIterator(this);
-}
+};
 
 let group = Group.from(["a", "b", "c"]);
 for (let value of group) {
