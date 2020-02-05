@@ -31,6 +31,10 @@ class Group {
 
     return group;
   }
+
+  [Symbol.iterator]() {
+    return new GroupIterator(this);
+  };
 }
 
 /**
@@ -61,10 +65,6 @@ class GroupIterator {
     return { value, done: false };
   }
 }
-
-Group.prototype[Symbol.iterator] = function() {
-  return new GroupIterator(this);
-};
 
 let group = Group.from(["a", "b", "c"]);
 for (let value of group) {
