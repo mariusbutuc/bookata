@@ -33,7 +33,7 @@
     for the exercise everytime the file is saved.
 
 - [x] 4. [Data Structures: Objects and Arrays][ch04]
-- [ ] 5. Higher-order Functions
+- [x] 5. Higher-order Functions
 - [x] 6. The Secret Life of Objects
 - [ ] 7. Project: A Robot
 - [ ] 8. Bugs and Errors
