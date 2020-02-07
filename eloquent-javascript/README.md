@@ -32,9 +32,9 @@
   - Shorten the feedback loop by using [nodemon] to automatically run the code
     for the exercise everytime the file is saved.
 
-- [ ] 4. [Data Structures: Objects and Arrays][ch04]
+- [x] 4. [Data Structures: Objects and Arrays][ch04]
 - [ ] 5. Higher-order Functions
-- [ ] 6. The Secret Life of Objects
+- [x] 6. The Secret Life of Objects
 - [ ] 7. Project: A Robot
 - [ ] 8. Bugs and Errors
 - [ ] 9. Regular Expressions
