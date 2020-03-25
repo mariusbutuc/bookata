@@ -32,7 +32,7 @@ const roads = [
  *
  * @param {string[]} edges - an array of edges, the road strings, which have
  *    the form "Start-End"
- * @returns {Object} a map object(*) that, for each node, stores an array of
+ * @returns {Object} — a map object(*) that, for each node, stores an array of
  *    connected nodes
  *
  * TODO: (*)is it a map object? Refactor to turn it into a Map?
@@ -131,9 +131,136 @@ let first = new VillageState(
 );
 let next = first.move("Alice's House");
 
-console.log(next.place);
+// console.log(next.place);
 // » "Alice's House"
-console.log(next.parcels);
+// console.log(next.parcels);
 // » []
-console.log(first.place);
+// console.log(first.place);
 // » "Post Office"
+
+/**
+ * Simulate a robot run.
+ *
+ * @param {VillageState} state — village state
+ * @param {*} robot — a function that takes a `VillageState` object and returns
+ *  the name of a nearby place
+ * @param {array} memory — the robot's memory
+ */
+function runRobot(state, robot, memory) {
+  for (let turn = 0;; turn++) {
+    if (state.parcels.length == 0) {
+      console.log(`Done in ${turn} turns.`);
+      break;
+    }
+
+    let action = robot(state, memory);
+    state = state.move(action.direction);
+    memory = action.memory;
+    console.log(`Moved to ${action.direction}`);
+  }
+}
+
+function randomPick(array) {
+  let choice = Math.floor(Math.random() * array.length);
+  return array[choice];
+}
+
+/**
+ * A robot that walks in a random direction every turn.
+ *
+ * The dumbest strategy.
+ *
+ * @param {VillageState} state — the village state object
+ * @param {null} _memory — the `randomRobot` does not use `memory`
+ *
+ * @returns {string} — the name of a (randomly picked) nearby place
+ */
+function randomRobot(state, _memory) {
+  return {direction: randomPick(roadGraph[state.place])};
+}
+
+VillageState.random = function(parcelCount = 5) {
+  let parcels = [];
+  for (let i = 0; i < parcelCount; i++) {
+    let address = randomPick(Object.keys(roadGraph));
+    let place;
+    do {
+      place = randomPick(Object.keys(roadGraph));
+    } while (place == address);
+    parcels.push({place, address});
+  }
+  return new VillageState("Post Office", parcels);
+}
+
+// let state = VillageState.random();
+// console.log(state);
+// console.log('\n***', 'randomRobot');
+// runRobot(state, randomRobot);
+
+const mailRoute = [
+  "Alice's House", "Cabin", "Alice's House", "Bob's House", "Town Hall",
+  "Daria's House", "Ernie's House", "Grete's House", "Shop", "Grete's House",
+  "Farm", "Marketplace", "Post Office"
+];
+
+/**
+ * A robot inspired by the way real-world mail delivery works.
+ *
+ * @param {VillageState} _state — *any* VillageState, as the roboth follows the
+ *  `mailRoute` regardless.
+ * @param {array} memory — the robot's memory
+ *
+ * @returns {direction: {string}, memory: {string[]}} — a nearby place + memory
+ */
+function routeRobot(_state, memory) {
+  if (memory.length == 0) {
+    memory = mailRoute;
+  }
+  // return {direction: memory[0], memory: memory.slice(1)}
+  // const [head, ...tail] = memory;
+  const [nextDestination, ...remainingMemory] = memory;
+  return {direction: nextDestination, memory: remainingMemory}
+}
+
+// console.log('\n***', 'routeRobot');
+// runRobot(state, routeRobot, []);
+
+function findRoute(graph, from, to) {
+  // An array of places that should be explored next, along with the route that
+  // got us there.
+  let work = [{at: from, route: []}];
+  for (let i = 0; i < work.length; i++) {
+    let {at, route} = work[i];
+    // Explore all roads going from the given place (`at`).
+    for (let place of graph[at]) {
+      // Reached the destination?
+      if (place == to) return route.concat((place));
+      // If this place has not been looked at before
+      if (!work.some(w => w.at == place)) {
+        // Add the new place to the work list
+        work.push({at: place, route: route.concat(place)});
+      }
+    }
+  }
+}
+
+/**
+ * A pathfinder robot strategy.
+ *
+ * @param {VillageState} {place, parcels}
+ * @param {array} route — the robot's memory
+ */
+function goalOrientedRobot({place, parcels}, route) {
+  if (route.length == 0) {
+    let parcel = parcels[0];
+    if (parcel.place != place) {
+      route = findRoute(roadGraph, place, parcel.place);
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+  }
+  return {direction: route[0], memory: route.slice(1)};
+}
+
+// console.log('\n***', 'goalOrientedRobot');
+// runRobot(state, goalOrientedRobot, []);
