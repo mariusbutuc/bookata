@@ -264,3 +264,63 @@ function goalOrientedRobot({place, parcels}, route) {
 
 // console.log('\n***', 'goalOrientedRobot');
 // runRobot(state, goalOrientedRobot, []);
+
+/**
+ * Measure two robots solving 100 tasks.
+ *
+ * It’s hard to objectively compare robots by just letting them solve a few
+ * scenarios. Maybe one robot just happened to get easier tasks or the kind of
+ * tasks that it is good at, whereas the other didn’t.
+ *
+ * `compareRobots` takes two robots (and their starting memory). It generates
+ * 100 tasks and lets each of the robots solve each of these tasks. When done,
+ * it outputs the average number of steps each robot took per task.
+ *
+ * Exercise 1. Measuring a robot
+ *             https://eloquentjavascript.net/07_robot.html#i_JrK0ADjuHH
+ *
+ * @param {*} robot1 - first robot
+ * @param {*} memory1 - first robot's starting memory
+ * @param {*} robot2 - second robot
+ * @param {*} memory2 - second robot's starting memory
+ *
+ * @returns { firstRobotAverage: number, secondRobotAverage: number}
+ */
+function compareRobots(robot1, memory1, robot2, memory2) {
+  // 1. Generate 100 tasks.
+  const taskCount = 100;
+  let tasks = [];
+  while(tasks.length < taskCount) {
+    let randomTask = VillageState.random();
+    tasks.push(randomTask);
+  }
+
+  // 2. Let each of the robots solve each of these tasks
+  function countRobotSteps(state, robot, memory) {
+    for (let turn = 0;; turn++) {
+      if (state.parcels.length == 0) return turn;
+
+      let action = robot(state, memory);
+      state = state.move(action.direction);
+      memory = action.memory;
+    }
+  }
+
+  let robot1Solutions = tasks.map(task => countRobotSteps(task, robot1, memory1));
+  let robot2Solutions = tasks.map(task => countRobotSteps(task, robot2, memory2));
+
+  // 3. When done, output the average number of steps each robot took per task.
+  function average(list) {
+    let listSum = list.reduce((acc, currentValue) => acc + currentValue);
+    let average = listSum / list.length;
+    return average;
+  }
+
+  return {
+    firstRobotAverage: average(robot1Solutions),
+    secondRobotAverage: average(robot2Solutions),
+  }
+}
+
+let measurement = compareRobots(routeRobot, [], goalOrientedRobot, []);
+console.log(measurement);
