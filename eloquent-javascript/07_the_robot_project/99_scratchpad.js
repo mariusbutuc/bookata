@@ -288,38 +288,60 @@ function goalOrientedRobot({place, parcels}, route) {
  */
 function compareRobots(robot1, memory1, robot2, memory2) {
   // 1. Generate 100 tasks.
-  const taskCount = 100;
+  const tasks = _generateTasks(100)
+
+  // 2. Let each of the robots solve each of these tasks
+  let robot1Solutions = tasks.map(task => _countSteps(task, robot1, memory1));
+  let robot2Solutions = tasks.map(task => _countSteps(task, robot2, memory2));
+
+  // 3. When done, output the average number of steps each robot took per task.
+  return {
+    firstRobotAverage: _average(robot1Solutions),
+    secondRobotAverage: _average(robot2Solutions),
+  }
+}
+
+/**
+ * Generate `taskCount` tasks
+ *
+ * @param {number} taskCount - number of tasks to generate
+ * @returns array of generated tasks
+ */
+function _generateTasks(taskCount) {
   let tasks = [];
   while(tasks.length < taskCount) {
     let randomTask = VillageState.random();
     tasks.push(randomTask);
   }
+  return tasks;
+}
 
-  // 2. Let each of the robots solve each of these tasks
-  function countRobotSteps(state, robot, memory) {
-    for (let turn = 0;; turn++) {
-      if (state.parcels.length == 0) return turn;
+/**
+ * Count the steps the robot takes to deliver all packages.
+ *
+ * @param {VillageState} state
+ * @param {Robot} robot
+ * @param {Memory} memory
+ * @returns {number} The number of steps the robot takes to deliver all packages
+ */
+function _countSteps(state, robot, memory) {
+  for (let turn = 0;; turn++) {
+    if (state.parcels.length == 0) return turn;
 
-      let action = robot(state, memory);
-      state = state.move(action.direction);
-      memory = action.memory;
-    }
+    let action = robot(state, memory);
+    state = state.move(action.direction);
+    memory = action.memory;
   }
+}
 
-  let robot1Solutions = tasks.map(task => countRobotSteps(task, robot1, memory1));
-  let robot2Solutions = tasks.map(task => countRobotSteps(task, robot2, memory2));
-
-  // 3. When done, output the average number of steps each robot took per task.
-  function average(list) {
-    let listSum = list.reduce((acc, currentValue) => acc + currentValue);
-    let average = listSum / list.length;
-    return average;
-  }
-
-  return {
-    firstRobotAverage: average(robot1Solutions),
-    secondRobotAverage: average(robot2Solutions),
-  }
+/**
+ * Calculate the average of an array of numbers.
+ *
+ * @param {number[]} list - the array of numbers to be averaged
+ * @returns {number} - the average value
+ */
+function _average(list) {
+  return list.reduce((acc, currentValue) => acc + currentValue) / list.length;
 }
 
 let measurement = compareRobots(routeRobot, [], goalOrientedRobot, []);
