@@ -325,8 +325,8 @@ function _generateTasks(taskCount) {
  * @returns {number} The number of steps the robot takes to deliver all packages
  */
 function _countSteps(state, robot, memory) {
-  for (let turn = 0;; turn++) {
-    if (state.parcels.length == 0) return turn;
+  for (let step = 0;; step++) {
+    if (state.parcels.length == 0) return step;
 
     let action = robot(state, memory);
     state = state.move(action.direction);
