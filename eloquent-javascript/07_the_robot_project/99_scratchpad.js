@@ -82,8 +82,9 @@ class VillageState {
    * Creates an instance of VillageState.
    *
    * @param {string} place - the robot’s current location.
-   * @param {string[]} parcels - the collection of undelivered parcels, each of
-   *    which has a current location and a destination address.
+   * @param {{place: string, address: string}[]} parcels - the collection of
+   *    undelivered parcels, each of which has a current location (`place`) and
+   *    a destination `address`.
    *
    * @memberof VillageState
    */
@@ -244,6 +245,9 @@ function findRoute(graph, from, to) {
   }
 }
 
+// let foo = findRoute(roadGraph, "Alice's House", "Farm");
+// console.log({foo})
+
 /**
  * A pathfinder robot strategy.
  *
@@ -263,6 +267,7 @@ function goalOrientedRobot({place, parcels}, route) {
 }
 
 // console.log('\n***', 'goalOrientedRobot');
+// let state = VillageState.random();
 // runRobot(state, goalOrientedRobot, []);
 
 /**
@@ -288,7 +293,7 @@ function goalOrientedRobot({place, parcels}, route) {
  */
 function compareRobots(robot1, memory1, robot2, memory2) {
   // 1. Generate 100 tasks.
-  const tasks = _generateTasks(100)
+  const tasks = _generateTasks(1)
 
   // 2. Let each of the robots solve each of these tasks
   let robot1Solutions = tasks.map(task => _countSteps(task, robot1, memory1));
@@ -344,5 +349,46 @@ function _average(list) {
   return list.reduce((acc, currentValue) => acc + currentValue) / list.length;
 }
 
-let measurement = compareRobots(routeRobot, [], goalOrientedRobot, []);
+/**
+ * A robot strategy more efficient than the pathfinder one.
+ *
+ * Can you write a robot that finishes the delivery task faster than
+ * `goalOrientedRobot`? If you observe that robot’s behavior, what obviously
+ * stupid things does it do? How could those be improved?
+ *
+ * Exercise 2. Robot efficiency
+ *             https://eloquentjavascript.net/07_robot.html#i_VbBsQJ1lp6
+ *
+ * @param {VillageState} state
+ * @param {string} state.place - the robot’s current location.
+ * @param {{place: string, address: string}[]} state.parcels - the collection of
+ *    undelivered parcels, each of which has a current location (`place`) and
+ *    a destination `address`.
+ * @param {array} route — the robot's memory
+ */
+function moreEfficientRobot({place, parcels}, route) {
+  if (route.length == 0) {
+    // # `goalOrientedRobot`:
+    // let parcel = parcels[0];
+    // if (parcel.place != place) {
+    //   route = findRoute(roadGraph, place, parcel.place); // Calculate route for delivery
+    // } else {
+    //   route = findRoute(roadGraph, place, parcel.address); // Deliver
+    // }
+
+    // Does the robot have any parcels that can be delivered at the current location?
+    let parcelForCurrentLocation = parcels.find(parcel => parcel.place === place)
+
+    if (parcelForCurrentLocation) {
+      route = findRoute(roadGraph, place, parcelForCurrentLocation.address);
+    } else {
+
+      route = findRoute(roadGraph, place, parcels[0].place);
+    }
+  }
+  // console.log({place, route})
+  return {direction: route[0], memory: route.slice(1)};
+}
+
+let measurement = compareRobots(moreEfficientRobot, [], goalOrientedRobot, []);
 console.log(measurement);
