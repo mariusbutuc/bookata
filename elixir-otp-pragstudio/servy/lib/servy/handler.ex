@@ -19,13 +19,14 @@ defmodule Servy.Handler do
   @doc """
   Transform the request string into a map.
   """
-  def parse(_request) do
-    # TODO Implement
-    _conv = %{
-      method: "GET",
-      path: "/wildthings",
-      resp_body: ""
-    }
+  def parse(request) do
+    [method, path, _] =
+      request
+      |> String.split("\n")
+      |> List.first()
+      |> String.split()
+
+    %{method: method, path: path, resp_body: ""}
   end
 
   @doc """
