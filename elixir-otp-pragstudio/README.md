@@ -10,7 +10,7 @@ Journey of learning guided by the [Developing With Elixir/OTP](https://pragmatic
 - [x] 4. Pattern Matching
 - [x] 5. Immutable Data
 - [x] 6. Function Clauses
-- [ ] 7. Advanced Pattern Matching
+- [x] 7. Advanced Pattern Matching
 - [ ] 8. Pattern Matching Maps
 - [ ] 9. Serving Files
 - [ ] 10. Module Attributes
@@ -54,12 +54,16 @@ Journey of learning guided by the [Developing With Elixir/OTP](https://pragmatic
   functions.
 - In Elixir _parlance_, function clauses is what we call multiple function
   definitions that share the same name and arity.
+- The string concatenation operator ([`<>`]) can be used to match the beginning
+  of a string in a pattern match. Additionally, the rest of the string is bound
+  to the given variable.
 
 ### Extracurricular
 
 - Add a few unit tests to (a) improve confidence in refactoring and (b) reduce manual testing.
 - Start exploring [`cortex`] to make TDD fun again.
 
+  [`<>`]: https://hexdocs.pm/elixir/Kernel.html#%3C%3E/2
   [`byte_size/1`]: https://hexdocs.pm/elixir/Kernel.html?#byte_size/1
   [`cortex`]: https://hex.pm/packages/cortex
   [`string.length/1`]: https://hexdocs.pm/elixir/String.html#length/1

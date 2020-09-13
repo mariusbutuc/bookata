@@ -36,19 +36,66 @@ defmodule Servy.HandlerTest do
       assert actual_response == expected_response
     end
 
-    test "does not handle a request to GET /bigfoot" do
-      assert_raise FunctionClauseError, fn ->
-        actual_response =
-          "/bigfoot"
-          |> request()
-          |> Servy.Handler.handle()
-      end
+    test "handles a request to GET a specific /bears/1" do
+      expected_response = """
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      Content-Length: 6
+
+      Bear 1
+      """
+
+      actual_response =
+        "/bears/1"
+        |> request()
+        |> Servy.Handler.handle()
+
+      assert actual_response == expected_response
+    end
+
+    test "handles a request to DELETE a specific /bears/1" do
+      expected_response = """
+      HTTP/1.1 403 Forbidden
+      Content-Type: text/html
+      Content-Length: 29
+
+      Deleting a bear is forbidden!
+      """
+
+      actual_response =
+        "/bears/1"
+        |> request("DELETE")
+        |> Servy.Handler.handle()
+
+      assert actual_response == expected_response
+    end
+
+    test "returns a 404 for non-matching paths" do
+      expected_response = """
+      HTTP/1.1 404 Not Found
+      Content-Type: text/html
+      Content-Length: 17
+
+      No /bigfoot here!
+      """
+
+      actual_response =
+        "/bigfoot"
+        |> request()
+        |> Servy.Handler.handle()
+
+      assert actual_response == expected_response
     end
   end
 
   describe "parse/1" do
     test "parses a request" do
-      expected_response = %{method: "GET", path: "/wildthings", resp_body: ""}
+      expected_response = %{
+        method: "GET",
+        path: "/wildthings",
+        resp_body: "",
+        status: nil
+      }
 
       actual_response =
         "/wildthings"
@@ -61,7 +108,12 @@ defmodule Servy.HandlerTest do
 
   describe "route/1" do
     test "routes a conversation" do
-      conversation = %{method: "GET", path: "/wildthings", resp_body: ""}
+      conversation = %{
+        method: "GET",
+        path: "/wildthings",
+        resp_body: "",
+        status: 200
+      }
       expected_response = %{conversation | resp_body: "Bears, Lions, Tigers"}
 
       actual_response =
@@ -74,7 +126,12 @@ defmodule Servy.HandlerTest do
 
   describe "format_response/1" do
     test "formats a conversation as a valid HTTP response string" do
-      conversation = %{method: "GET", path: "/wildthings", resp_body: "Bears, Lions, Tigers"}
+      conversation = %{
+        method: "GET",
+        path: "/wildthings",
+        resp_body: "Bears, Lions, Tigers",
+        status: 200
+      }
 
       expected_response = """
       HTTP/1.1 200 OK
@@ -92,9 +149,9 @@ defmodule Servy.HandlerTest do
     end
   end
 
-  def request(path) do
+  def request(path, method \\ "GET") do
     """
-    GET #{path} HTTP/1.1
+    #{method} #{path} HTTP/1.1
     Host: example.com
     User-Agent: ExampleBrowser/1.0
     Accept: */*
