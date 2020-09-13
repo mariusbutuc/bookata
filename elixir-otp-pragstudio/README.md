@@ -45,14 +45,25 @@ Journey of learning guided by the [Developing With Elixir/OTP] video course.
 
 - [x] 8. Pattern Matching Maps
 
-  - A technique used extensively in elixir. Very powerful.
-  - As always, there are multiple ways to do the same thing. and it's often
+  - A technique used extensively in Elixir. Very powerful.
+  - As always, there are multiple ways to do the same thing. And it's often
     simply a matter of preference.
   - [`Regex.named_captures/3`] are neat! Wondering if the resulting map has
     string keys because the captures can be bound to names that would be invalid
     atoms.
 
-- [ ] 9. Serving Files
+- [x] 9. Serving Files
+
+  - Elixir parlance/data type: a _tuple_ represents an ordered collection of
+    values. They typically hold 2-4 values.
+  - Many Elixir built-in functions use this _idiom_: return a tuple to
+    distinguish between success/error outcomes.
+  - _Design decision:_ a [`case`] expression is just another way to
+    conditionally run code based on pattern matches. Multi-clause functions are
+    an alternative. Let's write it out and see… Same output, but which one is
+    better™? There's no right and wrong answer. The choice you make will vary
+    depending on the situation and your personal preference.
+
 - [ ] 10. Module Attributes
 - [ ] 11. Organizing Code
 - [ ] 12. Modeling With Structs
@@ -79,6 +90,7 @@ Journey of learning guided by the [Developing With Elixir/OTP] video course.
 
   [`<>`]: https://hexdocs.pm/elixir/Kernel.html#%3C%3E/2
   [`byte_size/1`]: https://hexdocs.pm/elixir/Kernel.html?#byte_size/1
+  [`case`]: https://hexdocs.pm/elixir/Kernel.SpecialForms.html#case/2
   [`cortex`]: https://hex.pm/packages/cortex
   [`Regex.named_captures/3`]: https://hexdocs.pm/elixir/Regex.html#named_captures/3
   [`String.length/1`]: https://hexdocs.pm/elixir/String.html#length/1

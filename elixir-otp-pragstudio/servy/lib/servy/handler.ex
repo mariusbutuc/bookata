@@ -17,7 +17,6 @@ defmodule Servy.Handler do
     |> rewrite_path()
     |> route()
     |> track()
-    |> emojify()
     |> format_response()
   end
 
@@ -66,12 +65,49 @@ defmodule Servy.Handler do
     %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   def route(%{method: "GET", path: "/bears"} = conv), do:
     %{conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+  def route(%{method: "GET", path: "/bears/new"} = conv) do
+    # TODO Revisit semantic duplication relative to
+    #      route(%{method: "GET", path: "/pages/" <> static_page_slug} = conv)
+    Path.expand("../../pages", __DIR__)
+    |> Path.join("form.html")
+    |> File.read()
+    |> handle_file(conv)
+  end
   def route(%{method: "GET", path: "/bears/" <> id} = conv), do:
     %{conv | status: 200, resp_body: "Bear #{id}"}
+  def route(%{method: "GET", path: "/pages/" <> static_page_slug} = conv) do
+    # TODO Revisit semantic duplication relative to
+    #      route(%{method: "GET", path: "/bears/new"} = conv)
+    Path.expand("../../pages", __DIR__)
+    |> Path.join("#{static_page_slug}.html")
+    |> File.read()
+    |> case do
+        {:ok, content} ->
+          %{conv | status: 200, resp_body: content}
+
+        {:error, :enoent} ->
+          %{conv | status: 404, resp_body: "File not found!"}
+
+        {:error, reason} ->
+          Logger.warn("File error requesting #{static_page_slug}.html: #{reason}")
+          %{conv | status: 500, resp_body: "File error: #{reason}"}
+      end
+  end
   def route(%{method: "DELETE", path: "/bears/" <> _id} = conv), do:
     %{conv | status: 403, resp_body: "Bears can never be deleted!"}
   def route(%{path: path} = conv), do:
     %{conv | status: 404, resp_body: "No #{path} here!"}
+
+  # TODO Temporary, to explore the design decision between using multi-clause
+  #      functions versus a cases statement in the `route/1` function.
+  defp handle_file({:ok, content}, conv), do:
+    %{conv | status: 200, resp_body: content}
+  defp handle_file({:error, :enoent}, conv), do:
+    %{conv | status: 404, resp_body: "File not found!"}
+  defp handle_file({:error, reason}, conv) do
+    Logger.warn("File error: #{reason}")
+    %{conv | status: 500, resp_body: "File error: #{reason}"}
+  end
 
   @doc """
   Track the missing path every time a 404 is returned.
@@ -82,18 +118,6 @@ defmodule Servy.Handler do
   end
 
   def track(conv), do: conv
-
-  @doc """
-  Decorate all responses that have a 200 status with emojies before and after
-  the actual content.
-  """
-  def emojify(%{status: 200, resp_body: resp_body} = conv) do
-    # TODO Starting to forget what does a `conv` contain. Wishing for Structs,
-    # @types, and @ specs.
-    %{conv | resp_body: "🍌 #{resp_body} 🙈🙉🙊"}
-  end
-
-  def emojify(conv), do: conv
 
   @doc """
   Transform the `conv` map into a valid HTTP response string.
