@@ -9,58 +9,66 @@ defmodule Servy.HandlerTest do
 
   """
 
-  test "handles a request" do
-    expected_response = """
-    HTTP/1.1 200 OK
-    Content-Type: text/html
-    Content-Length: 20
+  describe "handle/1" do
+    test "handles a request" do
+      expected_response = """
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      Content-Length: 20
 
-    Bears, Lions, Tigers
-    """
+      Bears, Lions, Tigers
+      """
 
-    actual_response =
-      @request
-      |> Servy.Handler.handle()
+      actual_response =
+        @request
+        |> Servy.Handler.handle()
 
-    assert actual_response == expected_response
+      assert actual_response == expected_response
+    end
   end
 
-  test "parses a request" do
-    expected_response = %{method: "GET", path: "/wildthings", resp_body: ""}
+  describe "parse/1" do
+    test "parses a request" do
+      expected_response = %{method: "GET", path: "/wildthings", resp_body: ""}
 
-    actual_response =
-      @request
-      |> Servy.Handler.parse()
+      actual_response =
+        @request
+        |> Servy.Handler.parse()
 
-    assert actual_response == expected_response
+      assert actual_response == expected_response
+    end
   end
 
-  test "routes a conversation" do
-    conversation = %{method: "GET", path: "/wildthings", resp_body: ""}
-    expected_response = %{conversation | resp_body: "Bears, Lions, Tigers"}
+  describe "route/1" do
+    test "routes a conversation" do
+      conversation = %{method: "GET", path: "/wildthings", resp_body: ""}
+      expected_response = %{conversation | resp_body: "Bears, Lions, Tigers"}
 
-    actual_response =
-      conversation
-      |> Servy.Handler.route()
+      actual_response =
+        conversation
+        |> Servy.Handler.route()
 
-    assert actual_response == expected_response
+      assert actual_response == expected_response
+    end
   end
 
-  test "formats a conversation as a valid HTTP response string" do
-    conversation = %{method: "GET", path: "/wildthings", resp_body: "Bears, Lions, Tigers"}
+  describe "format_response/1" do
+    test "formats a conversation as a valid HTTP response string" do
+      conversation = %{method: "GET", path: "/wildthings", resp_body: "Bears, Lions, Tigers"}
 
-    expected_response = """
-    HTTP/1.1 200 OK
-    Content-Type: text/html
-    Content-Length: 20
+      expected_response = """
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      Content-Length: 20
 
-    Bears, Lions, Tigers
-    """
+      Bears, Lions, Tigers
+      """
 
-    actual_response =
-      conversation
-      |> Servy.Handler.format_response()
+      actual_response =
+        conversation
+        |> Servy.Handler.format_response()
 
-    assert actual_response == expected_response
+      assert actual_response == expected_response
+    end
   end
 end
