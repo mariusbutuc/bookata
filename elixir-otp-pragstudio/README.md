@@ -9,7 +9,7 @@ Journey of learning guided by the [Developing With Elixir/OTP](https://pragmatic
 - [x] 3. High-Level Transformations
 - [x] 4. Pattern Matching
 - [x] 5. Immutable Data
-- [ ] 6. Function Clauses
+- [x] 6. Function Clauses
 - [ ] 7. Advanced Pattern Matching
 - [ ] 8. Pattern Matching Maps
 - [ ] 9. Serving Files
@@ -47,6 +47,13 @@ Journey of learning guided by the [Developing With Elixir/OTP](https://pragmatic
   - Square-bracket syntax: (+) works with all maps, (?) returns `nil` for missing keys
   - Dot notation: (+) more strict (`KeyError`), (-) only works for keys that are atoms
 - [`String.length/1`] versus [`byte_size/1`].
+- In Elixir, we use `if` clauses less often comparative to imperative languages.
+  Instead, it is more _idiomatic_ to control the flow of the program using
+  pattern matching and functions. We prefer using pattern matching as an
+  alternative to `if`/`else` conditionals, by writing short, _declarative_
+  functions.
+- In Elixir _parlance_, function clauses is what we call multiple function
+  definitions that share the same name and arity.
 
 ### Extracurricular
 

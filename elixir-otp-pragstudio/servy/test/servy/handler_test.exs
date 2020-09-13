@@ -1,16 +1,8 @@
 defmodule Servy.HandlerTest do
   use ExUnit.Case
 
-  @request """
-  GET /wildthings HTTP/1.1
-  Host: example.com
-  User-Agent: ExampleBrowser/1.0
-  Accept: */*
-
-  """
-
   describe "handle/1" do
-    test "handles a request" do
+    test "handles a request to GET /wildthings" do
       expected_response = """
       HTTP/1.1 200 OK
       Content-Type: text/html
@@ -20,10 +12,37 @@ defmodule Servy.HandlerTest do
       """
 
       actual_response =
-        @request
+        "/wildthings"
+        |> request()
         |> Servy.Handler.handle()
 
       assert actual_response == expected_response
+    end
+
+    test "handles a request to GET /bears" do
+      expected_response = """
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      Content-Length: 25
+
+      Teddy, Smokey, Paddington
+      """
+
+      actual_response =
+        "/bears"
+        |> request()
+        |> Servy.Handler.handle()
+
+      assert actual_response == expected_response
+    end
+
+    test "does not handle a request to GET /bigfoot" do
+      assert_raise FunctionClauseError, fn ->
+        actual_response =
+          "/bigfoot"
+          |> request()
+          |> Servy.Handler.handle()
+      end
     end
   end
 
@@ -32,7 +51,8 @@ defmodule Servy.HandlerTest do
       expected_response = %{method: "GET", path: "/wildthings", resp_body: ""}
 
       actual_response =
-        @request
+        "/wildthings"
+        |> request()
         |> Servy.Handler.parse()
 
       assert actual_response == expected_response
@@ -70,5 +90,15 @@ defmodule Servy.HandlerTest do
 
       assert actual_response == expected_response
     end
+  end
+
+  def request(path) do
+    """
+    GET #{path} HTTP/1.1
+    Host: example.com
+    User-Agent: ExampleBrowser/1.0
+    Accept: */*
+
+    """
   end
 end
