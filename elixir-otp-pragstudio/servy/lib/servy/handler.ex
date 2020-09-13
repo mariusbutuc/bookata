@@ -32,26 +32,18 @@ defmodule Servy.Handler do
   @doc """
   Transform the `conv` map into a new map that also has a response body.
   """
-  def route(_conv) do
-    # TODO Implement
-    _conv = %{
-      method: "GET",
-      path: "/wildthings",
-      resp_body: "Bears, Lions, Tigers"
-    }
-  end
+  def route(conv), do: %{conv | resp_body: "Bears, Lions, Tigers"}
 
   @doc """
   Transform the `conv` map into a valid HTTP response string.
   """
-  def format_response(_conv) do
-    # TODO Implement
+  def format_response(%{resp_body: resp_body} = _conv) do
     """
     HTTP/1.1 200 OK
     Content-Type: text/html
-    Content-Length: 20
+    Content-Length: #{byte_size(resp_body)}
 
-    Bears, Lions, Tigers
+    #{resp_body}
     """
   end
 end
