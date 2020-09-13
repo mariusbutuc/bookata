@@ -6,13 +6,18 @@ defmodule Servy.Handler do
     * `conv` represents the "conversation" between the browser and our server.
   """
 
+  require Logger
+
   @doc """
   Return a response by applying a series of transformations to a request.
   """
   def handle(request) do
     request
     |> parse()
+    |> rewrite_path()
     |> route()
+    |> track()
+    |> emojify()
     |> format_response()
   end
 
@@ -35,36 +40,60 @@ defmodule Servy.Handler do
   end
 
   @doc """
-  Transform the `conv` map into a new map that also has a response body.
+  Rewrite (re-route?) paths to make them prettier or to juice up a page's SEO.
   """
-  def route(conv) do
-    # TODO Why not pattern match within the `conv` map instead? As mentioned in
-    #      the course notes, I too will pace myself: this is introduced in
-    #      Module 8: Pattern Matching Maps.
-    route(conv, conv.method, conv.path)
+  def rewrite_path(%{path: "/wildlife"} = conv) do
+    %{conv | path: "/wildthings"}
   end
+  def rewrite_path(%{path: path} = conv) do
+    regex = ~r{\/(?<entity>\w+)\?id=(?<id>\d+)}
+    captures = Regex.named_captures(regex, path)
+    rewrite_path_captures(conv, captures)
+  end
+  def rewrite_path(conv), do: conv
 
-  def route(conv, "GET", "/wildthings") do
+  # TODO Intentional about keeping these private function clauses close to the
+  # call site. For now.
+  defp rewrite_path_captures(conv, %{"entity" => entity, "id" => id}) do
+    %{conv | path: "/#{entity}/#{id}"}
+  end
+  defp rewrite_path_captures(conv, nil), do: conv
+
+  @doc """
+  Add the response body and status code to the `conv` map.
+  """
+  def route(%{method: "GET", path: "/wildthings"} = conv), do:
     %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
-  end
-
-  def route(conv, "GET", "/bears") do
+  def route(%{method: "GET", path: "/bears"} = conv), do:
     %{conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
-  end
-
-  def route(conv, "GET", "/bears/" <> id) do
+  def route(%{method: "GET", path: "/bears/" <> id} = conv), do:
     %{conv | status: 200, resp_body: "Bear #{id}"}
-  end
-
-  def route(conv, "DELETE", "/bears/" <> id) do
-    # TODO 403 at the moment, and not 401. Not allowed to delete a bear,
-    #      regardless of how much one tries.
-    %{conv | status: 403, resp_body: "Deleting a bear is forbidden!"}
-  end
-
-  def route(conv, _method, path) do
+  def route(%{method: "DELETE", path: "/bears/" <> _id} = conv), do:
+    %{conv | status: 403, resp_body: "Bears can never be deleted!"}
+  def route(%{path: path} = conv), do:
     %{conv | status: 404, resp_body: "No #{path} here!"}
+
+  @doc """
+  Track the missing path every time a 404 is returned.
+  """
+  def track(%{status: 404, path: path} = conv) do
+    Logger.warn("#{path} is on the loose!")
+    conv
   end
+
+  def track(conv), do: conv
+
+  @doc """
+  Decorate all responses that have a 200 status with emojies before and after
+  the actual content.
+  """
+  def emojify(%{status: 200, resp_body: resp_body} = conv) do
+    # TODO Starting to forget what does a `conv` contain. Wishing for Structs,
+    # @types, and @ specs.
+    %{conv | resp_body: "🍌 #{resp_body} 🙈🙉🙊"}
+  end
+
+  def emojify(conv), do: conv
 
   @doc """
   Transform the `conv` map into a valid HTTP response string.

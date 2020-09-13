@@ -6,9 +6,9 @@ defmodule Servy.HandlerTest do
       expected_response = """
       HTTP/1.1 200 OK
       Content-Type: text/html
-      Content-Length: 20
+      Content-Length: 38
 
-      Bears, Lions, Tigers
+      🍌 Bears, Lions, Tigers 🙈🙉🙊
       """
 
       actual_response =
@@ -23,9 +23,9 @@ defmodule Servy.HandlerTest do
       expected_response = """
       HTTP/1.1 200 OK
       Content-Type: text/html
-      Content-Length: 25
+      Content-Length: 43
 
-      Teddy, Smokey, Paddington
+      🍌 Teddy, Smokey, Paddington 🙈🙉🙊
       """
 
       actual_response =
@@ -40,9 +40,9 @@ defmodule Servy.HandlerTest do
       expected_response = """
       HTTP/1.1 200 OK
       Content-Type: text/html
-      Content-Length: 6
+      Content-Length: 24
 
-      Bear 1
+      🍌 Bear 1 🙈🙉🙊
       """
 
       actual_response =
@@ -57,9 +57,9 @@ defmodule Servy.HandlerTest do
       expected_response = """
       HTTP/1.1 403 Forbidden
       Content-Type: text/html
-      Content-Length: 29
+      Content-Length: 27
 
-      Deleting a bear is forbidden!
+      Bears can never be deleted!
       """
 
       actual_response =
@@ -101,6 +101,52 @@ defmodule Servy.HandlerTest do
         "/wildthings"
         |> request()
         |> Servy.Handler.parse()
+
+      assert actual_response == expected_response
+    end
+  end
+
+  describe "rewrite_path/1" do
+    test "rewrites requests for /wildlife to /wildthings" do
+      conversation = %{
+        method: "GET",
+        path: "/wildlife",
+        resp_body: "",
+        status: nil
+      }
+
+      expected_response = %{
+        method: "GET",
+        path: "/wildthings",
+        resp_body: "",
+        status: nil
+      }
+
+      actual_response =
+        conversation
+        |> Servy.Handler.rewrite_path()
+
+      assert actual_response == expected_response
+    end
+
+    test "rewrites requests for /bears?id=1 to /bears/1" do
+      conversation = %{
+        method: "GET",
+        path: "/bears?id=1",
+        resp_body: "",
+        status: nil
+      }
+
+      expected_response = %{
+        method: "GET",
+        path: "/bears/1",
+        resp_body: "",
+        status: nil
+      }
+
+      actual_response =
+        conversation
+        |> Servy.Handler.rewrite_path()
 
       assert actual_response == expected_response
     end
@@ -149,7 +195,7 @@ defmodule Servy.HandlerTest do
     end
   end
 
-  def request(path, method \\ "GET") do
+  defp request(path, method \\ "GET") do
     """
     #{method} #{path} HTTP/1.1
     Host: example.com
