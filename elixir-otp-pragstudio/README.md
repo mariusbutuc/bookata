@@ -64,7 +64,15 @@ Journey of learning guided by the [Developing With Elixir/OTP] video course.
     better™? There's no right and wrong answer. The choice you make will vary
     depending on the situation and your personal preference.
 
-- [ ] 10. Module Attributes
+- [x] 10. Module Attributes
+
+  - Set at the top level of a module.
+  - Used to associate metadata with the module.
+  - Reserved module attributes:
+    - `@moduledoc` — document modules
+    - `@doc` — document functions
+  - Custom module attributes — can be used to store constants.
+
 - [ ] 11. Organizing Code
 - [ ] 12. Modeling With Structs
 - [ ] 13. Matching Heads and Tails

@@ -1,6 +1,6 @@
 defmodule Servy.Handler do
   @moduledoc """
-  Handle a request by transforming it into a response.
+  Handles HTTP requests.
 
   ## Ubiquitous Language
     * `conv` represents the "conversation" between the browser and our server.
@@ -8,9 +8,9 @@ defmodule Servy.Handler do
 
   require Logger
 
-  @doc """
-  Return a response by applying a series of transformations to a request.
-  """
+  @pages_path Path.expand("../../pages", __DIR__)
+
+  @doc "Transforms a request into a response."
   def handle(request) do
     request
     |> parse()
@@ -68,7 +68,7 @@ defmodule Servy.Handler do
   def route(%{method: "GET", path: "/bears/new"} = conv) do
     # TODO Revisit semantic duplication relative to
     #      route(%{method: "GET", path: "/pages/" <> static_page_slug} = conv)
-    Path.expand("../../pages", __DIR__)
+    @pages_path
     |> Path.join("form.html")
     |> File.read()
     |> handle_file(conv)
@@ -78,7 +78,7 @@ defmodule Servy.Handler do
   def route(%{method: "GET", path: "/pages/" <> static_page_slug} = conv) do
     # TODO Revisit semantic duplication relative to
     #      route(%{method: "GET", path: "/bears/new"} = conv)
-    Path.expand("../../pages", __DIR__)
+    @pages_path
     |> Path.join("#{static_page_slug}.html")
     |> File.read()
     |> case do
@@ -109,9 +109,7 @@ defmodule Servy.Handler do
     %{conv | status: 500, resp_body: "File error: #{reason}"}
   end
 
-  @doc """
-  Track the missing path every time a 404 is returned.
-  """
+  @doc "Logs 404 requests."
   def track(%{status: 404, path: path} = conv) do
     Logger.warn("#{path} is on the loose!")
     conv
