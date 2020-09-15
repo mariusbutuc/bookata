@@ -73,7 +73,10 @@ Journey of learning guided by the [Developing With Elixir/OTP] video course.
     - `@doc` — document functions
   - Custom module attributes — can be used to store constants.
 
-- [ ] 11. Organizing Code
+- [x] 11. Organizing Code
+
+  -
+
 - [ ] 12. Modeling With Structs
 - [ ] 13. Matching Heads and Tails
 - [ ] 14. Recursion

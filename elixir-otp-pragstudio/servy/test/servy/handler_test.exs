@@ -118,70 +118,6 @@ defmodule Servy.HandlerTest do
     end
   end
 
-  describe "parse/1" do
-    test "parses a request" do
-      expected_response = %{
-        method: "GET",
-        path: "/wildthings",
-        resp_body: "",
-        status: nil
-      }
-
-      actual_response =
-        "/wildthings"
-        |> request()
-        |> Servy.Handler.parse()
-
-      assert actual_response == expected_response
-    end
-  end
-
-  describe "rewrite_path/1" do
-    test "rewrites requests for /wildlife to /wildthings" do
-      conversation = %{
-        method: "GET",
-        path: "/wildlife",
-        resp_body: "",
-        status: nil
-      }
-
-      expected_response = %{
-        method: "GET",
-        path: "/wildthings",
-        resp_body: "",
-        status: nil
-      }
-
-      actual_response =
-        conversation
-        |> Servy.Handler.rewrite_path()
-
-      assert actual_response == expected_response
-    end
-
-    test "rewrites requests for /bears?id=1 to /bears/1" do
-      conversation = %{
-        method: "GET",
-        path: "/bears?id=1",
-        resp_body: "",
-        status: nil
-      }
-
-      expected_response = %{
-        method: "GET",
-        path: "/bears/1",
-        resp_body: "",
-        status: nil
-      }
-
-      actual_response =
-        conversation
-        |> Servy.Handler.rewrite_path()
-
-      assert actual_response == expected_response
-    end
-  end
-
   describe "route/1" do
     test "routes a conversation" do
       conversation = %{
@@ -250,7 +186,7 @@ defmodule Servy.HandlerTest do
     end
   end
 
-  defp request(path, method \\ "GET") do
+  def request(path, method \\ "GET") do
     """
     #{method} #{path} HTTP/1.1
     Host: example.com

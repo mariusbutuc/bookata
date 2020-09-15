@@ -6,6 +6,10 @@ defmodule Servy.Handler do
     * `conv` represents the "conversation" between the browser and our server.
   """
 
+  import Servy.FileHandler, only: [handle_file: 2]
+  import Servy.Parser, only: [parse: 1]
+  import Servy.Plugins, only: [rewrite_path: 1, track: 1]
+
   require Logger
 
   @pages_path Path.expand("../../pages", __DIR__)
@@ -19,44 +23,6 @@ defmodule Servy.Handler do
     |> track()
     |> format_response()
   end
-
-  @doc """
-  Transform the request string into a map.
-  """
-  def parse(request) do
-    [method, path, _] =
-      request
-      |> String.split("\n")
-      |> List.first()
-      |> String.split()
-
-    %{
-      method: method,
-      path: path,
-      resp_body: "",
-      status: nil
-    }
-  end
-
-  @doc """
-  Rewrite (re-route?) paths to make them prettier or to juice up a page's SEO.
-  """
-  def rewrite_path(%{path: "/wildlife"} = conv) do
-    %{conv | path: "/wildthings"}
-  end
-  def rewrite_path(%{path: path} = conv) do
-    regex = ~r{\/(?<entity>\w+)\?id=(?<id>\d+)}
-    captures = Regex.named_captures(regex, path)
-    rewrite_path_captures(conv, captures)
-  end
-  def rewrite_path(conv), do: conv
-
-  # TODO Intentional about keeping these private function clauses close to the
-  # call site. For now.
-  defp rewrite_path_captures(conv, %{"entity" => entity, "id" => id}) do
-    %{conv | path: "/#{entity}/#{id}"}
-  end
-  defp rewrite_path_captures(conv, nil), do: conv
 
   @doc """
   Add the response body and status code to the `conv` map.
@@ -97,25 +63,6 @@ defmodule Servy.Handler do
     %{conv | status: 403, resp_body: "Bears can never be deleted!"}
   def route(%{path: path} = conv), do:
     %{conv | status: 404, resp_body: "No #{path} here!"}
-
-  # TODO Temporary, to explore the design decision between using multi-clause
-  #      functions versus a cases statement in the `route/1` function.
-  defp handle_file({:ok, content}, conv), do:
-    %{conv | status: 200, resp_body: content}
-  defp handle_file({:error, :enoent}, conv), do:
-    %{conv | status: 404, resp_body: "File not found!"}
-  defp handle_file({:error, reason}, conv) do
-    Logger.warn("File error: #{reason}")
-    %{conv | status: 500, resp_body: "File error: #{reason}"}
-  end
-
-  @doc "Logs 404 requests."
-  def track(%{status: 404, path: path} = conv) do
-    Logger.warn("#{path} is on the loose!")
-    conv
-  end
-
-  def track(conv), do: conv
 
   @doc """
   Transform the `conv` map into a valid HTTP response string.
