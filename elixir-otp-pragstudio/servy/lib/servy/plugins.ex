@@ -1,6 +1,6 @@
 defmodule Servy.Plugins do
   @moduledoc """
-
+  General use plugin functions.
   """
 
   require Logger
@@ -11,11 +11,13 @@ defmodule Servy.Plugins do
   def rewrite_path(%{path: "/wildlife"} = conv) do
     %{conv | path: "/wildthings"}
   end
+
   def rewrite_path(%{path: path} = conv) do
     regex = ~r{\/(?<entity>\w+)\?id=(?<id>\d+)}
     captures = Regex.named_captures(regex, path)
     rewrite_path_captures(conv, captures)
   end
+
   def rewrite_path(conv), do: conv
 
   # TODO Intentional about keeping these private function clauses close to the
@@ -23,6 +25,7 @@ defmodule Servy.Plugins do
   defp rewrite_path_captures(conv, %{"entity" => entity, "id" => id}) do
     %{conv | path: "/#{entity}/#{id}"}
   end
+
   defp rewrite_path_captures(conv, nil), do: conv
 
   @doc "Logs 404 requests."

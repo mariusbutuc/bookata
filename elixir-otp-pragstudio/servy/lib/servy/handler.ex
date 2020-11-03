@@ -27,10 +27,12 @@ defmodule Servy.Handler do
   @doc """
   Add the response body and status code to the `conv` map.
   """
-  def route(%{method: "GET", path: "/wildthings"} = conv), do:
-    %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
-  def route(%{method: "GET", path: "/bears"} = conv), do:
-    %{conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+  def route(%{method: "GET", path: "/wildthings"} = conv),
+    do: %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
+
+  def route(%{method: "GET", path: "/bears"} = conv),
+    do: %{conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+
   def route(%{method: "GET", path: "/bears/new"} = conv) do
     # TODO Revisit semantic duplication relative to
     #      route(%{method: "GET", path: "/pages/" <> static_page_slug} = conv)
@@ -39,8 +41,10 @@ defmodule Servy.Handler do
     |> File.read()
     |> handle_file(conv)
   end
-  def route(%{method: "GET", path: "/bears/" <> id} = conv), do:
-    %{conv | status: 200, resp_body: "Bear #{id}"}
+
+  def route(%{method: "GET", path: "/bears/" <> id} = conv),
+    do: %{conv | status: 200, resp_body: "Bear #{id}"}
+
   def route(%{method: "GET", path: "/pages/" <> static_page_slug} = conv) do
     # TODO Revisit semantic duplication relative to
     #      route(%{method: "GET", path: "/bears/new"} = conv)
@@ -48,21 +52,22 @@ defmodule Servy.Handler do
     |> Path.join("#{static_page_slug}.html")
     |> File.read()
     |> case do
-        {:ok, content} ->
-          %{conv | status: 200, resp_body: content}
+      {:ok, content} ->
+        %{conv | status: 200, resp_body: content}
 
-        {:error, :enoent} ->
-          %{conv | status: 404, resp_body: "File not found!"}
+      {:error, :enoent} ->
+        %{conv | status: 404, resp_body: "File not found!"}
 
-        {:error, reason} ->
-          Logger.warn("File error requesting #{static_page_slug}.html: #{reason}")
-          %{conv | status: 500, resp_body: "File error: #{reason}"}
-      end
+      {:error, reason} ->
+        Logger.warn("File error requesting #{static_page_slug}.html: #{reason}")
+        %{conv | status: 500, resp_body: "File error: #{reason}"}
+    end
   end
-  def route(%{method: "DELETE", path: "/bears/" <> _id} = conv), do:
-    %{conv | status: 403, resp_body: "Bears can never be deleted!"}
-  def route(%{path: path} = conv), do:
-    %{conv | status: 404, resp_body: "No #{path} here!"}
+
+  def route(%{method: "DELETE", path: "/bears/" <> _id} = conv),
+    do: %{conv | status: 403, resp_body: "Bears can never be deleted!"}
+
+  def route(%{path: path} = conv), do: %{conv | status: 404, resp_body: "No #{path} here!"}
 
   @doc """
   Transform the `conv` map into a valid HTTP response string.
