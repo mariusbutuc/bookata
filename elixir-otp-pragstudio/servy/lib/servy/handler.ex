@@ -12,7 +12,7 @@ defmodule Servy.Handler do
 
   require Logger
 
-  @pages_path Path.expand("../../pages", __DIR__)
+  @pages_path Path.expand("pages", File.cwd!)
 
   @doc "Transforms a request into a response."
   def handle(request) do

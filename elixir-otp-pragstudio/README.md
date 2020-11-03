@@ -75,7 +75,7 @@ Journey of learning guided by the [Developing With Elixir/OTP] video course.
 
 - [x] 11. Organizing Code
 
-  -
+  - `__DIR__` versus `File.cwd!` (use `h […]` if a reminder is needed)
 
 - [ ] 12. Modeling With Structs
 - [ ] 13. Matching Heads and Tails
