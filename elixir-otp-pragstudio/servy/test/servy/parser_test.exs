@@ -1,8 +1,6 @@
 defmodule Servy.ParserTest do
   use ExUnit.Case
 
-  import Servy.HandlerTest, only: [request: 1]
-
   describe "parse/1" do
     test "parses a request" do
       expected_response = %{
@@ -13,9 +11,14 @@ defmodule Servy.ParserTest do
       }
 
       actual_response =
-        "/wildthings"
-        |> request()
-        |> Servy.Handler.parse()
+        """
+        GET /wildthings HTTP/1.1
+        Host: example.com
+        User-Agent: ExampleBrowser/1.0
+        Accept: */*
+
+        """
+        |> Servy.Parser.parse()
 
       assert actual_response == expected_response
     end

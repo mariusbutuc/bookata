@@ -19,7 +19,7 @@ defmodule Servy.PluginsTest do
 
       actual_response =
         conversation
-        |> Servy.Handler.rewrite_path()
+        |> Servy.Plugins.rewrite_path()
 
       assert actual_response == expected_response
     end
@@ -41,7 +41,7 @@ defmodule Servy.PluginsTest do
 
       actual_response =
         conversation
-        |> Servy.Handler.rewrite_path()
+        |> Servy.Plugins.rewrite_path()
 
       assert actual_response == expected_response
     end
