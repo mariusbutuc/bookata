@@ -1,9 +1,11 @@
 defmodule Servy.ParserTest do
   use ExUnit.Case
 
+  alias Servy.Conv
+
   describe "parse/1" do
     test "parses a request" do
-      expected_response = %{
+      expected_response = %Conv{
         method: "GET",
         path: "/wildthings",
         resp_body: "",

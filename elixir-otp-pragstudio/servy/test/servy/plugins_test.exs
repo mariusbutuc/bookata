@@ -1,16 +1,18 @@
 defmodule Servy.PluginsTest do
   use ExUnit.Case
 
+  alias Servy.Conv
+
   describe "rewrite_path/1" do
     test "rewrites requests for /wildlife to /wildthings" do
-      conversation = %{
+      conversation = %Conv{
         method: "GET",
         path: "/wildlife",
         resp_body: "",
         status: nil
       }
 
-      expected_response = %{
+      expected_response = %Conv{
         method: "GET",
         path: "/wildthings",
         resp_body: "",
@@ -25,14 +27,14 @@ defmodule Servy.PluginsTest do
     end
 
     test "rewrites requests for /bears?id=1 to /bears/1" do
-      conversation = %{
+      conversation = %Conv{
         method: "GET",
         path: "/bears?id=1",
         resp_body: "",
         status: nil
       }
 
-      expected_response = %{
+      expected_response = %Conv{
         method: "GET",
         path: "/bears/1",
         resp_body: "",

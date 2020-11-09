@@ -1,6 +1,8 @@
 defmodule Servy.HandlerTest do
   use ExUnit.Case
 
+  alias Servy.Conv
+
   describe "handle/1" do
     test "handles a request to GET /wildthings" do
       expected_response = """
@@ -122,14 +124,14 @@ defmodule Servy.HandlerTest do
 
   describe "route/1" do
     test "routes a conversation" do
-      conversation = %{
+      conversation = %Conv{
         method: "GET",
         path: "/wildthings",
         resp_body: "",
         status: 200
       }
 
-      expected_response = %{conversation | resp_body: "Bears, Lions, Tigers"}
+      expected_response = %Conv{conversation | resp_body: "Bears, Lions, Tigers"}
 
       actual_response =
         conversation
@@ -139,14 +141,14 @@ defmodule Servy.HandlerTest do
     end
 
     test "serves a static file" do
-      conversation = %{
+      conversation = %Conv{
         method: "GET",
         path: "/pages/about",
         resp_body: "",
         status: 200
       }
 
-      expected_response = %{
+      expected_response = %Conv{
         conversation
         | resp_body: """
           <h1>Clark's Wildthings Refuge</h1>
@@ -170,7 +172,7 @@ defmodule Servy.HandlerTest do
 
   describe "format_response/1" do
     test "formats a conversation as a valid HTTP response string" do
-      conversation = %{
+      conversation = %Conv{
         method: "GET",
         path: "/wildthings",
         resp_body: "Bears, Lions, Tigers",
