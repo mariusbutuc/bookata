@@ -77,7 +77,24 @@ Journey of learning guided by the [Developing With Elixir/OTP] video course.
 
   - `__DIR__` versus `File.cwd!` (use `h […]` if a reminder is needed)
 
-- [ ] 12. Modeling With Structs
+- [x] 12. Modeling With Structs
+
+  - `Map`s are generic data structures.
+    - they support arbitrary keys and values.
+  - `Struct`s make implied constraints explicit (think types)
+    - a `Struct` is a "special `Map`"
+      - fix set of fields
+      - default values
+      - constraints are checked at _compile-time_: validate to support only valid fields
+    - one Struct per module, inheriting the module's name
+    - create (initialize?) with supplied values to override the defaults
+    - _stricter access_ when compared to maps: dot-notation only
+    - pattern matching applies
+    - specific _type_ of `Map`
+    - provides _type safety_
+    - makes application code more _robust_
+    - **Use:** model _entities_ of our _domain_
+
 - [ ] 13. Matching Heads and Tails
 - [ ] 14. Recursion
 - [ ] 15. Slicing and Dicing with Enum
