@@ -4,7 +4,12 @@
 
 ## Contents
 
-- [ ] 1. Welcome to React
+- [x] 1. Welcome to React
+
+  > […] we want this book to serve as a strong foundation for all your future work with the library.
+  > The goal of this book is to avoid confusion in the learning process by putting things in a sequence:
+  > a learning roadmap.
+
 - [ ] 2. JavaScript for React
 - [ ] 3. Functional Programming with JavaScript
 - [ ] 4. How React Works
