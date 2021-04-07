@@ -77,7 +77,22 @@
 
 ## Asynchronous JavaScript
 
-- `Promise {<pending>}`
+> A solid understanding of asynchronous behavior is essential for the modern JavaScript engineer.
+
+### `Promise`
+
+An object that represents whether the async operation is pending, has been completed, or has failed.
+
+- `then()` » invoke the callback if the previous operation was successful
+- `catch()` » invoke the callback if the `fetch` did not resolve successfully
+
+### Async/Await
+
+The syntax of `async` functions looks (more) like code found in synchronous functions.
+
+- `async` » makes the function asynchronous that can wait for promises to resolve before executing the code any further.
+- `await` » wait for the promise to resolve first.
+- `try…catch` » surround the promise call to handle any errora that may occur due to an unresolved promise.
 
 [a constant]: const.js
 [babel repl]: https://babeljs.io/repl
