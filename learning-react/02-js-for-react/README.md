@@ -79,7 +79,7 @@
 
 > A solid understanding of asynchronous behavior is essential for the modern JavaScript engineer.
 
-### `Promise`
+### [`Promise`]
 
 An object that represents whether the async operation is pending, has been completed, or has failed.
 
@@ -88,14 +88,35 @@ An object that represents whether the async operation is pending, has been compl
 
 ### Async/Await
 
-The syntax of `async` functions looks (more) like code found in synchronous functions.
+The syntax of [`async` functions] looks (more) like code found in synchronous functions.
 
 - `async` » makes the function asynchronous that can wait for promises to resolve before executing the code any further.
 - `await` » wait for the promise to resolve first.
 - `try…catch` » surround the promise call to handle any errora that may occur due to an unresolved promise.
 
+## Classes
+
+- Initially, the React library leaned heavily on [classes] to construct user interface components.
+- Nowadays, React is beginning to move away from classes, towards using functions to construct components.
+- Classes are still prevalent, particularly in legacy React code, as well as in the JavaScript world at large.
+- JavaScript uses [`prototypical inheritance`], a.k.a. `prototypal inheritance`.
+
+  - Three different kinds of prototypal inheritance
+
+    1. Concatenative inheritance: `Object.assign()`, mixins, etc.
+    2. Prototype delegation: `Object.create()`, `new`, `Object.prototype`, etc.
+
+       > If a property is not found on the object, the lookup is delegated to the delegate prototype. […]
+       > When most people think of prototypal OO in JavaScript, they think of prototype delegation.
+
+    3. Functional inheritance: factory function, etc.
+
+[`async` functions]: async_await.js
+[`promise`]: promises.js
+[`prototypical inheritance`]: https://medium.com/javascript-scene/e4cd0a7562e9
 [a constant]: const.js
 [babel repl]: https://babeljs.io/repl
+[classes]: classes.js
 [different syntax options & anatomy]: functions.js
 [kangax compatibility table]: http://kangax.github.io/compat-table/esnext/
 [list matching]: list_matching.js
