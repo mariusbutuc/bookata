@@ -111,6 +111,23 @@ The syntax of [`async` functions] looks (more) like code found in synchronous fu
 
     3. Functional inheritance: factory function, etc.
 
+## ES6 Modules
+
+- Reusable code, avoiding variable collision.
+- Stored in separate files, one per module.
+- `export` one or multiple objects, functions, primitives etc. — any JS type basically.
+- `export default` can be used to export a single main type.
+- Consumed using `import`: either into a dingle variable or leveraging object destructuring.
+- Aliases can be used to scope module variables locally under different variable names.
+- Alternatively, `*` can be used to import everything into a single variable.
+
+### CommonJS
+
+- The ES6 module `import` / `export` is not yet fully supported by all browsers _or_ by Node.
+  - Babel supports it though.
+- CommonJS is the module pattern supported by all versions of Node.
+  - Here, `module.exports` and `require` are used to export and import respectively.
+
 [`async` functions]: async_await.js
 [`promise`]: promises.js
 [`prototypical inheritance`]: https://medium.com/javascript-scene/e4cd0a7562e9
