@@ -11,6 +11,9 @@
   > a learning roadmap.
 
 - [ ] 2. JavaScript for React
+
+  - A JavaScript syntax baseline, good for working with React: [02-js-for-react]
+
 - [ ] 3. Functional Programming with JavaScript
 - [ ] 4. How React Works
 - [ ] 5. React with JSX
@@ -22,5 +25,5 @@
 - [ ] 11. React Router
 - [ ] 12. React and the Server
 
-
+  [02-js-for-react]: 02-js-for-react
   [book]: https://www.oreilly.com/library/view/learning-react-2nd/9781492051718/
