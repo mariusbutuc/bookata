@@ -16,8 +16,42 @@
 - Consequently, [declarative programs] tend to be more readable and, thus, easier to reason about. The code itself, the syntax itself describes what should happen, while the details of how things happen are abstracted away. Hence the application becomes arguably easier to scale.
 - React is declarative.
 
+## Core concepts of functional programming
+
+### Immutability
+
+- In a functional program, data is [immutable]. It never changes.
+- _Mutability_: In JavaScript, function arguments are references to the actual data.
+  - JavaScript standard modules can mix mutating functions (`Array.push`) together with immutable functions (`Array.concat`).
+- Instead of changing the original data structures, we build changed copies of those data structures and use them instead.
+
+- `Object.assign` is the copy machine:
+
+  1. take a blank object,
+  2. copy the original object,
+  3. overwrite the properties that need to be changed.
+
+  ```js
+  Object.assign({}, color, { rating });
+  ```
+
+- Alternatively, the spread operator (`...`) can be used to
+
+  1. copy the original object into a new object
+  2. overwrite the properties that need to be changed.
+
+  ```js
+  { ...color, rating } // Objects
+  [...list, { title }] // Arrays
+  ```
+
+  ⚠️ As well as adding new elements to an array, the spread operator can also add _new_, inexistent properties to an object.
+
+  Contrast this behaviour with the "update operator" from other languages e.g., Elixir: `%Foo{oldfoo | bar: "new value"}`.
+
 [_what_ should happen]: http://wiki.c2.com/?DeclarativeProgramming
 [declarative programs]: declarative.js
 [functions]: functions.js
+[immutable]: immutable.js
 [imperative programs]: imperative.js
 [λ-calculus]: https://turing100.acm.org/lambda_calculus_timeline.pdf
