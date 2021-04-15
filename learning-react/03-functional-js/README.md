@@ -49,9 +49,28 @@
 
   Contrast this behaviour with the "update operator" from other languages e.g., Elixir: `%Foo{oldfoo | bar: "new value"}`.
 
+### Pure functions
+
+- [Pure functions] are functions that:
+
+  - Return a value (this value can also be a function) that is computed based on its argument(s) alone.
+  - Treat their arguments as immutable data.
+  - Do not cause side effects, like setting global variables or changing anything else about the application's state.
+
+- Pure functions are naturally _testable_.
+
+  - They do not change anything about their environment, or "world".
+  - Consequently, they do not require a complicated test setup or teardown.
+
+- In React, the UI is expressed with pure functions.
+
+  - It does not mutate the DOM.
+  - It's the responsibility of some other part of the application to use that element to change the DOM.
+
 [_what_ should happen]: http://wiki.c2.com/?DeclarativeProgramming
 [declarative programs]: declarative.js
 [functions]: functions.js
 [immutable]: immutable.js
 [imperative programs]: imperative.js
+[pure functions]: pure_functions.js
 [λ-calculus]: https://turing100.acm.org/lambda_calculus_timeline.pdf
