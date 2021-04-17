@@ -67,10 +67,56 @@
   - It does not mutate the DOM.
   - It's the responsibility of some other part of the application to use that element to change the DOM.
 
+### Data Transformations
+
+- FP is all about [transforming data] from one form to another.
+- Two core functions, `map` and `reduce`, significantly facilitate creating one dataset from another.
+
+  - `Array.map`
+
+    - Use case: Create a pure function that changes one object in an array of objects.
+
+      - ⚠️ Ensure the changes are on the new array and not to the original.
+      - Since the arguments (`schools` and `school`) are passed in as references, something like
+
+        ```js
+        school.name = newName;
+        ```
+
+        would still mutate the original data.
+
+      - Therefore using `Array.map` alone is not a guarantee for immutability.
+
+    - Use case: Transform object structure for more refined semantics, or an array, with the help of `Object.keys`
+
+      ```js
+      Object.keys(dehydratedObject).map(…)
+      ```
+
+  - `Array.reduce`
+
+    - Used to turn collections/arrays into primitives and other objects.
+      > If the [2<sup>nd</sup>, optional `initialValue` argument][reduce initial value] is not supplied, the first element in the array will be used as the initial `accumulator` value and skipped as `currentValue`.
+    - Use `Array.reduceRight` if we need to start reducing from the end of the array.
+
+    - Use cases:
+      - Find the maximum value in an array.
+      - Transform an array into a [hash]/indexed lookup.
+      - Deduplicate values in an array.
+
+- Other useful `Array` functions that do not mutate their arguments:
+  - `Array.join`
+  - `Array.filter`
+    - A _predicate_ is a function that always returns a Boolean value: `true` or `false`.
+    - To be preferred over `Array.pop` or `Array.splice` to remove an element from an array, as it does not mutate data.
+
 [_what_ should happen]: http://wiki.c2.com/?DeclarativeProgramming
 [declarative programs]: declarative.js
 [functions]: functions.js
+[hash]: https://en.wikipedia.org/wiki/Hash_function
 [immutable]: immutable.js
 [imperative programs]: imperative.js
 [pure functions]: pure_functions.js
+[reduce initial value]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#parameters
+[transforming data]: data_transformations.js
 [λ-calculus]: https://turing100.acm.org/lambda_calculus_timeline.pdf
