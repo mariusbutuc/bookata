@@ -6,8 +6,8 @@
  *  » has been completed, or
  *  » has failed.
  */
-const fetch = require("node-fetch");
-const XMLHttpRequest = require("xhr2");
+import fetch from "node-fetch";
+import XMLHttpRequest from "xhr2";
 
 // console.log(fetch("https://api.randomuser.me/?nat=CA&results=1"));
 // Promise { <pending> }
@@ -26,12 +26,13 @@ fetch("https://api.randomuser.me/?nat=CA&results=1")
 const getPeople = (count) =>
   new Promise((resolves, rejects) => {
     const api = `https://api.randomuser.me/?nat=CA&results=${count}`;
+    console.log({ count, api });
     const request = new XMLHttpRequest();
     request.open("GET", api);
     request.onload = () =>
       request.status === 200
         ? resolves(JSON.parse(request.response).results)
-        : reject(Error(request.statusText));
+        : rejects(Error(request.statusText));
     request.onerror = (err) => rejects(err);
     request.send();
   });
@@ -39,3 +40,5 @@ const getPeople = (count) =>
 getPeople(5)
   .then((members) => console.log(members))
   .catch((error) => console.error(`getPeople failed: ${error.message}`));
+
+export default getPeople;

@@ -110,10 +110,30 @@
     - A _predicate_ is a function that always returns a Boolean value: `true` or `false`.
     - To be preferred over `Array.pop` or `Array.splice` to remove an element from an array, as it does not mutate data.
 
+### Higher-order Functions
+
+- [Higher-order functions] are functions that can manipulate other functions:
+
+  - Functions that take functions in as arguments
+
+    - e.g., `Array.map`, `Array.filter`, and `Array.reduce`
+
+  - Functions that return functions
+
+    - can help handle the complexities associated with asynchronicity in JavaScript.
+
+  - Functions that both intake and return functions
+
+- Currying
+
+  > A [curried function] is a function that takes multiple arguments _one at a time_. […]
+
 [_what_ should happen]: http://wiki.c2.com/?DeclarativeProgramming
+[curried function]: https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983
 [declarative programs]: declarative.js
 [functions]: functions.js
 [hash]: https://en.wikipedia.org/wiki/Hash_function
+[higher-order functions]: higher-order_functions.js
 [immutable]: immutable.js
 [imperative programs]: imperative.js
 [pure functions]: pure_functions.js
