@@ -26,7 +26,6 @@ fetch("https://api.randomuser.me/?nat=CA&results=1")
 const getPeople = (count) =>
   new Promise((resolves, rejects) => {
     const api = `https://api.randomuser.me/?nat=CA&results=${count}`;
-    console.log({ count, api });
     const request = new XMLHttpRequest();
     request.open("GET", api);
     request.onload = () =>
