@@ -128,9 +128,19 @@
 
   > A [curried function] is a function that takes multiple arguments _one at a time_. […]
 
+### Recursion
+
+> Creating [functions that recall themselves]. […] A replacement for loops.
+
+Use cases:
+
+- Recursion is a pattern that works particularly well with asynchronous processes.
+- Recursion is a good technique for searching data structures.
+
 [_what_ should happen]: http://wiki.c2.com/?DeclarativeProgramming
 [curried function]: https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983
 [declarative programs]: declarative.js
+[functions that recall themselves]: recursion.js
 [functions]: functions.js
 [hash]: https://en.wikipedia.org/wiki/Hash_function
 [higher-order functions]: higher-order_functions.js
