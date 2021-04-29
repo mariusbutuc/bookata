@@ -1,3 +1,3 @@
 set -e
 
-npx create-react-app amplify-app
+yarn create react-app amplify-app
