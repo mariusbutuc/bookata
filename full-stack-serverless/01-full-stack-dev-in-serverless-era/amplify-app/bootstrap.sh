@@ -2,4 +2,5 @@ set -e
 
 yarn set version berry
 
-yarn pnpify --sdk vscode
+# Editor setup for VSCode
+yarn dlx @yarnpkg/pnpify --sdk vscode
