@@ -1,8 +1,7 @@
 set -e
 
 # 1. Install the Amplify CLI
-PACKAGE="@aws-amplify/cli"
-npm list -g $PACKAGE || npm install -g $PACKAGE
+yarn global add @aws-amplify/cli
 
 # 2. Configure it with an identity and access management (IAM) user in your AWS account.
 #    To create a new user and configure the CLI, run the `configure` command:
