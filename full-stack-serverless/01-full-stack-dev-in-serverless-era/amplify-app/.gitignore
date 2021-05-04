@@ -8,7 +8,12 @@
 # Yarn 2/Modern using Zero-Installs
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
 .yarn/*
-!.yarn/cache
+# Remove the Yarn 2 Modern cache, as the nature of this repo is less collaborative and dynamic.
+#
+# > `.yarn/cache` may be safely ignored, but you'll need to run yarn install to regenerate them between each
+# > branch switch - which would be optional otherwise, cf Zero-Installs.
+#
+# !.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
