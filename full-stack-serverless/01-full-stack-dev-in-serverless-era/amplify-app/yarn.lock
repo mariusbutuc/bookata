@@ -58,7 +58,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:3.4.30":
+"@aws-amplify/auth@npm:*, @aws-amplify/auth@npm:3.4.30":
   version: 3.4.30
   resolution: "@aws-amplify/auth@npm:3.4.30"
   dependencies:
@@ -70,7 +70,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/cache@npm:3.1.55":
+"@aws-amplify/cache@npm:*, @aws-amplify/cache@npm:3.1.55":
   version: 3.1.55
   resolution: "@aws-amplify/cache@npm:3.1.55"
   dependencies:
@@ -79,7 +79,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:3.8.22":
+"@aws-amplify/core@npm:*, @aws-amplify/core@npm:3.8.22":
   version: 3.8.22
   resolution: "@aws-amplify/core@npm:3.8.22"
   dependencies:
@@ -111,7 +111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/interactions@npm:3.3.30":
+"@aws-amplify/interactions@npm:*, @aws-amplify/interactions@npm:3.3.30":
   version: 3.3.30
   resolution: "@aws-amplify/interactions@npm:3.3.30"
   dependencies:
@@ -154,7 +154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/storage@npm:3.4.0":
+"@aws-amplify/storage@npm:*, @aws-amplify/storage@npm:3.4.0":
   version: 3.4.0
   resolution: "@aws-amplify/storage@npm:3.4.0"
   dependencies:
@@ -936,6 +936,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-sdk/fetch-http-handler@npm:*":
+  version: 3.13.1
+  resolution: "@aws-sdk/fetch-http-handler@npm:3.13.1"
+  dependencies:
+    "@aws-sdk/protocol-http": 3.13.1
+    "@aws-sdk/querystring-builder": 3.13.1
+    "@aws-sdk/types": 3.13.1
+    "@aws-sdk/util-base64-browser": 3.13.1
+    tslib: ^2.0.0
+  checksum: c01050da500b0b2a968124fe25d01ad63c533f274cf719325fc6416f72814de94760f6d17ef83934e83b1bbde9d2c442f08274dc257d1d2a56aff54f2bb7502f
+  languageName: node
+  linkType: hard
+
 "@aws-sdk/fetch-http-handler@npm:3.6.1":
   version: 3.6.1
   resolution: "@aws-sdk/fetch-http-handler@npm:3.6.1"
@@ -1214,6 +1227,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-sdk/protocol-http@npm:*, @aws-sdk/protocol-http@npm:3.13.1":
+  version: 3.13.1
+  resolution: "@aws-sdk/protocol-http@npm:3.13.1"
+  dependencies:
+    "@aws-sdk/types": 3.13.1
+    tslib: ^2.0.0
+  checksum: 28b80b03c5d818a268ce290bc699ae34bb398736c5571475b5599cc52d1244ee9fa25c8686eeae716c4e23f5cb65d57890038815a9c93fac359111f4dd8db923
+  languageName: node
+  linkType: hard
+
 "@aws-sdk/protocol-http@npm:3.6.1":
   version: 3.6.1
   resolution: "@aws-sdk/protocol-http@npm:3.6.1"
@@ -1221,6 +1244,17 @@ __metadata:
     "@aws-sdk/types": 3.6.1
     tslib: ^1.8.0
   checksum: dfedb6d9c78339743426995d73fff4fdb7c4ce38af4be729e895e8542de40bd86d822eeb0d4acb67752b566e4d84de767191e4e387e6c8beed52f902063331a5
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/querystring-builder@npm:*, @aws-sdk/querystring-builder@npm:3.13.1":
+  version: 3.13.1
+  resolution: "@aws-sdk/querystring-builder@npm:3.13.1"
+  dependencies:
+    "@aws-sdk/types": 3.13.1
+    "@aws-sdk/util-uri-escape": 3.13.1
+    tslib: ^2.0.0
+  checksum: af9590000c04e4b571d95d7e329dae44d3e7b7d4e057ce276fe2624788994aa4faa8f2fef61503998a8229abf1de220a708128d07f12f5f96e8ece3477c59150
   languageName: node
   linkType: hard
 
@@ -1300,6 +1334,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-sdk/types@npm:3.13.1, @aws-sdk/types@npm:^3.1.0":
+  version: 3.13.1
+  resolution: "@aws-sdk/types@npm:3.13.1"
+  checksum: 3901289c676a8dc2578ff81612aca167a97bb8addc3290d84fb8272203056554e3ec1a6039a7f887e34feeea73f068bd2e9abb8e0da4910de91d3fd90fa3abb0
+  languageName: node
+  linkType: hard
+
 "@aws-sdk/types@npm:3.6.1":
   version: 3.6.1
   resolution: "@aws-sdk/types@npm:3.6.1"
@@ -1311,13 +1352,6 @@ __metadata:
   version: 1.0.0-rc.10
   resolution: "@aws-sdk/types@npm:1.0.0-rc.10"
   checksum: 93de0a1f2d12dbe3c9ff02209afdfbc880db4e62567eda2e0ce71eb11f33be923298ab0eb21972cc780cc716f577770ac82b4119546584372f83f3006b481f28
-  languageName: node
-  linkType: hard
-
-"@aws-sdk/types@npm:^3.1.0":
-  version: 3.13.1
-  resolution: "@aws-sdk/types@npm:3.13.1"
-  checksum: 3901289c676a8dc2578ff81612aca167a97bb8addc3290d84fb8272203056554e3ec1a6039a7f887e34feeea73f068bd2e9abb8e0da4910de91d3fd90fa3abb0
   languageName: node
   linkType: hard
 
@@ -1350,6 +1384,15 @@ __metadata:
   dependencies:
     tslib: ^1.8.0
   checksum: 53783442881da40f318239390dcdd5efe5d83856559da64bd3873e1eabeedbf2ef15981976a5e6dbd6f65567c0779b23cabae3076453991bb77d14bccee6ee4e
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/util-base64-browser@npm:3.13.1":
+  version: 3.13.1
+  resolution: "@aws-sdk/util-base64-browser@npm:3.13.1"
+  dependencies:
+    tslib: ^2.0.0
+  checksum: 1456a08c2608e7846a320aa09b1f18cbf4d26154096e51063642e00fe328368e92b6354c8fcefa4ecd71d05b7b8ebe40feb65b55753034e6a47e4953d49a8612
   languageName: node
   linkType: hard
 
@@ -1438,6 +1481,15 @@ __metadata:
   dependencies:
     tslib: ^2.0.0
   checksum: f915188d0a32a2e75ceefc43d53a4c0490086087f31e1e376a9256efd4f4318b54d0ae94ef9a08cc4e220aaca8703262ff346a836998df9ed63bfd84b27b4b5a
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/util-uri-escape@npm:3.13.1":
+  version: 3.13.1
+  resolution: "@aws-sdk/util-uri-escape@npm:3.13.1"
+  dependencies:
+    tslib: ^2.0.0
+  checksum: 0f90e92609774b20f609b9e5f8ff046c31ae6f902a9f4c06669e071c117ec6b884cf19699336ac067e9339fee452eaf61e7ae60b5314784d6456a9f7bd4aa103
   languageName: node
   linkType: hard
 
@@ -4620,6 +4672,7 @@ __metadata:
     "@testing-library/user-event": ^12.1.10
     aws-amplify: ^3.3.27
     eslint: ^7.25.0
+    eslint-config-react-app: ^6.0.0
     prettier: ^2.2.1
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -6550,6 +6603,13 @@ __metadata:
     randombytes: ^2.0.0
     randomfill: ^1.0.3
   checksum: 8b558367b3759652b7c8dfd8fa0dc55a69362ae3efe039ac44d4b010bc63143708f4748ef8efc079945bf61dbc53c829cda968cd2abc1f34fcf43f669a414f73
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:*":
+  version: 4.0.0
+  resolution: "crypto-js@npm:4.0.0"
+  checksum: fdd1415b9e4b317f6ac7f055a00495dabea6aa93ab82ccd63866b0a76d2da9587942764816a8a7976cb23b8bbfd7eea23ccb852b3fef218d166cc5db8c008ab3
   languageName: node
   linkType: hard
 
