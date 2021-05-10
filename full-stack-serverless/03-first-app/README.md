@@ -91,4 +91,15 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
 
   - The fields of GraphQL object types eventually resolve to _concrete data_. These are scalar types: the leaves of the query.
 
+- The [`useReducer`] hook
+
+  - `useReducer` is usually preferable to `useState` when you have _complex state logic_ that involves _multiple sub-values_ or when the next state depends on the previous one. `useReducer` also lets you optimize performance for components that trigger _deep updates_ because you can pass dispatch down instead of callbacks.
+
+- Using the [Amplify GraphQL client] to fetch data: `API.graphql(…)`
+
+- Leveraging the Ant Design [`List` component]
+
+  [`list` component]: https://ant.design/components/list/
+  [`usereducer`]: https://reactjs.org/docs/hooks-reference.html#usereducer
+  [amplify graphql client]: https://docs.amplify.aws/lib/graphqlapi/query-data/q/platform/js
   [graphql scalar types]: https://graphql.org/learn/schema/#scalar-types
