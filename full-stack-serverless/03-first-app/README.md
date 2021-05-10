@@ -37,7 +37,34 @@ Build a notes app that will allow users to create, update, and delete notes.
      - Data model / base types
      - Operations
        - Queries: fetch data.
+         ```graphql
+         query listNotes {
+           listNotes(filter: { completed: { eq: false } }, limit: 1) {
+             items {
+               id
+               name
+               description
+             }
+           }
+         }
+         ```
        - Mutations: create, update, and delete data.
+         ```graphql
+         mutation createNote {
+           createNote(
+             input: {
+               name: "Book flight"
+               description: "Flying to Paris on June 1 returning June 10"
+               completed: false
+             }
+           ) {
+             id
+             name
+             description
+             completed
+           }
+         }
+         ```
        - Subscriptions: subscribe to changes in real time.
 
 2. Resolvers
