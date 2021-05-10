@@ -18,3 +18,42 @@ Build a notes app that will allow users to create, update, and delete notes.
 
 </p>
 </details>
+
+## GraphQL
+
+### What is GraphQL?
+
+- API specification
+- Query language for APIs
+- Runtime for fulfilling queries with the data
+- Define the structure of data required from an API call
+
+### What makes up a GraphQL API?
+
+1. Schema
+
+   - Written in GraphQL Schema Definition Language (SDL)
+   - Defines
+     - Data model / base types
+     - Operations
+       - Queries: fetch data.
+       - Mutations: create, update, and delete data.
+       - Subscriptions: subscribe to changes in real time.
+
+2. Resolvers
+
+3. Data sources
+
+#### GraphQL server
+
+Leverage **AWS AppSync** to deploy the GraphQL API, resolvers, and data sources via the Amplify CLI.
+
+#### The `@model` directive
+
+Part of the AWS Amplify GraphQl Transform library, the `@model` directive expands the base type into an AWS AppSync GraphQL API, adding
+
+1. Schema definitions for queries (Read, List)
+2. Schema definitions for mutations (Create, Update, and Delete)
+3. Schema definitions for subscriptions
+4. DynamoDB database
+5. Resolver code mapping all the GraphQL ops to the DynamoDB database
