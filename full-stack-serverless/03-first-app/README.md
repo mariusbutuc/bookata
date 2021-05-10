@@ -57,3 +57,11 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
 3. Schema definitions for subscriptions
 4. DynamoDB database
 5. Resolver code mapping all the GraphQL ops to the DynamoDB database
+
+## Extra
+
+- [GraphQL scalar types]
+
+  - The fields of GraphQL object types eventually resolve to _concrete data_. These are scalar types: the leaves of the query.
+
+  [graphql scalar types]: https://graphql.org/learn/schema/#scalar-types
