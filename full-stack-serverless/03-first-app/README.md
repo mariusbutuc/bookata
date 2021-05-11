@@ -2,7 +2,7 @@
 
 ![27.27%](https://progress-bar.dev/27/)
 
-### Goals:
+### Goals
 
 Build a notes app that will allow users to create, update, and delete notes.
 
@@ -85,7 +85,7 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
 4. DynamoDB database
 5. Resolver code mapping all the GraphQL ops to the DynamoDB database
 
-## Extra
+## Takeaways
 
 - [GraphQL scalar types]
 
@@ -98,6 +98,12 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
 - Using the [Amplify GraphQL client] to fetch data: `API.graphql(…)`
 
 - Leveraging the Ant Design [`List` component]
+
+- [Optimistic response]
+
+  > […] we are updating the local state before the API call is successful. […] It is done because we want the UI to be fast and to update as soon as the user adds a new note.
+  >
+  > If the API call fails, you can then implement some functionality in the `catch` block to notify the user […]
 
   [`list` component]: https://ant.design/components/list/
   [`usereducer`]: https://reactjs.org/docs/hooks-reference.html#usereducer
