@@ -16,7 +16,10 @@ import { listNotes } from './graphql/queries';
 // The GraphQL mutation operation for creating a new Note
 // TODO: Understand why we use the "class name" alias below. Because of the `createNote` function?
 //       And why not for the `listNotes` query operation?
-import { createNote as CreateNote } from './graphql/mutations';
+import {
+  createNote as CreateNote,
+  deleteNote as DeleteNote,
+} from './graphql/mutations';
 
 const CLIENT_ID = uuid();
 
@@ -71,7 +74,26 @@ export default function App() {
       });
       console.log('Successfully created note!');
     } catch (err) {
-      console.lo('error: ', err);
+      console.log('error: ', err);
+      // TODO: Consider dispatching an Error here?
+      // dispatch({ type: ERROR_EVENT });
+    }
+  }
+
+  async function deleteNote({ id }) {
+    const index = state.notes.findIndex((note) => note.id === id);
+    const notes = [
+      ...state.notes.slice(0, index),
+      ...state.notes.slice(index + 1),
+    ];
+    // update local state & show an optimistic response
+    dispatch({ type: SET_NOTES_EVENT, notes });
+
+    try {
+      await API.graphql({ query: DeleteNote, variables: { input: { id } } });
+      console.log('Successfully deleted note!');
+    } catch (err) {
+      console.log('error: ', err);
       // TODO: Consider dispatching an Error here?
       // dispatch({ type: ERROR_EVENT });
     }
@@ -109,7 +131,14 @@ export default function App() {
 
   function renderItem(item) {
     return (
-      <List.Item style={styles.item}>
+      <List.Item
+        style={styles.item}
+        actions={[
+          <p style={styles.p} onClick={() => deleteNote(item)}>
+            Delete
+          </p>,
+        ]}
+      >
         <List.Item.Meta title={item.name} description={item.description} />
       </List.Item>
     );
