@@ -4,7 +4,7 @@
 
 - [x] 1. [Full Stack Development in the Era of Serverless Computing][01-full-stack-dev-in-serverless-era]
 - [x] 2. [Getting Started with AWS Amplify][02-getting-started]
-- [ ] 3. [Creating Your First App][03-first-app]
+- [x] 3. [Creating Your First App][03-first-app]
 - [ ] 4. Introduction to Authentication
 - [ ] 5. Custom Authentication Strategies
 - [ ] 6. Serverless Functions In-Depth: Part 1

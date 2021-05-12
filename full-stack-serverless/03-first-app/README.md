@@ -85,6 +85,14 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
 4. DynamoDB database
 5. Resolver code mapping all the GraphQL ops to the DynamoDB database
 
+<details><summary>Screenshot</summary>
+<p>
+
+![React_App](https://user-images.githubusercontent.com/511893/117908393-55e02400-b2a6-11eb-8796-8e117dfb0e17.png)
+
+</p>
+</details>
+
 ## Takeaways
 
 - [GraphQL scalar types]
@@ -104,6 +112,42 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
   > […] we are updating the local state before the API call is successful. […] It is done because we want the UI to be fast and to update as soon as the user adds a new note.
   >
   > If the API call fails, you can then implement some functionality in the `catch` block to notify the user […]
+
+### List Notes (GraphQL query)
+
+- the `useReducer` hook
+- Using the Amplify GraphQL client to fetch data: `API.graphql(…)`
+- the Ant Design `List` component
+
+### Create Notes (GraphQL mutation)
+
+- the form to create a new note
+- the function to update the state as the user types into the form
+- the function to
+  - add the new note to the UI and
+  - send an API call to create a new note
+
+### Delete Notes (GraphQL mutation)
+
+- `deleteNote` function to delete the note both
+  - from the UI and
+  - from the GraphQL API
+- button in each note to invoke `deleteNote`.
+
+### Update Notes (GraphQL mutation)
+
+- `updateNote` function to update the note
+  - in the UI and
+  - in the GraphQL API
+- button in each note to invoke `updateNote`.
+
+### Real-Time Data (GraphQL subscriptions)
+
+Add ability to subscribe to updates in real time: adding a new Note.
+
+- the app receives the new Note
+- update the Notes array with the new Note
+- render the updated notes array on the screen
 
   [`list` component]: https://ant.design/components/list/
   [`usereducer`]: https://reactjs.org/docs/hooks-reference.html#usereducer

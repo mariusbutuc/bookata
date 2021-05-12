@@ -13,7 +13,7 @@ import 'antd/dist/antd.css';
 // The GraphQL query operation for fetching an array of notes
 import { listNotes } from './graphql/queries';
 
-// The GraphQL mutation operation for creating a new Note
+// The GraphQL mutation operations for Notes
 // TODO: Understand why we use the "class name" alias below. Because of the `createNote` function?
 //       And why not for the `listNotes` query operation?
 import {
@@ -21,6 +21,9 @@ import {
   deleteNote as DeleteNote,
   updateNote as UpdateNote,
 } from './graphql/mutations';
+
+// The GraphQL mutation operation for creating a new Note
+import { onCreateNote } from './graphql/subscriptions';
 
 const CLIENT_ID = uuid();
 
@@ -143,6 +146,19 @@ export default function App() {
   //      additional renders. If the array contains values and those values change, the component will re-render.
   useEffect(() => {
     fetchNotes();
+
+    // Subscribe to the onCreateNote event
+    const subscription = API.graphql({ query: onCreateNote }).subscribe({
+      next: (noteData) => {
+        const note = noteData.value.data.onCreateNote;
+        // If our Client created the Note, we return without going any further
+        if (CLIENT_ID === note.clientId) return;
+        // Otherwise, dispatch the ADD_NOTE action, passing in the Note data from the subscription
+        dispatch({ type: ADD_NOTE_EVENT, note });
+      },
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   function onChange(e) {
