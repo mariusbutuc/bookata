@@ -14,4 +14,8 @@ build an application that demonstrates
 - _authentication_, and
 - _protected routes_.
 
+### Takeaways
+
+- Deploying the authentication service using `amplify push` generates no artefacts to be peristed in source control.
+
 [↗]: https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/library/view/full-stack-serverless/9781492059882/ch04.html
