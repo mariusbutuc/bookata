@@ -11,6 +11,8 @@ function Protected(props) {
       .catch(() => {
         props.history.push("/profile");
       });
+    // FIXME: Understand the implications of disabling the warning below
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
