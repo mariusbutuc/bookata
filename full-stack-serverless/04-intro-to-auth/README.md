@@ -14,6 +14,13 @@ build an application that demonstrates
 - _authentication_, and
 - _protected routes_.
 
+<details>
+  <summary>Screenshot</summary>
+
+![FSS#04 Intro to Authentication](https://user-images.githubusercontent.com/511893/118343020-608ff880-b4f4-11eb-9ac2-c160882b4421.png)
+
+</details>
+
 ### Extra takeaways
 
 - Deploying the authentication service using `amplify push` generates no artefacts to be peristed in source control.
