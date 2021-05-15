@@ -7,7 +7,7 @@ const Container = ({ children }) => (
 const styles = {
   container: {
     margin: "0 auto",
-    padding: "50px, 100px",
+    padding: "50px 100px",
   },
 };
 
