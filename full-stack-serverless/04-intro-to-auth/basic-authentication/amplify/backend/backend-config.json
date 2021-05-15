@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "authappd23bc1f5": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

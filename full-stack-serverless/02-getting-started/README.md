@@ -1,6 +1,4 @@
-# Getting Started with AWS Amplify
-
-![18.18%](https://progress-bar.dev/18/)
+# [Getting Started with AWS Amplify][↗️] ![18.18%](https://progress-bar.dev/18/)
 
 ### Goals:
 
@@ -31,5 +29,5 @@
 
   - PR opened after #14 in the meantime: https://github.com/aws-amplify/amplify-js/pull/8219
 
-  [↗️]: https://learning.oreilly.com/library/view/full-stack-serverless/9781492059882/
+  [↗️]: https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/library/view/full-stack-serverless/9781492059882/ch02.html
   [external api]: https://www.coinlore.com/cryptocurrency-data-api

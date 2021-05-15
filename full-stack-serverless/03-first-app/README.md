@@ -1,6 +1,4 @@
-# Creating Your First App
-
-![27.27%](https://progress-bar.dev/27/)
+# [Creating our First App][↗] ![27.27%](https://progress-bar.dev/27/)
 
 ### Goals
 
@@ -14,7 +12,7 @@ Build a notes app that will allow users to create, update, and delete notes.
 <details><summary>Screenshot</summary>
 <p>
 
-![React_App](https://user-images.githubusercontent.com/511893/117550403-329b4780-b00e-11eb-94f1-f19dd5d2a67e.png)
+![React_App](https://user-images.githubusercontent.com/511893/117908393-55e02400-b2a6-11eb-8796-8e117dfb0e17.png)
 
 </p>
 </details>
@@ -107,7 +105,7 @@ Part of the AWS Amplify GraphQl Transform library, the `@model` directive expand
 
 - Leveraging the Ant Design [`List` component]
 
-- [Optimistic response]
+- Optimistic response
 
   > […] we are updating the local state before the API call is successful. […] It is done because we want the UI to be fast and to update as soon as the user adds a new note.
   >
@@ -149,6 +147,7 @@ Add ability to subscribe to updates in real time: adding a new Note.
 - update the Notes array with the new Note
 - render the updated notes array on the screen
 
+  [↗]: https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/library/view/full-stack-serverless/9781492059882/ch03.html
   [`list` component]: https://ant.design/components/list/
   [`usereducer`]: https://reactjs.org/docs/hooks-reference.html#usereducer
   [amplify graphql client]: https://docs.amplify.aws/lib/graphqlapi/query-data/q/platform/js
