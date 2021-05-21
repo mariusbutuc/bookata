@@ -16,7 +16,7 @@ Build upon the app completed in [the previous chapter][04-intro-to-auth].
 <details>
   <summary>Screenshot</summary>
 
-![FSS#05 Custom Authentication Strategies](https://i.imgur.com/OvMZBs9.jpg)
+![FSS#05 Custom Authentication Strategies](https://user-images.githubusercontent.com/511893/119075105-3e97e980-b9be-11eb-95e6-1d256364b8cf.png))
 
 </details>
 
