@@ -22,7 +22,13 @@ Build upon the app completed in [the previous chapter][04-intro-to-auth].
 
 ### Extra takeaways
 
-- TBD…
+- As of React v17, `e.persist()` doesn’t do anything because the `SyntheticEvent` is [no longer pooled][react-v17-no-event-pooling].
+- **Q:** Why name a component `ForgotPassword` if it enables the user to act and `ResetPassword`?
+
+  - **A:** Because that's what the method on the `Auth` class from AWS Amplify is called. Is this reason enough though? 🤔
+
+- Amplify has a _local eventing system_ called `Hub`.
 
   [↗]: https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/library/view/full-stack-serverless/9781492059882/ch05.html
   [04-intro-to-auth]: 04-intro-to-auth
+  [react-v17-no-event-pooling]: https://reactjs.org/blog/2020/08/10/react-v17-rc.html#no-event-pooling
