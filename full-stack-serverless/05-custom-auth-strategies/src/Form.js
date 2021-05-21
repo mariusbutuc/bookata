@@ -15,6 +15,14 @@ const initialFormState = {
   confirmationCode: '',
 };
 
+const FORM_TYPE = {
+  signUp: 'signUp',
+  confirmSignUp: 'confirmSignUp',
+  signIn: 'signIn',
+  resetPassword: 'resetPassword',
+  resetPasswordSubmit: 'resetPasswordSubmit',
+};
+
 function Form(props) {
   const [formType, updateFormType] = useState('signIn');
   const [formState, updateFormState] = useState(initialFormState);
@@ -43,7 +51,7 @@ function Form(props) {
    */
   function renderForm() {
     switch (formType) {
-      case 'signUp':
+      case FORM_TYPE.signUp:
         return (
           <SignUp
             signUp={() => signUp(formState, updateFormType)}
@@ -51,7 +59,7 @@ function Form(props) {
           />
         );
 
-      case 'confirmSignUp':
+      case FORM_TYPE.confirmSignUp:
         return (
           <ConfirmSignUp
             confirmSignUp={() => confirmSignUp(formState, updateFormType)}
@@ -59,7 +67,7 @@ function Form(props) {
           />
         );
 
-      case 'signIn':
+      case FORM_TYPE.signIn:
         return (
           <SignIn
             signIn={() => signIn(formState, props.setUser)}
@@ -67,7 +75,7 @@ function Form(props) {
           />
         );
 
-      case 'resetPassword':
+      case FORM_TYPE.resetPassword:
         return (
           <ResetPassword
             resetPassword={() => resetPassword(formState, updateFormType)}
@@ -75,7 +83,7 @@ function Form(props) {
           />
         );
 
-      case 'resetPasswordSubmit':
+      case FORM_TYPE.resetPasswordSubmit:
         return (
           <ResetPasswordSubmit
             resetPasswordSubmit={() =>
@@ -93,21 +101,24 @@ function Form(props) {
   return (
     <div>
       {renderForm()}
-      {formType === 'signUp' && (
+      {formType === FORM_TYPE.signUp && (
         <p style={styles.toggleForm}>
           Already have an account?{' '}
-          <span style={styles.anchor} onClick={() => updateFormType('signIn')}>
+          <span
+            style={styles.anchor}
+            onClick={() => updateFormType(FORM_TYPE.signIn)}
+          >
             Sign In
           </span>
         </p>
       )}
-      {formType === 'signIn' && (
+      {formType === FORM_TYPE.signIn && (
         <>
           <p style={styles.toggleForm}>
             Need an account?{' '}
             <span
               style={styles.anchor}
-              onClick={() => updateFormType('signUp')}
+              onClick={() => updateFormType(FORM_TYPE.signUp)}
             >
               Sign Up
             </span>
@@ -116,7 +127,7 @@ function Form(props) {
             Forgot your password?{' '}
             <span
               style={styles.anchor}
-              onClick={() => updateFormType('resetPassword')}
+              onClick={() => updateFormType(FORM_TYPE.resetPassword)}
             >
               Reset Password
             </span>
@@ -131,7 +142,7 @@ async function signUp({ username, password, email }, updateFormType) {
   try {
     await Auth.signUp({ username, password, attributes: { email } });
     console.log('Sign up success!');
-    updateFormType('confirmSignUp');
+    updateFormType(FORM_TYPE.confirmSignUp);
   } catch (err) {
     console.log('Error signing up: ', err);
   }
@@ -140,7 +151,7 @@ async function signUp({ username, password, email }, updateFormType) {
 async function confirmSignUp({ username, confirmationCode }, updateFormType) {
   try {
     await Auth.confirmSignUp(username, confirmationCode);
-    updateFormType('signIn');
+    updateFormType(FORM_TYPE.signIn);
   } catch (err) {
     console.log('Error signing up: ', err);
   }
@@ -161,7 +172,7 @@ async function signIn({ username, password }, setUser) {
 async function resetPassword({ username }, updateFormType) {
   try {
     await Auth.forgotPassword(username);
-    updateFormType('forgotPasswordSubmit');
+    updateFormType(FORM_TYPE.resetPasswordSubmit);
   } catch (err) {
     console.log('Error submitting username to reset password: ', err);
   }
@@ -173,7 +184,7 @@ async function resetPasswordSubmit(
 ) {
   try {
     await Auth.forgotPasswordSubmit(username, confirmationCode, password);
-    updateFormType('signIn');
+    updateFormType(FORM_TYPE.signIn);
   } catch (err) {
     console.log('Error updating password: ', err);
   }
