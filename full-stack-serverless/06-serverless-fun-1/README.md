@@ -30,9 +30,7 @@ Instead of using the serverless functions as strictly a web server or an API, th
 
 ### Extra takeaways
 
-- Event sources for serverless functions
-
-  - an event-based architecture
+- Event-based architecture: different event sources emit different event types with different shapes of data / data structures. This also reflects in the data available in the event.
 
   [↗]: https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/library/view/full-stack-serverless/9781492059882/ch06.html
   [02-getting-started]: 02-getting-started
