@@ -10,6 +10,16 @@
       "StackName": "amplify-06serverlessfun1-dev-101150",
       "StackId": "arn:aws:cloudformation:us-east-1:382760315432:stack/amplify-06serverlessfun1-dev-101150/7e438030-bef5-11eb-9fe4-12bdd946785e",
       "AmplifyAppId": "d3asdqpmx1alrx"
+    },
+    "categories": {
+      "function": {
+        "06serverlessfun1e1bf7103PostConfirmation": {
+          "GROUP": "Admin"
+        }
+      },
+      "auth": {
+        "06serverlessfun1e1bf7103": {}
+      }
     }
   }
 }
