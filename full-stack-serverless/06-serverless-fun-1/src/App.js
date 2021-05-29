@@ -12,6 +12,18 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  return (
+    <div className="App">
+      <header>
+        <h1>Hello World</h1>
+        {_isAdmin(user) && <p>Welcome, Admin</p>}
+      </header>
+      <AmplifySignOut />
+    </div>
+  );
+}
+
+function _isAdmin(user) {
   let isAdmin = false;
 
   if (user) {
@@ -30,15 +42,7 @@ function App() {
     }
   }
 
-  return (
-    <div className="App">
-      <header>
-        <h1>Hello World</h1>
-        {isAdmin && <p>Welcome, Admin</p>}
-      </header>
-      <AmplifySignOut />
-    </div>
-  );
+  return isAdmin;
 }
 
 export default withAuthenticator(App);
