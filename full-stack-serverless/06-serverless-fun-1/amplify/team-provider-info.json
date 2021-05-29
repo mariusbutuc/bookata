@@ -16,7 +16,7 @@
         "06serverlessfun1e1bf7103PostConfirmation": {
           "GROUP": "Admin",
           "deploymentBucketName": "amplify-06serverlessfun1-dev-101150-deployment",
-          "s3Key": "amplify-builds/06serverlessfun1e1bf7103PostConfirmation-32423375313248626f62-build.zip"
+          "s3Key": "amplify-builds/06serverlessfun1e1bf7103PostConfirmation-54373130724e725a5673-build.zip"
         }
       },
       "auth": {
