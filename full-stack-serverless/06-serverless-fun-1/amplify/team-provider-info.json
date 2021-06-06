@@ -17,6 +17,10 @@
           "GROUP": "Admin",
           "deploymentBucketName": "amplify-06serverlessfun1-dev-101150-deployment",
           "s3Key": "amplify-builds/06serverlessfun1e1bf7103PostConfirmation-54373130724e725a5673-build.zip"
+        },
+        "S3Trigger520bec93": {
+          "deploymentBucketName": "amplify-06serverlessfun1-dev-101150-deployment",
+          "s3Key": "amplify-builds/S3Trigger520bec93-3548443546326d4a6f55-build.zip"
         }
       },
       "auth": {
