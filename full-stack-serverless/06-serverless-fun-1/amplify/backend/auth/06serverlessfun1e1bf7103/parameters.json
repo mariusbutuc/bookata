@@ -1,6 +1,6 @@
 {
     "identityPoolName": "06serverlessfun1e1bf7103_identitypool_e1bf7103",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "06serve1bf7103",
     "userPoolName": "06serverlessfun1e1bf7103_userpool_e1bf7103",
     "autoVerifiedAttributes": [
