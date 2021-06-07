@@ -24,7 +24,7 @@ Instead of using the serverless functions as strictly a web server or an API, th
 <details>
   <summary>Screenshot</summary>
 
-![FSS#06 Serverless Functions In-Depth: Part 1](https://i.imgur.com/OvMZBs9.jpg))
+![FSS#06 Serverless Functions In-Depth: Part 1](https://user-images.githubusercontent.com/511893/120945321-921c6e00-c706-11eb-8c23-a63b618689fe.png)
 
 </details>
 
@@ -32,16 +32,27 @@ Instead of using the serverless functions as strictly a web server or an API, th
 
 - Event-based architecture: different event sources emit different event types with different shapes of data / data structures. This also reflects in the data available in the event.
 
+#### Adding a Post-Confirmation Lambda Trigger
+
+Functionality to be added:
+
+1. Create an authentication service ([`amplify add auth`](https://github.com/mariusbutuc/bookata/pull/19/commits/3dd171f)).
+1. Create and configure a post-confirmation Lambda trigger.
+   - Invoke the Lambda function every time someone signs up and successfully confirms their account using the authentication service.
+   - 💡 _As simple as creating the authentication service with the right configuration through Amplify CLI._
+1. Add the new user to the group called `Admins` if their email attribute is [included in the `adminEmails` array](https://github.com/mariusbutuc/bookata/pull/19/commits/2ac6ac8).
+1. Greet the user [if they are an Admin](https://github.com/mariusbutuc/bookata/pull/19/commits/49f16d8).
+
 #### Dynamic Image Resizing with AWS Lambda and Amazon S3
 
 Functionality to be added:
 
-1. Upload images to S3
-1. Configure S3 trigger to call Lambda function on every new file upload to bucket
+1. Upload images to S3 (using the `Storage` API).
+1. Configure S3 trigger to call Lambda function on every new file upload to bucket.
 
-   - As simple as creating the S3 bucket with the right configuration through Amplify CLI.
+   - 💡 _As simple as creating the S3 bucket with the right configuration through Amplify CLI._
 
-1. Resize image to fit below the width threshold
+1. Resize image to fit below the width threshold (using the `sharp` library).
 
 [↗]: https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/library/view/full-stack-serverless/9781492059882/ch06.html
 [02-getting-started]: 02-getting-started
