@@ -10,11 +10,14 @@
   > The goal of this book is to avoid confusion in the learning process by putting things in a sequence:
   > a learning roadmap.
 
-- [ ] 2. JavaScript for React
+- [x] 2. [JavaScript for React][02-js-for-react]
 
-  - A JavaScript syntax baseline, good for working with React: [02-js-for-react]
+  - A JavaScript syntax baseline, good for working with React.
 
-- [ ] 3. Functional Programming with JavaScript
+- [ ] 3. [Functional Programming with JavaScript][03-functional-js]
+
+  > Functional programming techniques are being used more and more in JavaScript projects, particularly React projects.
+
 - [ ] 4. How React Works
 - [ ] 5. React with JSX
 - [ ] 6. React State Management
@@ -26,4 +29,5 @@
 - [ ] 12. React and the Server
 
   [02-js-for-react]: 02-js-for-react
+  [03-functional-js]: 03-functional-js
   [book]: https://www.oreilly.com/library/view/learning-react-2nd/9781492051718/
