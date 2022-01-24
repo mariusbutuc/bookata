@@ -1,12 +1,12 @@
 # Elixir for Programmers, Second Edition [↗][course]
 
-![0%](https://progress-bar.dev/0)
+![17%](https://progress-bar.dev/17)
 
 > Elixir, Phoenix, and LiveView, paced for folks who can already program.
 
 ## The Hangman Game - The Plan
 
-- [ ] 1.  The dictionary module
+- [x] 1.  The dictionary module
 
   - It lets us select a random word for our game
 
