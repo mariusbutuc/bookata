@@ -1,6 +1,6 @@
 # Elixir for Programmers, Second Edition [↗][course]
 
-![17%](https://progress-bar.dev/17)
+![33%](https://progress-bar.dev/33)
 
 > Elixir, Phoenix, and LiveView, paced for folks who can already program.
 
@@ -10,7 +10,7 @@
 
   - It lets us select a random word for our game
 
-- [ ] 2. The game logic
+- [x] 2. The game logic
 
   - Separate application + manage dependencies
   - Split code into small modules using the _Single Responsibility Principle_

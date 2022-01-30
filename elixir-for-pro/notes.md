@@ -2,9 +2,9 @@
 
 ## ✅ 01. Welcome to Elixir for Programmers
 
-## ✅ 02. Getting
+## ✅ 02. Getting Started
 
-## ✅ 03. Our First Project
+## ✅ 03. Our First Project: The Dictionary
 
 ```ex
 h File.read/1
@@ -166,6 +166,95 @@ String.split(eg, ~r/\n/, trim: true)
 
 ## 06. Let's Start Coding
 
+- Hangman game logic
+
+  - Organization / Architecture / Design
+
+    - Be strict about separating the API from the implementation.
+    - Enforce a rule: Every function does just one thing; it is responsible for a single transformation
+    - Good design: **cohesion** / **Single Responsibility Principle**
+      - easier to change code
+      - changes tend to be localized
+      - a change is less likely to impact other areas of functionality
+
+  - The API; the way applications comunicate
+
+    - APIs with state
+
+      - state is an implementation detail
+        - _easy_ to build UI from state, but also _inflexible_ (high coupling: UI to a particular implementation)
+      - **opaque** to the users of the API
+      - can change implementation without changing clients
+      - state is represented by a token, similar to how a web app is using cookies
+
+    - `Hangman.make_move/2` returns
+
+      - `state'`: private » implementation-side value, representing the game
+      - `tally`: public » client-side value, representing the current score, etc.
+
+    - Tightening up the API
+      - with type annotations
+      - help the folks who use our code
+      - give us feedback on possible errors
+
+  - Types, type annotations, and the tools that go with them
+
+    - Dyalizer
+
+      - Static type analyzer for Elixir & Erlang
+      - works OK with regular code
+      - works better with _annotated_ code
+
+    - Adding _[typespecs]_ makes it easier for other people (future me included) to see what the _intent_ is
+
+    - Creating types informs the designs
+
+      - Similarly to how writing **tests** helps **clarify thinking**.
+      - Working out the **types** of the functions gets me thinking about
+        - **what** they do and
+        - **how** they do it.
+      - Help maintain APIs as tight as possible:
+        - writing out types explicitly helps me see when I'm leaking implementation details out to the client.
+
+  - Code patterns
+
+    - Logic lives in `lib/impl` rather than `lib/hangman`, as it allows for more semantically refined code spliting by concern
+      - 💛 Remember to **separate** API from implementation
+      - use `defdelegate` to make this separation easier
+    - Module naming and using `alias`
+    - [Structures][structs]
+      - `defstruct …` can optionally give each field an initial value
+      - Their structure cannot be changed at runtime, like maps can
+      - Always associated with a module
+        - Using `__MODULE__` makes changing the module name seamless
+      - Purpose: hold the data processed by that module's functions (e.g., the internal game state)
+      - Exporting a type `t` to describe the struct
+      - `@opaque` types communicate that the internals of the type should remain private from anyone importing it.
+
+  - Dependencies
+
+    - Local `path: …` dependencies
+    - [Dependency documentation][deps]
+
+  - Using [guards] to further augment pattern matching
+
+    - I also try to avoid **conditional logic** inside functions
+      - Use multiple function heads with single purpose each, together with pattern matching and guards instead
+      - I also noticed that this technique tends to improve the maintainability of the code
+      - 👃 **code smell**: I find myself writting `if` or `cond`. Am I polluting the function with multiple responsibilities?
+
+  - The Single Responsibility Principle
+
+    - Bob Martin states this as "it has just one reason to change."
+    - Conditional statements are an indication that you're doing two things.
+    - Fixing this will sometimes involve writing a new helper function. This is a _good thing_.
+
+  - Possible benefits of using `MapSet` instead of a `List`:
+    - Me: more efficient lookups: `MapSet.member/2` over `Enum.member?/2` on lists.
+    - Me: more idiomatic/intent-revealing `MapSet.equal?/2` instead of `Enum.sort(l1) == Enum.sort(l2)`
+    - +Dave's: set-like use-case: unique entries + ability to test for membership.
+    - +Dave's: Choosing the **highest level of abstraction** for the given use-case
+
 ## 07. Write a Text-based Client
 
 ## 08. Refactor the Dictionary
@@ -197,3 +286,8 @@ String.split(eg, ~r/\n/, trim: true)
 ## 21. Hangamn Using LiveView
 
 ## 22. It's a Wrap
+
+[deps]: https://hexdocs.pm/mix/Mix.Tasks.Deps.html
+[guards]: https://hexdocs.pm/elixir/patterns-and-guards.html#guards
+[structs]: https://elixir-lang.org/getting-started/structs.html
+[typespecs]: https://hexdocs.pm/elixir/typespecs.html
