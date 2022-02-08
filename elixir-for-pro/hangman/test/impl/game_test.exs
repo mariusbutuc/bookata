@@ -44,6 +44,13 @@ defmodule Hangman.Impl.GameTest do
     end
   end
 
+  test "validate that a guess is a single lowercase ASCII character" do
+    game = Game.new_game()
+
+    {game, _tally} = Game.make_move(game, "xyz")
+    assert game.game_state == :bad_guess
+  end
+
   test "a duplicate letter is reported" do
     game = Game.new_game()
 
@@ -90,8 +97,8 @@ defmodule Hangman.Impl.GameTest do
     assert tally.game_state == :bad_guess
   end
 
+  # hello
   test "can handle a sequence of moves" do
-    # hello
     [
       # To describe a move, why use a list instead of a map?
       # e.g., %{guess: "a", state: :bad_guess, turns: 6, letters: ["_", "_", "_", "_", "_"], used: ["a"]}
@@ -99,6 +106,33 @@ defmodule Hangman.Impl.GameTest do
       ["a", :already_used, 6, ["_", "_", "_", "_", "_"], ["a"]],
       ["e", :good_guess, 6, ["_", "e", "_", "_", "_"], ["a", "e"]],
       ["x", :bad_guess, 5, ["_", "e", "_", "_", "_"], ["a", "e", "x"]]
+    ]
+    |> test_sequence_of_moves()
+  end
+
+  test "can handle a winning game" do
+    [
+      ["a", :bad_guess, 6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["e", :good_guess, 6, ["_", "e", "_", "_", "_"], ["a", "e"]],
+      ["i", :bad_guess, 5, ["_", "e", "_", "_", "_"], ["a", "e", "i"]],
+      ["o", :good_guess, 5, ["_", "e", "_", "_", "o"], ~w{a e i o}],
+      ["l", :good_guess, 5, ["_", "e", "l", "l", "o"], ~w{a e i l o}],
+      ["h", :won, 5, ["h", "e", "l", "l", "o"], ~w{a e h i l o}]
+    ]
+    |> test_sequence_of_moves()
+  end
+
+  test "can handle a losing game" do
+    [
+      ["a", :bad_guess, 6, ["_", "_", "_", "_", "_"], ["a"]],
+      ["b", :bad_guess, 5, ["_", "_", "_", "_", "_"], ["a", "b"]],
+      ["c", :bad_guess, 4, ["_", "_", "_", "_", "_"], ["a", "b", "c"]],
+      ["d", :bad_guess, 3, ["_", "_", "_", "_", "_"], ~w{a b c d}],
+      ["e", :good_guess, 3, ["_", "e", "_", "_", "_"], ~w{a b c d e}],
+      ["f", :bad_guess, 2, ["_", "e", "_", "_", "_"], ~w{a b c d e f}],
+      ["g", :bad_guess, 1, ["_", "e", "_", "_", "_"], ~w{a b c d e f g}],
+      ["h", :good_guess, 1, ["h", "e", "_", "_", "_"], ~w{a b c d e f g h}],
+      ["i", :lost, 0, ["h", "e", "_", "_", "_"], ~w{a b c d e f g h i}]
     ]
     |> test_sequence_of_moves()
   end
