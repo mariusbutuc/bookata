@@ -1,6 +1,6 @@
 # Elixir for Programmers, Second Edition [↗][course]
 
-![42%](https://progress-bar.dev/42)
+![44%](https://progress-bar.dev/44)
 
 > Elixir, Phoenix, and LiveView, paced for folks who can already program.
 
