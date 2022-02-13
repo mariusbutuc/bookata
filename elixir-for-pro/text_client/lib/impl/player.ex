@@ -18,19 +18,20 @@ defmodule TextClient.Impl.Player do
   end
 
   def interact({_game, _tally = %{game_state: :lost, letters: letters}}) do
-    IO.puts("Sorry, you lost. The word was #{letters |> Enum.join()}.")
+    IO.puts(~s{Sorry, you lost. The word was "#{letters |> Enum.join()}".})
   end
 
-  def interact(_state = {_game, tally}) do
-    # feedback
+  def interact({game, tally}) do
     tally
     |> feedback_for()
     |> IO.puts()
 
-    # display current word
-    # get next guess
-    # make move
-    # interact()
+    tally
+    |> current_word()
+    |> IO.puts()
+
+    Hangman.make_move(game, get_guess())
+    |> interact()
   end
 
   defp feedback_for(_tally = %{game_state: :initializing, letters: letters}) do
@@ -43,4 +44,22 @@ defmodule TextClient.Impl.Player do
     do: "Sorry, this letter is not in the word."
 
   defp feedback_for(_tally = %{game_state: :already_used}), do: "You already used this letter."
+
+  defp current_word(tally) do
+    [
+      "Word so far: ",
+      tally.letters |> Enum.join(" "),
+      "   turns left: ",
+      tally.turns_left |> to_string(),
+      "   used so far: ",
+      tally.used |> Enum.join(" ")
+    ]
+  end
+
+  defp get_guess() do
+    "Next letter: "
+    |> IO.gets()
+    |> String.trim()
+    |> String.downcase()
+  end
 end
