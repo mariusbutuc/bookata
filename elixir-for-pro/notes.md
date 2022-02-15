@@ -273,6 +273,7 @@ String.split(eg, ~r/\n/, trim: true)
   - Rewriting functions into a tail-call recursive form. Sometimes worth it, sometimes not.
 
 - Top-down approach:
+
   - Declare the desired public interface / "endpoints".
   - Add some comments/pseudocode.
   - Allow this exploration to inform the structure of the module, the structure of the state we need to keep, etc.
@@ -288,6 +289,12 @@ String.split(eg, ~r/\n/, trim: true)
   - Leverage the list of atoms from (Hangman's `state` type)[hangman/lib/type.ex].
     - Guide the incremental addition of functionality.
     - Ensure all the options are covered.
+
+- [Homework](https://codestool.coding-gnome.com/courses/take/elixir-for-programmers-2/texts/29541835-finish-up-the-text-client)
+
+  > (Difficult) If you'd like an interesting challenge, write another application where the computer plays the hangman game. For a simple implementation you could just blindly guess letters, starting at the most frequent.
+  >
+  > You could then optimize it by looking at the possible words. You'll need to add a new API function to the dictionary to return all the words of a given length. You can then use that list to decide which letter will give you the most information based on the current game state.
 
 ## 08. Refactor the Dictionary
 

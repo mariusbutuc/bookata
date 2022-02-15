@@ -49,10 +49,22 @@ defmodule TextClient.Impl.Player do
     [
       "Word so far: ",
       tally.letters |> Enum.join(" "),
-      "   turns left: ",
+      # Colour: #2a4
+      apply(IO.ANSI, :color, rgb_255_to_5(34, 170, 68)),
+      "   (turns left: ",
+      # Colour: #1bb
+      apply(IO.ANSI, :color, rgb_255_to_5(17, 187, 187)),
       tally.turns_left |> to_string(),
-      "   used so far: ",
-      tally.used |> Enum.join(" ")
+      # Colour: #2a4
+      apply(IO.ANSI, :color, rgb_255_to_5(34, 170, 68)),
+      ", used: ",
+      # Colour: #bb1
+      apply(IO.ANSI, :color, rgb_255_to_5(187, 187, 17)),
+      tally.used |> Enum.join(", "),
+      # Colour: #2a4
+      apply(IO.ANSI, :color, rgb_255_to_5(34, 170, 68)),
+      ")",
+      IO.ANSI.reset()
     ]
   end
 
@@ -62,4 +74,14 @@ defmodule TextClient.Impl.Player do
     |> String.trim()
     |> String.downcase()
   end
+
+  defp rgb_255_to_5(red, green, blue) do
+    [
+      base_255_to_5(red),
+      base_255_to_5(green),
+      base_255_to_5(blue)
+    ]
+  end
+
+  defp base_255_to_5(base_255), do: round(base_255 * 5 / 255)
 end

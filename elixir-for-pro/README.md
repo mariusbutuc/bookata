@@ -1,6 +1,6 @@
 # Elixir for Programmers, Second Edition [↗][course]
 
-![44%](https://progress-bar.dev/44)
+![45%](https://progress-bar.dev/45)
 
 > Elixir, Phoenix, and LiveView, paced for folks who can already program.
 
@@ -15,7 +15,7 @@
   - Separate application + manage dependencies
   - Split code into small modules using the _Single Responsibility Principle_
 
-- [ ] 3. The text-based client
+- [x] 3. The text-based client
 
   - Maintain _application state_ in _a functional language_
 
