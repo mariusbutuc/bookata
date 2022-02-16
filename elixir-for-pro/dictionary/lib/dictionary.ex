@@ -1,11 +1,11 @@
 defmodule Dictionary do
   alias Dictionary.Impl.WordList
 
-  @opaque state :: list(String.t())
+  @opaque t :: WordList.t()
 
-  @spec start() :: state()
-  defdelegate start(), to: WordList
+  @spec start() :: t
+  defdelegate start(), to: WordList, as: :word_list
 
-  @spec random_word(state()) :: String.t()
+  @spec random_word(t) :: String.t()
   defdelegate random_word(word_list), to: WordList
 end
