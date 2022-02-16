@@ -12,14 +12,9 @@ defmodule TextClient.Impl.Markup do
     color_components =
       hex
       |> extract_rgb(String.length(hex))
-
-      # Convert hex to decimal
       |> Enum.map(fn hex -> String.to_integer(hex, 16) end)
-
-      # Convert decimal to "base 5"
       |> Enum.map(&base_255_to_5/1)
 
-    # Apply RGB color array
     apply(IO.ANSI, :color, color_components)
   end
 
