@@ -164,7 +164,7 @@ String.split(eg, ~r/\n/, trim: true)
 - List and recursion
   - A list is either `[]` or `[h|t]`.
 
-## 06. Let's Start Coding: The Hangman Game Logic
+## ✅ 06. Let's Start Coding: The Hangman Game Logic
 
 - Organization / Architecture / Design
 
@@ -261,7 +261,7 @@ String.split(eg, ~r/\n/, trim: true)
   - This failing test tells me exactly where I am
   - A great way to recapture context
 
-## 07. Write a Text-based Client
+## ✅ 07. Write a Text-based Client
 
 > To iterate is human, to recurse, divine.
 
@@ -296,7 +296,7 @@ String.split(eg, ~r/\n/, trim: true)
   >
   > You could then optimize it by looking at the possible words. You'll need to add a new API function to the dictionary to return all the words of a given length. You can then use that list to decide which letter will give you the most information based on the current game state.
 
-## 08. Refactor the Dictionary
+## ✅ 08. Refactor the Dictionary
 
 ## 09. Process and Maintaining State
 
