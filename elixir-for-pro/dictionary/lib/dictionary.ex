@@ -1,15 +1,11 @@
 defmodule Dictionary do
-  @doc """
-  Compile the word list file [1] into a list of words.
+  alias Dictionary.Impl.WordList
 
-    [1]: https://coding-gnome.com/courses/e4p2/assets/words.txt
-  """
-  @word_list "assets/words.txt"
-             |> File.read!()
-             |> String.split(~r{\n}, trim: true)
+  @opaque state :: list(String.t())
 
-  def random_word do
-    @word_list
-    |> Enum.random()
-  end
+  @spec start() :: state()
+  defdelegate start(), to: WordList
+
+  @spec random_word(state()) :: String.t()
+  defdelegate random_word(word_list), to: WordList
 end
