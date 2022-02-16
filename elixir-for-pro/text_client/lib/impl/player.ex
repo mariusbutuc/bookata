@@ -61,7 +61,7 @@ defmodule TextClient.Impl.Player do
       tally.used |> Enum.join(", "),
       Markup.color("#2a4"),
       ")",
-      IO.ANSI.reset()
+      Markup.reset()
     ]
   end
 

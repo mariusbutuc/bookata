@@ -23,6 +23,8 @@ defmodule TextClient.Impl.Markup do
     apply(IO.ANSI, :color, color_components)
   end
 
+  defdelegate reset(), to: IO.ANSI
+
   defp extract_rgb(hex, _length = 4) do
     hex
     |> String.trim("#")
