@@ -298,7 +298,33 @@ String.split(eg, ~r/\n/, trim: true)
 
 ## ✅ 08. Refactor the Dictionary
 
-## 09. Process and Maintaining State
+## 09. Processes and Maintaining State
+
+> Elixir's concurrency model is based on messages being passed between independent processes.
+
+- In this context, a process is internal to the Elixir runtime system.
+
+  - Different from the OS process.
+  - Much more efficient.
+
+### [`spawn`]: Create a new process
+
+```ex
+1..100_000
+|> Enum.each(fn _ -> spawn(fn -> Process.sleep(5000) end) end)
+```
+
+- `spawn` runs a function in a separate process. It takes either an annonymous function or an MFA.
+
+- When we ran 10 processes, our code looked like:
+
+  ```ex
+  1..10 |> Enum.each(fn idx -> spawn(Procs, :hello, ["#{idx} world!"]) end)
+  ```
+
+  Why did we need to wrap the `spawn` in a function?
+
+- Elixir processes are _cheap_. You can create one in less than 10µS, and each takes less than 3k of memory (including their initial heap and stack).
 
 ## 10. Use an Agent for the Dictionary
 
@@ -326,6 +352,7 @@ String.split(eg, ~r/\n/, trim: true)
 
 ## 22. It's a Wrap
 
+[`spawn`]: https://hexdocs.pm/elixir/Kernel.html#spawn/1
 [deps]: https://hexdocs.pm/mix/Mix.Tasks.Deps.html
 [guards]: https://hexdocs.pm/elixir/patterns-and-guards.html#guards
 [structs]: https://elixir-lang.org/getting-started/structs.html
