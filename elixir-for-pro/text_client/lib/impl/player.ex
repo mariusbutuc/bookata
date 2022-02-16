@@ -1,4 +1,6 @@
 defmodule TextClient.Impl.Player do
+  alias TextClient.Impl.Markup
+
   @typep game :: Hangman.game()
   @typep tally :: Hangman.tally()
   @typep state :: {game, tally}
@@ -49,20 +51,15 @@ defmodule TextClient.Impl.Player do
     [
       "Word so far: ",
       tally.letters |> Enum.join(" "),
-      # Colour: #2a4
-      apply(IO.ANSI, :color, rgb_255_to_5(34, 170, 68)),
+      Markup.color("#2a4"),
       "   (turns left: ",
-      # Colour: #1bb
-      apply(IO.ANSI, :color, rgb_255_to_5(17, 187, 187)),
+      Markup.color("#1bb"),
       tally.turns_left |> to_string(),
-      # Colour: #2a4
-      apply(IO.ANSI, :color, rgb_255_to_5(34, 170, 68)),
+      Markup.color("#2a4"),
       ", used: ",
-      # Colour: #bb1
-      apply(IO.ANSI, :color, rgb_255_to_5(187, 187, 17)),
+      Markup.color("#bb1"),
       tally.used |> Enum.join(", "),
-      # Colour: #2a4
-      apply(IO.ANSI, :color, rgb_255_to_5(34, 170, 68)),
+      Markup.color("#2a4"),
       ")",
       IO.ANSI.reset()
     ]
@@ -74,14 +71,4 @@ defmodule TextClient.Impl.Player do
     |> String.trim()
     |> String.downcase()
   end
-
-  defp rgb_255_to_5(red, green, blue) do
-    [
-      base_255_to_5(red),
-      base_255_to_5(green),
-      base_255_to_5(blue)
-    ]
-  end
-
-  defp base_255_to_5(base_255), do: round(base_255 * 5 / 255)
 end
