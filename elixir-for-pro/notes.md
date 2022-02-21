@@ -354,6 +354,48 @@ iex()> Process.alive?(pid)
 - Can you think of a good argument to wrap all messages in tuples (e.g., `{ :reset }` or `{ :quit }`)?
 - Can you think of a good reason not to (e.g., `:reset` or `:quit`)?
 
+### Linking processes together
+
+```ex
+iex> h exit
+iex> h spawn_link
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, :kaboom})
+** (EXIT from #PID<0.160.0>) shell process exited with reason: :kaboom
+iex> Process.alive?(pid)
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, :normal})
+iex> Process.alive?(pid)
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, :shutdown})
+** (EXIT from #PID<0.193.0>) shell process exited with reason: shutdown
+iex> Process.alive?(pid)
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, {:shutdown, 42}})
+** (EXIT from #PID<0.204.0>) shell process exited with reason: shutdown: 42
+```
+
+- `spawn` creates an isolated process.
+- `spawn_linked` links the creating and created processes
+
+  > If one dies an abnormal death, the other is killed
+
+  - Avoids zombies
+
+#### Seeking **high availability**?
+
+> The trick is knowing how to crash, and when.
+
+But first, let's have a look at `Agent`s…
+
+#### Homework
+
+- [ ] Spawn of the Dead
+
 ## 10. Use an Agent for the Dictionary
 
 ## 11. Applications: Making our Code Independent

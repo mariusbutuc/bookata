@@ -1,6 +1,9 @@
 defmodule Procs do
   def greeter(count) when count |> is_number() do
     receive do
+      {:crash, reason} ->
+        exit(reason)
+
       {:quit} ->
         IO.puts("I'm outta here!")
 
