@@ -326,6 +326,18 @@ String.split(eg, ~r/\n/, trim: true)
 
 - Elixir processes are _cheap_. You can create one in less than 10µS, and each takes less than 3k of memory (including their initial heap and stack).
 
+### Messages: `send` and `receive`
+
+```ex
+iex()> h send
+iex()> h receive
+
+iex()> pid = spawn(Procs, :greeter, ["Salut"])
+iex()> send(pid, "world!")
+iex()> send(pid, "again")
+iex()> Process.alive?(pid)
+```
+
 ## 10. Use an Agent for the Dictionary
 
 ## 11. Applications: Making our Code Independent
