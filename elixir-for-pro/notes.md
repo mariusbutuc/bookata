@@ -338,6 +338,22 @@ iex()> send(pid, "again")
 iex()> Process.alive?(pid)
 ```
 
+### Pattern matching messages
+
+- Background process
+
+  - Maintain state by passing it as a parameter in the recursive call.
+  - Update state when handling the message.
+
+- Messages: tuples with a verb and value(s).
+
+- 💡 Maintain code **symmetry** (e.g., across function clauses.)
+
+#### Homework:
+
+- Can you think of a good argument to wrap all messages in tuples (e.g., `{ :reset }` or `{ :quit }`)?
+- Can you think of a good reason not to (e.g., `:reset` or `:quit`)?
+
 ## 10. Use an Agent for the Dictionary
 
 ## 11. Applications: Making our Code Independent

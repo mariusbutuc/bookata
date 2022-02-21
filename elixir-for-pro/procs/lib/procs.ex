@@ -1,11 +1,22 @@
 defmodule Procs do
-  def greeter(what_to_say) when what_to_say |> is_binary() do
+  def greeter(count) when count |> is_number() do
     receive do
-      msg ->
-        IO.puts("#{what_to_say}: #{inspect(msg)}")
-    end
+      {:quit} ->
+        IO.puts("I'm outta here!")
 
-    # Tail recursion is memory efficient
-    greeter(what_to_say)
+      {:reset} ->
+        greeter(0)
+
+      {:add, n} ->
+        greeter(count + n)
+
+      msg ->
+        IO.puts("#{count}: Hello #{inspect(msg)}")
+
+        # Remember: function acting as a loop
+        #           Tail recursion
+        #           Memory efficient
+        greeter(count)
+    end
   end
 end
