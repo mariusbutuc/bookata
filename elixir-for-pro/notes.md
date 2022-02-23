@@ -396,6 +396,35 @@ But first, let's have a look at `Agent`s…
 
 - [ ] Spawn of the Dead
 
+### Agents: An abstraction over state
+
+Abstraction paralel: passing functions to `Enum.map/2`
+
+| Data structure knowledge                                           | Domain/Business knowledge                                          |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| The fact that we have a `List`                                     | What we do to that `List`                                          |
+| `Enum.map/2` knows how to ennumerate over the elements in a `List` | The function does what we need it to do to the individual elements |
+| Have a generic background process: `Agent`                         | Pass in functions to manipulate its state                          |
+
+```ex
+iex> h Agent.start_link
+iex> {:ok, counter} = Agent.start_link(fn -> 0 end)
+
+iex> h Agent.get
+iex> Agent.get(counter, fn state -> state end)
+
+iex> h Agent.update
+iex> Agent.update(counter, fn state -> state + 1 end)
+
+iex> h Agent.get_and_update
+iex> Agent.get_and_update(counter, fn state -> {state, state + 1} end)
+```
+
+- Benefits: Concurrence + fault tolerance. System performance.
+- Beware: Writing OO language using Elixir syntax.
+
+> 💡 The use of an agent is an _implementation_ detail. It should never leak into the rest of your code.
+
 ## 10. Use an Agent for the Dictionary
 
 ## 11. Applications: Making our Code Independent
