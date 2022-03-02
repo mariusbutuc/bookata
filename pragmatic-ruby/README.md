@@ -1,6 +1,6 @@
-# Ruby Programming _(Ruby 3.0)_ [↗][course]
+# Ruby Programming [↗][course]
 
-![0%](https://progress-bar.dev/0)
+![10%](https://progress-bar.dev/10)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -9,7 +9,9 @@
 ## Modules
 
 - [x] 1. Introduction
-- [ ] 2. Running Ruby
+  - When installing Ruby, I prefer `asdf` over `rbenv`: can use this for Elixir and other languages as well.
+- [x] 2. Running Ruby
+  - [VS Code extensions](vs_code_extensions.md)
 - [ ] 3. Numbers and Strings
 - [ ] 4. Variables and Objects
 - [ ] 5. Self
