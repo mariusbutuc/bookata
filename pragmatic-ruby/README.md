@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![10%](https://progress-bar.dev/10)
+![15%](https://progress-bar.dev/15)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -12,7 +12,7 @@
   - When installing Ruby, I prefer `asdf` over `rbenv`: can use this for Elixir and other languages as well.
 - [x] 2. Running Ruby
   - [VS Code extensions](vs_code_extensions.md)
-- [ ] 3. Numbers and Strings
+- [x] 3. Numbers and Strings
 - [ ] 4. Variables and Objects
 - [ ] 5. Self
 - [ ] 6. Methods
