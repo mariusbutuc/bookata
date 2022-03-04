@@ -40,5 +40,6 @@
     {
       "code-runner.clearPreviousOutput": true,
       "code-runner.runInTerminal": true,
+      "code-runner.saveFileBeforeRun": true,
     }
     ```

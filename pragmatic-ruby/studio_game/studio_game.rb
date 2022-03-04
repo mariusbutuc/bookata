@@ -1,26 +1,37 @@
 # frozen_string_literal: true
 
-name = 'larry'
-health = 60
-# player_info = name + '\'s health is ' + health.to_s
-player_info = "#{name}'s health is #{health}"
+puts "\n[welcome] Player 1: Larry!"
+name1 = 'larry'
+health1 = 60
+puts "\t#{name1.capitalize} has a health of #{health1}."
 
-puts player_info
+puts "\n[welcome] Player 2: Curly!"
+name2 = 'curly'
+health2 = 125
+puts "\t#{name2.upcase} has a health of #{health2}."
 
-curly = 'curly'
-moe = 'moe'
-players = "Players:\n\t#{name}\n\t#{curly}\n\t#{moe}"
+puts "\n[caution] ⚠️ effects of passing by \"object reference\""
+health2 = health1
+puts "\t#{name2.upcase} has a health of #{health2} now."
 
-puts players
+puts "\n[caution] ⚠️ effects of passing by \"object reference\""
+health1 = 30
+puts "\t#{name1.capitalize} has a health of #{health1} now."
+puts "\t#{name2.upcase} has a health of #{health2} still."
 
-puts "\n\nSome \"tests\":"
+puts "\n[welcome] Player 3: Moe!"
+name3 = 'moe'
+health3 = 100
+status = "#{name3.capitalize} has a health of #{health3}."
+puts "\t" + status.center(50, '*')
 
-PASS = '✔️✔️'
-FAIL = '💥'
+puts "\n[welcome] Player 4: Shemp!"
+name4 = 'shemp'
+health4 = 90
+formatted_name = name4.capitalize.ljust(30, '.')
+puts "\t#{formatted_name} #{health4} health"
 
-{
-  list_of_players: players == "Players:\n\tlarry\n\tcurly\n\tmoe" ? PASS : FAIL,
-  player_info: player_info == "larry's health is 60" ? PASS : FAIL
-}.each do |assertion, status|
-  puts "\t#{status} #{assertion}"
-end
+puts "\n[welcome] Are we ready to start the Game?"
+current_time = Time.new
+formatted_time = current_time.strftime('%A %m/%d/%Y at %I:%M%p')
+puts "\tThe game started on #{formatted_time}.\n\n"

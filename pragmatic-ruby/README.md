@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![15%](https://progress-bar.dev/15)
+![19%](https://progress-bar.dev/19)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -13,7 +13,7 @@
 - [x] 2. Running Ruby
   - [VS Code extensions](vs_code_extensions.md)
 - [x] 3. Numbers and Strings
-- [ ] 4. Variables and Objects
+- [x] 4. Variables and Objects
 - [ ] 5. Self
 - [ ] 6. Methods
 - [ ] 7. Classes
