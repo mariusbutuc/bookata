@@ -6,8 +6,13 @@ projects = [
   { title: 'XYZ' }
 ]
 
-project = projects.first
-puts "Project #{project[:title]} has $#{project[:funding]} in funding."
+def project_info(title, funding = 0)
+  # If `nil` is passed in, this seems to be a value on its own.
+  #   …so the default parameter value does not work here!
+  funding = 0 if funding.nil?
+  "Project #{title} has $#{funding} in funding."
+end
 
-puts 'Projects:'
-projects.each { |p| puts "\tProject #{p[:title]}" }
+projects.each do |p|
+  puts project_info(p[:title], p[:funding])
+end

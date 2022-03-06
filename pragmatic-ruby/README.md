@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![19%](https://progress-bar.dev/19)
+![26%](https://progress-bar.dev/26)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -14,8 +14,13 @@
   - [VS Code extensions](vs_code_extensions.md)
 - [x] 3. Numbers and Strings
 - [x] 4. Variables and Objects
-- [ ] 5. Self
-- [ ] 6. Methods
+  - Documentation with `RDoc` and `ri`
+  - ⚠️ Effects of [passing by "object reference"](https://stackoverflow.com/a/10974116/341929)
+- [x] 5. Self
+  - The implicit receiver
+- [x] 6. Methods
+  - Lexical scoping
+  - The Single Responsibility Principle
 - [ ] 7. Classes
 - [ ] 8. Attributes
 - [ ] 9. Arrays
