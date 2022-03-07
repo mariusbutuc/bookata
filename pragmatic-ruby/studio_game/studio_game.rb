@@ -1,14 +1,27 @@
 # frozen_string_literal: true
 
-def say_hello(name, health = 100)
-  "[#{time}] Hello #{name.capitalize}, your health is at #{health}."
-end
+require_relative('player')
 
-def time
-  Time.new.strftime('%H:%M:%S')
-end
+# I'm Moe with a health of 100.
+player1 = Player.new('moe')
+puts player1
 
-puts say_hello('larry', 60)
-puts say_hello('curly', 125)
-puts say_hello('moe')
-puts say_hello('shemp', 90)
+# I'm Larry with a health of 60.
+player2 = Player.new('larry', 60)
+puts player2
+
+# I'm Curly with a health of 125.
+player3 = Player.new('curly', 125)
+puts player3
+
+# Curly got blammed!
+player3.blam
+
+# I'm Curly with a health of 115.
+puts player3
+
+# Curly got w00ted!
+player3.w00t
+
+# I'm Curly with a health of 130.
+puts player3

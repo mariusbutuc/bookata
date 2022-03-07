@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![26%](https://progress-bar.dev/26)
+![30%](https://progress-bar.dev/30)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -21,7 +21,9 @@
 - [x] 6. Methods
   - Lexical scoping
   - The Single Responsibility Principle
-- [ ] 7. Classes
+- [x] 7. Classes
+  - Encapsulate state (instance variables) and behaviour (instance methods).
+  - The constructor method, `initialize`, sets up the state for the instance/object.
 - [ ] 8. Attributes
 - [ ] 9. Arrays
 - [ ] 10. Objects Interacting
