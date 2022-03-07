@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![30%](https://progress-bar.dev/30)
+![34%](https://progress-bar.dev/34)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -24,7 +24,8 @@
 - [x] 7. Classes
   - Encapsulate state (instance variables) and behaviour (instance methods).
   - The constructor method, `initialize`, sets up the state for the instance/object.
-- [ ] 8. Attributes
+- [x] 8. Attributes
+  - Expose only as little internal/private state as possible to maintain high flexibility & adaptability to change.
 - [ ] 9. Arrays
 - [ ] 10. Objects Interacting
 - [ ] 11. Separate Source Files

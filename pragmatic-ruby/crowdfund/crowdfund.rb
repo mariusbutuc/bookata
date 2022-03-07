@@ -21,3 +21,10 @@ puts lmn
 
 # Project XYZ has $50 in funding towards a goal of $75.
 puts xyz
+
+# Project ABC has $50 in funding towards a goal of $75.
+xyz.name = 'abc'
+puts xyz
+
+# 2515
+puts lmn.outstanding
