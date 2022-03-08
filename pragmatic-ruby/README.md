@@ -1,10 +1,10 @@
 # Ruby Programming [↗][course]
 
-![34%](https://progress-bar.dev/34)
+![43%](https://progress-bar.dev/43)
 
 > Power up with Ruby and get ready for Rails!
 
-…or, how to get back up to speed with Ruby in half a week or less.
+…or, how to get back up to speed with Ruby in ~23 days~ half a week or less.
 
 ## Modules
 
@@ -29,7 +29,22 @@
 - [x] 9. Arrays
   - One of Ruby's two (2) built-in collection classes.
   - An array is an _ordered_ list of object references.
-- [ ] 10. Objects Interacting
+- [x] 10. Objects Interacting
+
+  - Goal of OOP:
+
+    - identify _categories_ of things and
+    - make _objects_ that represent those things.
+
+  - Design:
+
+    - Start from the interface I wish I could consume
+    - **Tell, Don't Ask** principle
+
+  - Heart of OOP:
+    - Objects collaborating to accomplish something bigger.
+    - More objects talking to more objects.
+
 - [ ] 11. Separate Source Files
 - [ ] 12. Unit Testing
 - [ ] 13. Conditionals and TDD

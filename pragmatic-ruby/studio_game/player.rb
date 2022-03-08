@@ -28,6 +28,13 @@ class Player
     @health + @name.length
   end
 
+  def random_interaction
+    available_actions = %i[blam w00t]
+    random_action = available_actions.sample
+
+    send(random_action)
+  end
+
   def to_s
     "I'm #{@name} with a health of #{@health} and a score of #{score}."
   end
