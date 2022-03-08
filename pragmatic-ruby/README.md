@@ -26,7 +26,9 @@
   - The constructor method, `initialize`, sets up the state for the instance/object.
 - [x] 8. Attributes
   - Expose only as little internal/private state as possible to maintain high flexibility & adaptability to change.
-- [ ] 9. Arrays
+- [x] 9. Arrays
+  - One of Ruby's two (2) built-in collection classes.
+  - An array is an _ordered_ list of object references.
 - [ ] 10. Objects Interacting
 - [ ] 11. Separate Source Files
 - [ ] 12. Unit Testing

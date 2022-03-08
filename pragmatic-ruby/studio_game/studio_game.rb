@@ -2,19 +2,38 @@
 
 require_relative('player')
 
-# Larry
-player2 = Player.new('larry', 60)
-puts player2.name
+players = [
+  Player.new('moe'),
+  Player.new('larry', 60),
+  Player.new('curly', 125)
+]
 
-# Lawrence
-player2.name = 'lawrence'
-puts player2.name
+puts "\nThere are #{players.size} players in the game:"
+# puts players
+players.each do |player|
+  puts "\t#{player}"
+end
 
-# 60
-puts player2.health
+puts "\nHealth Commission Report"
+players.each do |player|
+  puts player.health
+end
 
-# 68
-puts player2.score
+puts "\nRandom acts of …"
+def random_action
+  %i[blam w00t].sample
+end
+players.each do |player|
+  3.times do |_|
+    player.send(random_action)
+  end
 
-# I'm Lawrence with a health of 60 and a score of 68.
-puts player2
+  puts player
+end
+
+players.pop
+players.push(Player.new('shemp', 90))
+puts "\nThere are #{players.size} players in the game:"
+players.each do |player|
+  puts "\t#{player}"
+end

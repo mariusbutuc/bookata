@@ -2,29 +2,15 @@
 
 require_relative('project')
 
-# Project LMN has $500 in funding towards a goal of $3000.
-lmn = Project.new('lmn', 500, 3000)
-puts lmn
+projects = [
+  Project.new('lmn', 500, 3000),
+  Project.new('xyz', 25, 75)
+]
 
-# Project XYZ has $25 in funding towards a goal of $75.
-xyz = Project.new('xyz', 25, 75)
-puts xyz
+puts "\n#{projects.size} projects currently looking to raise money."
+projects.push(Project.new('abc', 17, 42))
 
-# Project LMN lost some funds!
-lmn.remove_funds
-
-# Project XYZ got more funds!
-xyz.add_funds
-
-# Project LMN has $485 in funding towards a goal of $3000.
-puts lmn
-
-# Project XYZ has $50 in funding towards a goal of $75.
-puts xyz
-
-# Project ABC has $50 in funding towards a goal of $75.
-xyz.name = 'abc'
-puts xyz
-
-# 2515
-puts lmn.outstanding
+puts "\n#{projects.size} projects currently looking to raise money."
+projects.each do |project|
+  puts "\t#{project}"
+end
