@@ -40,6 +40,25 @@
     {
       "code-runner.clearPreviousOutput": true,
       "code-runner.runInTerminal": true,
-      "code-runner.saveFileBeforeRun": true,
+      "code-runner.saveAllFilesBeforeRun": false,
+    }
+    ```
+
+- [x] [Ruby Test Explorer](https://marketplace.visualstudio.com/items?itemName=connorshea.vscode-ruby-test-adapter)
+
+  - [RSpec](https://rspec.info/): Behaviour Driven Development for Ruby
+
+    ```sh
+    ➜ gem install rspec
+    ```
+
+  - Custom settings
+
+    ```js
+    {
+      "rubyTestExplorer.logpanel": true,
+      "rubyTestExplorer.rspecCommand": "rspec",
+      "rubyTestExplorer.rspecDirectory": "./",
+      "rubyTestExplorer.testFramework": "rspec",
     }
     ```

@@ -4,7 +4,7 @@
 class Project
   attr_reader :name, :funding, :goal
 
-  def initialize(name, funding, goal)
+  def initialize(name, goal, funding = 0)
     @name = "Project #{name.upcase}"
     @funding = funding
     @goal = goal
@@ -32,3 +32,4 @@ class Project
     "#{@name} has $#{@funding} in funding towards a goal of $#{@goal}."
   end
 end
+# rubocop:enable Style/Documentation
