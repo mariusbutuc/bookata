@@ -39,3 +39,15 @@ class Player
     "I'm #{@name} with a health of #{@health} and a score of #{score}."
   end
 end
+
+if __FILE__ == $PROGRAM_NAME
+  player = Player.new('moe')
+  puts player.name
+  puts player.health
+
+  player.w00t
+  puts player.health
+
+  player.blam
+  puts player.health
+end

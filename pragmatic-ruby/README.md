@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![43%](https://progress-bar.dev/43)
+![47%](https://progress-bar.dev/47)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -45,7 +45,10 @@
     - Objects collaborating to accomplish something bigger.
     - More objects talking to more objects.
 
-- [ ] 11. Separate Source Files
+- [x] 11. Separate Source Files
+  - "Document" classes with example usage code if `__FILE__ == $PROGRAM_NAME`, where:
+    - `__FILE__` = the path of the current source file
+    - `$PROGRAM_NAME` = the path of the Ruby program file being run
 - [ ] 12. Unit Testing
 - [ ] 13. Conditionals and TDD
 - [ ] 14. Modules

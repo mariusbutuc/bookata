@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative('player')
-
 # A collection of Players and some behaviour that lets us play the Game.
 class Game
   attr_reader :title
