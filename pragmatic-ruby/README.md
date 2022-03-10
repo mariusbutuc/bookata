@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![52%](https://progress-bar.dev/52)
+![58%](https://progress-bar.dev/58)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -55,7 +55,16 @@
 
   - [RSpec](https://rspec.info/): domain-specific language for Behaviour Driven Development (BDD) written in Ruby. For describing/specifying/testing the behavior of objects.
 
-- [ ] 13. Conditionals and TDD
+- [x] 13. Conditionals and TDD
+
+  - Benefits of writing _tests first_:
+
+    - **Design** from the outside: before diving into implementation.
+    - Start with a **measurable goal**: focus + know when you're done.
+    - Always have safety nets in place: **confidence**, essential for being **productive**.
+
+  - Interesting caveats on ⚠️ [RSpec: Settings mocks or stubs on _any instance_ of a class](https://github.com/rspec/rspec-mocks/blob/9ed1fdb/README.md#settings-mocks-or-stubs-on-any-instance-of-a-class)
+
 - [ ] 14. Modules
 - [ ] 15. Blocks
 - [ ] 16. Symbols and Structs

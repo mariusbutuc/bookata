@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative('project')
-require_relative('portfolio')
+require_relative 'lib/project'
+require_relative 'lib/portfolio'
 
 smb = Portfolio.new('smb')
 
