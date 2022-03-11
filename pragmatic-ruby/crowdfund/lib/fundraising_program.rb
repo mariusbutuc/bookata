@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../utils/die'
+require_relative 'funding_round'
 
 # A fundraising program is a collection of projects (state) and interactions (behaviour) over them.
 #
@@ -27,10 +27,7 @@ class FundraisingProgram
   # This method smells of :reek:FeatureEnvy
   def simulate
     @projects.each do |project|
-      die = Die.new
-      number_rolled = die.roll
-
-      number_rolled.even? ? project.add_funds : project.remove_funds
+      FundingRound.raise(project)
     end
   end
 

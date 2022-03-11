@@ -13,6 +13,4 @@ game = Game.new('Knuckleheads')
   game.add_player(player)
 end
 
-game.print_status
 game.play
-game.print_status

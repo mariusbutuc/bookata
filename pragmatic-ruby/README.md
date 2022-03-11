@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![58%](https://progress-bar.dev/58)
+![63%](https://progress-bar.dev/63)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -63,9 +63,14 @@
     - Start with a **measurable goal**: focus + know when you're done.
     - Always have safety nets in place: **confidence**, essential for being **productive**.
 
-  - Interesting caveats on ⚠️ [RSpec: Settings mocks or stubs on _any instance_ of a class](https://github.com/rspec/rspec-mocks/blob/9ed1fdb/README.md#settings-mocks-or-stubs-on-any-instance-of-a-class)
+  - ⚠️ Interesting caveats on [RSpec: Settings mocks or stubs on _any instance_ of a class](https://github.com/rspec/rspec-mocks/blob/9ed1fdb/README.md#settings-mocks-or-stubs-on-any-instance-of-a-class)
 
-- [ ] 14. Modules
+- [x] 14. Modules
+
+  > Writing **good code** isn't solely about writing code that **works** and **does what we expect**.  
+  > Writing good code is also about reorganizing and **refactoring** our code as necessary to ensure that we **keep our code tidy**.  
+  > **Clean code** is **easier to change**, and since change is inevitable, it's best if we're prepared for it.
+
 - [ ] 15. Blocks
 - [ ] 16. Symbols and Structs
 - [ ] 17. Hashes
