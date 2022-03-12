@@ -11,6 +11,7 @@ describe Game do
 
   before do
     @game = Game.new('Knuckleheads')
+    @rounds = 2
 
     @initial_health = 100
     @player = Player.new('moe', @initial_health)
@@ -22,9 +23,9 @@ describe Game do
     it 'w00ts the player' do
       allow_any_instance_of(Die).to receive(:roll).and_return(5)
 
-      @game.play
+      @game.play(@rounds)
 
-      expect(@player.health).to eq(@initial_health + 15)
+      expect(@player.health).to eq(@initial_health + 15 * @rounds)
     end
   end
 
@@ -32,7 +33,7 @@ describe Game do
     it 'w00ts the player' do
       allow_any_instance_of(Die).to receive(:roll).and_return(3)
 
-      @game.play
+      @game.play(@rounds)
 
       expect(@player.health).to eq(@initial_health)
     end
@@ -42,9 +43,9 @@ describe Game do
     it 'blams the player' do
       allow_any_instance_of(Die).to receive(:roll).and_return(1)
 
-      @game.play
+      @game.play(@rounds)
 
-      expect(@player.health).to eq(@initial_health - 10)
+      expect(@player.health).to eq(@initial_health - 10 * @rounds)
     end
   end
 end

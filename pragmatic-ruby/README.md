@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![63%](https://progress-bar.dev/63)
+![67%](https://progress-bar.dev/67)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -71,7 +71,14 @@
   > Writing good code is also about reorganizing and **refactoring** our code as necessary to ensure that we **keep our code tidy**.  
   > **Clean code** is **easier to change**, and since change is inevitable, it's best if we're prepared for it.
 
-- [ ] 15. Blocks
+- [x] 15. Blocks & Iterators
+
+  > You'll find blocks _everywhere_ in good Ruby programs.
+
+  - [`Enumerable`](https://ruby-doc.org/core-3.1.1/Enumerable.html)
+
+  - Mastering [Ruby blocks & iterators](https://pragmaticstudio.com/ruby-blocks) is key in becoming an effective Ruby programmer.
+
 - [ ] 16. Symbols and Structs
 - [ ] 17. Hashes
 - [ ] 18. Custom Iterators

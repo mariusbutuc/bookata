@@ -29,7 +29,20 @@ class Player
   end
 
   def strong?
-    @health >= 150
+    @health >= 100
+  end
+
+  def <=>(other)
+    other.score <=> score
+  end
+
+  def name_and_health
+    "#{name} (#{health})"
+  end
+
+  def name_and_score
+    formatted_name = name.ljust(20, '.')
+    "#{formatted_name} #{score}"
   end
 
   def to_s
