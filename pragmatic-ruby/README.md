@@ -79,7 +79,15 @@
 
   - Mastering [Ruby blocks & iterators](https://pragmaticstudio.com/ruby-blocks) is key in becoming an effective Ruby programmer.
 
-- [ ] 16. Symbols and Structs
+- [x] 16. Symbols and Structs
+
+  - `Symbol`: immutable names identifier
+
+  - `Struct`:
+    - lightweight class
+    - collection of attributes
+    - data, without behaviour
+
 - [ ] 17. Hashes
 - [ ] 18. Custom Iterators
 - [ ] 19. Input/Output
