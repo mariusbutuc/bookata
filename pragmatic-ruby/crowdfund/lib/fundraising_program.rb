@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'funding_round'
+require_relative 'pledge_pool'
 
 # A fundraising program is a collection of projects (state) and interactions (behaviour) over them.
 #
@@ -18,17 +19,28 @@ class FundraisingProgram
     @projects.push(project)
   end
 
-  def showcase
-    puts self
-    @projects.each { |project| puts "\t#{project}" }
-    puts
+  def brief
+    status = [to_s]
+
+    @projects.reduce(status) { |stats, project| stats << project }
+
+    status.push(PledgePool.status)
+
+    puts status
   end
 
-  # This method smells of :reek:FeatureEnvy
   def simulate
+    puts "\nLet the market simulation begin:"
     @projects.each do |project|
       FundingRound.raise(project)
     end
+  end
+
+  def debrief
+    status = ["\nAt the end of the day, the portfolio looks like this:"]
+    @projects.reduce(status) { |stats, project| stats << project }
+
+    puts status
   end
 
   def to_s

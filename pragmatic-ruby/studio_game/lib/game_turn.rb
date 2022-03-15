@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../utils/die'
+require_relative 'treasure_trove'
 
 # A game turn involves rolling the die and updating the player
 module GameTurn
@@ -15,5 +16,14 @@ module GameTurn
     else
       player.w00t
     end
+
+    find_treasure(player)
+  end
+
+  # "private" 😊
+
+  def self.find_treasure(player)
+    treasure = TreasureTrove.random
+    puts "#{player.name} found a #{treasure.name} worth #{treasure.points} points."
   end
 end

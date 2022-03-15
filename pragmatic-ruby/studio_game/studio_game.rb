@@ -13,6 +13,8 @@ game = Game.new('Knuckleheads')
   game.add_player(player)
 end
 
+puts game.prelude
+
 game.play(2)
 
-game.print_stats
+puts game.postlude

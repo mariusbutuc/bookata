@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 require_relative 'lib/project'
-require_relative 'lib/portfolio'
+require_relative 'lib/fundraising_program'
 
-smb = Portfolio.new('smb')
+smb = FundraisingProgram.new('smb')
 
 [
-  Project.new('abc', 17, 42),
-  Project.new('lmn', 500, 3000),
-  Project.new('xyz', 25, 75)
+  Project.new('abc', 42, 17),
+  Project.new('lmn', 3000, 500),
+  Project.new('xyz', 75, 25)
 ].each do |project|
   smb.add_project(project)
 end
 
-smb.showcase
+smb.brief
 smb.simulate
-smb.showcase
+smb.debrief

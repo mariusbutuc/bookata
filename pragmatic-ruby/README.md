@@ -1,6 +1,6 @@
 # Ruby Programming [↗][course]
 
-![67%](https://progress-bar.dev/67)
+![71%](https://progress-bar.dev/71)
 
 > Power up with Ruby and get ready for Rails!
 
@@ -84,9 +84,23 @@
   - `Symbol`: immutable names identifier
 
   - `Struct`:
+
     - lightweight class
     - collection of attributes
     - data, without behaviour
+
+  - Takeaways:
+
+    - Differentiate between `Symbol` and `String`
+    - Define a `Struct` and create objects from it
+    - Define constants and access them within a namespace
+    - Further encapsulate code
+
+  > This project […] has incrementally evolved into a full OO program with all the trappings of a "real-world" application!
+
+  - Yet to learn to/refine:
+    - Stop at "good-enough" refactoring stages
+    - Refactorings should _not_ change behaviour (e.g., output vs return string)
 
 - [ ] 17. Hashes
 - [ ] 18. Custom Iterators
