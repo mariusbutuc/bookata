@@ -23,7 +23,6 @@ module GameTurn
   # "private" 😊
 
   def self.find_treasure(player)
-    treasure = TreasureTrove.random
-    puts "#{player.name} found a #{treasure.name} worth #{treasure.points} points."
+    player.found_treasure(TreasureTrove.random)
   end
 end

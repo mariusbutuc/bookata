@@ -1,8 +1,8 @@
 # Ruby Programming [↗][course]
 
-![71%](https://progress-bar.dev/71)
+![73%](https://progress-bar.dev/73)
 
-> Power up with Ruby and get ready for Rails!
+> "Power up with Ruby and get ready for Rails!"
 
 …or, how to get back up to speed with Ruby in ~23 days~ half a week or less.
 
@@ -73,7 +73,7 @@
 
 - [x] 15. Blocks & Iterators
 
-  > You'll find blocks _everywhere_ in good Ruby programs.
+  > "You'll find blocks _everywhere_ in good Ruby programs."
 
   - [`Enumerable`](https://ruby-doc.org/core-3.1.1/Enumerable.html)
 
@@ -96,13 +96,23 @@
     - Define constants and access them within a namespace
     - Further encapsulate code
 
-  > This project […] has incrementally evolved into a full OO program with all the trappings of a "real-world" application!
+  > "This project […] has incrementally evolved into a full OO program with all the trappings of a "real-world" application!"
 
   - Yet to learn to/refine:
     - Stop at "good-enough" refactoring stages
     - Refactorings should _not_ change behaviour (e.g., output vs return string)
 
-- [ ] 17. Hashes
+- [x] 17. Hashes
+
+  > "Look inside almost every Ruby program and you'll find hashes."
+
+  - Create a hash (with default value)
+  - _Insert/put_ key-value pairs into a hash
+  - _Look up (find/get)_ values by indexing into the hash (with the key)
+  - Iterate through a hash
+  - Call methods to manipulate a hash
+  - Write a(nother) virtual accessor/attribute (computed value, not part of instance state)
+
 - [ ] 18. Custom Iterators
 - [ ] 19. Input/Output
 - [ ] 20. Inheritance

@@ -13,8 +13,7 @@ describe Game do
     @game = Game.new('Knuckleheads')
     @rounds = 2
 
-    @initial_health = 100
-    @player = Player.new('moe', @initial_health)
+    @player = Player.new('moe')
 
     @game.add_player(@player)
   end
@@ -25,7 +24,7 @@ describe Game do
 
       @game.play(@rounds)
 
-      expect(@player.health).to eq(@initial_health + 15 * @rounds)
+      expect(@player.health).to eq(100 + 15 * @rounds)
     end
   end
 
@@ -35,7 +34,7 @@ describe Game do
 
       @game.play(@rounds)
 
-      expect(@player.health).to eq(@initial_health)
+      expect(@player.health).to eq(100)
     end
   end
 
@@ -45,8 +44,27 @@ describe Game do
 
       @game.play(@rounds)
 
-      expect(@player.health).to eq(@initial_health - 10 * @rounds)
+      expect(@player.health).to eq(100 - 10 * @rounds)
     end
+  end
+
+  it "assigns a treasure for points during a player's turn" do
+    expect(@player.points).to eq(0)
+
+    @game.play(1)
+
+    expect(@player.points).not_to eq(0)
+  end
+
+  it 'computes total points as the sum of all player points' do
+    player2 = Player.new('larry')
+    @game.add_player(player2)
+
+    @player.found_treasure(Treasure.new(:hammer, 50))
+    @player.found_treasure(Treasure.new(:hammer, 50))
+    player2.found_treasure(Treasure.new(:crowbar, 400))
+
+    expect(@game.total_points).to eq(500)
   end
 end
 # rubocop:enable Metrics/BlockLength

@@ -26,6 +26,16 @@ class Game
     end
   end
 
+  def total_points
+    @players.reduce(0) { |sum, player| sum + player.points }
+  end
+
+  def to_s
+    "Game #{@title} loaded and ready with #{@players.size} players."
+  end
+
+  # TODO: Display-related concerns; consider extracting to mixin?
+
   def prelude
     [to_s] << TreasureTrove.status
   end
@@ -40,12 +50,9 @@ class Game
     stats << player_stats(strong_players, 'strong')
     stats << player_stats(wimpy_players, 'wimpy')
     stats << high_scores
+    stats << "\nTotal treasure value found in this game: #{total_points} 🏆"
 
     stats
-  end
-
-  def to_s
-    "Game #{@title} loaded and ready with #{@players.size} players."
   end
 
   private

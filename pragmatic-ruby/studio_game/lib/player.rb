@@ -7,6 +7,7 @@ class Player
   def initialize(name, health = 100)
     @name = name.capitalize
     @health = health
+    @found_treasures = Hash.new(0)
   end
 
   # "Custom" attr_writter :name
@@ -25,7 +26,7 @@ class Player
   end
 
   def score
-    @health + @name.length
+    @health + points
   end
 
   def strong?
@@ -36,28 +37,32 @@ class Player
     other.score <=> score
   end
 
-  def name_and_health
-    "#{name} (#{health})"
+  def found_treasure(treasure)
+    treasure_name = treasure.name
+    treasure_points = treasure.points
+
+    @found_treasures[treasure_name] += treasure_points
+
+    puts "#{@name} found a #{treasure_name} worth #{treasure_points} points."
+    puts "#{@name}'s treasures: #{@found_treasures}."
   end
 
-  def name_and_score
-    formatted_name = name.ljust(20, '.')
-    "#{formatted_name} #{score}"
+  def points
+    @found_treasures.values.reduce(0, :+)
   end
 
   def to_s
-    "I'm #{@name} with a health of #{@health} and a score of #{score}."
+    "I'm #{@name} with health = #{@health}, points = #{points}, hence score = #{score}."
   end
-end
 
-if __FILE__ == $PROGRAM_NAME
-  player = Player.new('moe')
-  puts player.name
-  puts player.health
+  # TODO: Display concerns, to be mixed in
 
-  player.w00t
-  puts player.health
+  def name_and_health
+    "#{@name} (#{@health})"
+  end
 
-  player.blam
-  puts player.health
+  def name_and_score
+    formatted_name = @name.ljust(20, '.')
+    "#{formatted_name} #{score}"
+  end
 end
