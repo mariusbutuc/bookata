@@ -1,13 +1,13 @@
 # Learn Docker in a Month of Lunches [↗]
 
-![4%](https://progress-bar.dev/4)
+![9%](https://progress-bar.dev/9)
 
 ## The Map
 
 ### Part 1: Understanding Docker **Containers** and **Images**
 
 - [x] 1. Before you begin
-- [ ] 2. Understanding Docker and running Hello World
+- [x] 2. [Understanding Docker and running Hello World](02_hello_docker)
 - [ ] 3. Building your own **Docker images**
 - [ ] 4. **Packaging applications** from source code into Docker Images
 - [ ] 5. Sharing images with Docker Hub and other registries
