@@ -60,6 +60,28 @@ docker container exec \
   --workdir /usr/local/apache2/htdocs \
   sweet_feynman sh
 
+# Hypothesis 5:
+## Experiment: Learn from the author's approach/Sample solution: https://github.com/sixeyed/diamol/tree/master/ch02/lab
+CONTAINER_NAME="sweet_feynman"
+CONTENT_DIRECTORY="/usr/local/apache2/htdocs"
+
+# 1. Run the web container from the chapter exercises:
+docker container run \
+  --detach \
+  --name $CONTAINER_NAME \
+  --publish 8088:80 \
+  diamol/ch02-hello-diamol-web
+
+# 2. [Optional] Check that the HTML page in the container is in the expected location:
+docker container exec \
+  $CONTAINER_NAME \
+  ls $CONTENT_DIRECTORY
+
+# 3. Use `docker container cp` to overwrite the `index.html` file in the container with the one in the current directory
+docker container cp \
+  index.html \
+  $CONTAINER_NAME:${CONTENT_DIRECTORY}/index.html
+
 # Cleanup
 
 # docker container rm --force $(docker container ls --all --quiet)
