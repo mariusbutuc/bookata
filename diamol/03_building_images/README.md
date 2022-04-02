@@ -154,7 +154,7 @@ Order the instructions by how often they change:
   - Use the cache for everything else.
 
 ```sh
-docker image build -t web-ping:v3 .             git:(diamol|●5✚4…1⚑4
+docker image build -t web-ping:v3 .
 [+] Building 0.2s (8/8) FINISHED
  => [internal] load build definition from Dockerfile                                                  0.1s
  => => transferring dockerfile: 376B                                                                  0.0s
