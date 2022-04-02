@@ -150,7 +150,7 @@ Order the instructions by how often they change:
 - Unlikely to change? Move to the top of the file.
 - Most likely to change? Move at the end.
 - Goal:
-  - Most builds should only need to execure the last instruction.
+  - Most builds should **only** need to **execute the last instruction**.
   - Use the cache for everything else.
 
 ```sh
@@ -176,5 +176,63 @@ docker image build -t web-ping:v3 .             git:(diamol|●5✚4…1⚑4
 
 Ensure that the application can read configuration values from the container.
 
-- Faster build times.
-- Deploy to Prod using the exact same image that passed QA in the Test environments.
+- **Faster build** times.
+- Deploy to Prod using **the exact same image** that passed QA in the Test environments.
+
+## Lab #2: How do we produce a Docker image without a Dockerfile?
+
+- The Dockerfile is there to automate the deployment of our app.
+- What if there is a step that cannot be automated/scripted? What if some steps need to be finished off manually?
+
+### Task
+
+1. Start with an image from Docker Hub: `diamol/ch03-lab`.
+
+   - The image contains a file at the path `/diamol/ch03.txt`.
+
+1. Update the text file to add my name at the end.
+
+1. Produce a new image with the changed file.
+
+   - All without using a `Dockerfile`.
+
+### Hints
+
+- Remember the `-it` flags.
+- The filesystem for a container still exists when it is exited.
+- `docker container --help` —there are two commands that could help solve this lab.  
+  Perhaps:
+
+  - `docker container commit` - _Create a new image from a container's changes_
+  - `docker container exec` - _Run a command in a running container_
+
+### My [solution]
+
+```sh
+CONTAINER_NAME="03_lab"
+NAME="Marius"
+TEXT_FILE_PATH="/diamol/ch03.txt"
+
+# 1. Start with an image from Docker Hub: `diamol/ch03-lab`.
+docker container run \
+  --detach \
+  --name $CONTAINER_NAME \
+  diamol/ch03-lab
+
+# 2. Update the text file to add my name at the end.
+docker container exec \
+  -it \
+  --env NAME=$NAME \
+  --env TEXT_FILE_PATH=$TEXT_FILE_PATH \
+  $CONTAINER_NAME sh
+
+echo $NAME >> $TEXT_FILE_PATH
+
+# 3. Produce a new image with the changed file.
+docker container commit \
+  --author "Marius Butuc <contact@mariusbutuc.com>" \
+  $CONTAINER_NAME \
+  $CONTAINER_NAME
+```
+
+[solution]: 03_lab.sh

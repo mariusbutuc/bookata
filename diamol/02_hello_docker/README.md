@@ -54,13 +54,13 @@ Run containers in background
 - batch processes
 - databases
 
-## Lab: Exploring the container filesystem
+## Lab #1: Exploring the container filesystem
 
 ### Task
 
 Run the website container from this chapter, but replace the `index.html` file.
 
-### [solution]
+### My [solution]
 
 ```sh
 docker container run \
