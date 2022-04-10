@@ -1,6 +1,8 @@
 # Learn Docker in a Month of Lunches [↗]
 
-![14%](https://progress-bar.dev/14)
+![18%](https://progress-bar.dev/18)
+
+The majority of the source files are from the book's [code sample repo].
 
 ## The Map
 
@@ -9,7 +11,7 @@
 - [x] 1. Before you begin
 - [x] 2. [Understanding Docker and running Hello World](02_hello_docker)
 - [x] 3. [Building your own **Docker images**](03_building_images)
-- [ ] 4. **Packaging applications** from source code into Docker Images
+- [x] 4. [**Packaging applications** from source code into Docker Images](04_packaging_apps)
 - [ ] 5. Sharing images with Docker Hub and other registries
 - [ ] 6. Using Docker volumes for **persistent storage**
 
@@ -39,3 +41,4 @@
 - [ ] 22. **Never the end**
 
 [↗]: https://www.manning.com/books/learn-docker-in-a-month-of-lunches
+[code sample repo]: https://github.com/sixeyed/diamol
