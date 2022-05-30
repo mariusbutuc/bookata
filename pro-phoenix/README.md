@@ -7,7 +7,7 @@
 ### Part 1: Building with Functional MVC
 
 - [x] 2. The Lay of the Land
-- [ ] 3. Controllers
+- [x] 3. [Controllers](./03_controllers.md)
 - [ ] 4. Ecto and Changesets
 - [ ] 5. Authenticating Users
 - [ ] 6. Generators and Relationships
