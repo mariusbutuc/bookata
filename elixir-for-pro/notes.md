@@ -298,7 +298,132 @@ String.split(eg, ~r/\n/, trim: true)
 
 ## ✅ 08. Refactor the Dictionary
 
-## 09. Process and Maintaining State
+## 09. Processes and Maintaining State
+
+> Elixir's concurrency model is based on messages being passed between independent processes.
+
+- In this context, a process is internal to the Elixir runtime system.
+
+  - Different from the OS process.
+  - Much more efficient.
+
+### [`spawn`]: Create a new process
+
+```ex
+1..100_000
+|> Enum.each(fn _ -> spawn(fn -> Process.sleep(5000) end) end)
+```
+
+- `spawn` runs a function in a separate process. It takes either an annonymous function or an MFA.
+
+- When we ran 10 processes, our code looked like:
+
+  ```ex
+  1..10 |> Enum.each(fn idx -> spawn(Procs, :hello, ["#{idx} world!"]) end)
+  ```
+
+  Why did we need to wrap the `spawn` in a function?
+
+- Elixir processes are _cheap_. You can create one in less than 10µS, and each takes less than 3k of memory (including their initial heap and stack).
+
+### Messages: `send` and `receive`
+
+```ex
+iex()> h send
+iex()> h receive
+
+iex()> pid = spawn(Procs, :greeter, ["Salut"])
+iex()> send(pid, "world!")
+iex()> send(pid, "again")
+iex()> Process.alive?(pid)
+```
+
+### Pattern matching messages
+
+- Background process
+
+  - Maintain state by passing it as a parameter in the recursive call.
+  - Update state when handling the message.
+
+- Messages: tuples with a verb and value(s).
+
+- 💡 Maintain code **symmetry** (e.g., across function clauses.)
+
+#### Homework:
+
+- Can you think of a good argument to wrap all messages in tuples (e.g., `{ :reset }` or `{ :quit }`)?
+- Can you think of a good reason not to (e.g., `:reset` or `:quit`)?
+
+### Linking processes together
+
+```ex
+iex> h exit
+iex> h spawn_link
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, :kaboom})
+** (EXIT from #PID<0.160.0>) shell process exited with reason: :kaboom
+iex> Process.alive?(pid)
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, :normal})
+iex> Process.alive?(pid)
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, :shutdown})
+** (EXIT from #PID<0.193.0>) shell process exited with reason: shutdown
+iex> Process.alive?(pid)
+
+iex> pid = spawn_link(Procs, :greeter, [0])
+iex> send(pid, {:crash, {:shutdown, 42}})
+** (EXIT from #PID<0.204.0>) shell process exited with reason: shutdown: 42
+```
+
+- `spawn` creates an isolated process.
+- `spawn_linked` links the creating and created processes
+
+  > If one dies an abnormal death, the other is killed
+
+  - Avoids zombies
+
+#### Seeking **high availability**?
+
+> The trick is knowing how to crash, and when.
+
+But first, let's have a look at `Agent`s…
+
+#### Homework
+
+- [ ] Spawn of the Dead
+
+### Agents: An abstraction over state
+
+Abstraction paralel: passing functions to `Enum.map/2`
+
+| Data structure knowledge                                           | Domain/Business knowledge                                          |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| The fact that we have a `List`                                     | What we do to that `List`                                          |
+| `Enum.map/2` knows how to ennumerate over the elements in a `List` | The function does what we need it to do to the individual elements |
+| Have a generic background process: `Agent`                         | Pass in functions to manipulate its state                          |
+
+```ex
+iex> h Agent.start_link
+iex> {:ok, counter} = Agent.start_link(fn -> 0 end)
+
+iex> h Agent.get
+iex> Agent.get(counter, fn state -> state end)
+
+iex> h Agent.update
+iex> Agent.update(counter, fn state -> state + 1 end)
+
+iex> h Agent.get_and_update
+iex> Agent.get_and_update(counter, fn state -> {state, state + 1} end)
+```
+
+- Benefits: Concurrence + fault tolerance. System performance.
+- Beware: Writing OO language using Elixir syntax.
+
+> 💡 The use of an agent is an _implementation_ detail. It should never leak into the rest of your code.
 
 ## 10. Use an Agent for the Dictionary
 
@@ -326,6 +451,7 @@ String.split(eg, ~r/\n/, trim: true)
 
 ## 22. It's a Wrap
 
+[`spawn`]: https://hexdocs.pm/elixir/Kernel.html#spawn/1
 [deps]: https://hexdocs.pm/mix/Mix.Tasks.Deps.html
 [guards]: https://hexdocs.pm/elixir/patterns-and-guards.html#guards
 [structs]: https://elixir-lang.org/getting-started/structs.html
