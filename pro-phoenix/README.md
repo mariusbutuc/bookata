@@ -8,7 +8,7 @@
 
 - [x] 2. The Lay of the Land
 - [x] 3. [Controllers](./03_controllers.md)
-- [ ] 4. Ecto and Changesets
+- [x] 4. [Ecto and Changesets](./04_ecto_and_changesets.md)
 - [ ] 5. Authenticating Users
 - [ ] 6. Generators and Relationships
 - [ ] 7. Ecto Queries and Constraints
