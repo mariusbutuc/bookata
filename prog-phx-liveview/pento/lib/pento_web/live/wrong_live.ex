@@ -3,15 +3,13 @@ defmodule PentoWeb.WrongLive do
   #     In Phoenix v1.6+ apps, the line below should be: use MyAppWeb, :live_view
   use PentoWeb, :live_view
 
+  @default_message "Make a guess:"
+
   @doc """
   Establish the initial state for the live view by populating the _socket assigns_.
   """
   def mount(_params, _session, socket) do
-    initial_state =
-      socket
-      |> assign(score: 0, message: "Make a guess:", time: time())
-
-    {:ok, initial_state}
+    {:ok, initial_state(socket)}
   end
 
   @doc """
@@ -22,14 +20,16 @@ defmodule PentoWeb.WrongLive do
     <h1>Your score: <%= @score %></h1>
     <h2>
       <%= @message %>
-      <br />
-      It's <%= @time %>
     </h2>
     <h2>
-      <%= for n <- 1..10 do %>
+      <%= for n <- numbers() do %>
         <a href="#" phx-click="guess" phx-value-number={n}><%= n %></a>
       <% end %>
     </h2>
+
+    <%= live_patch to: Routes.live_path(@socket, __MODULE__), replace: true do %>
+      <button>Restart</button>
+    <% end %>
     """
   end
 
@@ -37,17 +37,42 @@ defmodule PentoWeb.WrongLive do
   Handle the `guess`ing of a given `number`.
   """
   def handle_event("guess", %{"number" => guess} = _data, socket) do
-    message = "Your guess: #{guess}. Wrong. Guess again."
-    score = socket.assigns.score - 1
+    {guess, _remainder} = Integer.parse(guess)
+
+    %{
+      winner: winner,
+      score: score
+    } = socket.assigns
+
+    {message, score} = validate(guess, winner, score)
 
     new_state =
       socket
-      |> assign(message: message, score: score, time: time())
+      |> assign(message: message, score: score)
 
     {:noreply, new_state}
   end
 
-  defp time() do
-    DateTime.utc_now() |> to_string()
+  def handle_params(_params, _uri, socket) do
+    {:noreply, initial_state(socket)}
+  end
+
+  defp numbers, do: 1..10
+
+  defp pick_winner, do: numbers() |> Enum.random()
+
+  defp initial_state(socket) do
+    socket
+    |> assign(score: 0, message: @default_message, winner: pick_winner())
+  end
+
+  defp validate(winner, winner, score) do
+    message = "Your guess: #{winner}. Winner!"
+    {message, score + 10}
+  end
+
+  defp validate(guess, _winner, score) do
+    message = "Your guess: #{guess}. Wrong. Guess again."
+    {message, score - 1}
   end
 end
