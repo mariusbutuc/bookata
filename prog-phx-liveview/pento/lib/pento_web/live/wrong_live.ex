@@ -1,5 +1,7 @@
 defmodule PentoWeb.WrongLive do
-  use Phoenix.LiveView, layout: {PentoWeb.LayoutView, "live.html"}
+  # NB: https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#module-example
+  #     In Phoenix v1.6+ apps, the line below should be: use MyAppWeb, :live_view
+  use PentoWeb, :live_view
 
   @doc """
   Establish the initial state for the live view by populating the _socket assigns_.
