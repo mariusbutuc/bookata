@@ -1,0 +1,3 @@
+.nix-hex/
+!.nix-hex/packages/hexpm/phx_new-1.6.13.tar
+.nix-mix/
