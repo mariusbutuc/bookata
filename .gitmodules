@@ -1,0 +1,3 @@
+[submodule "phoenix-liveview_-_pragstudio/ps_phx_lv"]
+	path = phoenix-liveview_-_pragstudio/ps_phx_lv
+	url = git@github.com:mariusbutuc/ps_phx_lv.git
