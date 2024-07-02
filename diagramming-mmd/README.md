@@ -6,7 +6,7 @@
 
 ### UML
 
-- [ ] 1.  Document the Domain
+- [x] 1.  [Document the Domain](./01-document-domain/) 
 - [ ] 2.  Enhance the Domain Model
 - [ ] 3.  Visualize Application and User Flows
 
