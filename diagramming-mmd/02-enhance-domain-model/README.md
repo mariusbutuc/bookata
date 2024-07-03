@@ -119,3 +119,36 @@ title: Streamy Domain Model
 classDiagram
     Title "0..*" o-- "1..*" Actor: features
 ```
+
+#### Improved readability
+- Styling, spacing, etc.
+
+```mermaid
+---
+title: Streamy Domain Model
+---
+classDiagram
+    Title "0..*" o-- "1..*" Actor: features
+    
+    %% Added to improve readability
+    Title: \n
+    %% style Title fill:#f9f
+```
+
+#### Enrich Nodes with Links
+
+```mermaid
+---
+title: Streamy Domain Model
+---
+classDiagram
+    Title "0..*" o-- "1..*" Actor: features
+    
+    link Title "https://www.imdb.com/" _blank
+```
+
+### Enhance Our Domain Model
++ Add generalizations to show inheritance.
++ Add descriptions to all relationships.
++ Define multiplicity for all relationships,
++ Perhaps link to an external documentation page.
