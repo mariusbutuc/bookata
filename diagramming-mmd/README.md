@@ -6,8 +6,8 @@
 
 ### UML
 
-- [x] 1.  [Document the Domain](./01-document-domain/) 
-- [ ] 2.  Enhance the Domain Model
+- [x] 1.  [Document the Domain](./01-document-domain) 
+- [x] 2.  [Enhance the Domain Model](./02-enhance-domain-model)
 - [ ] 3.  Visualize Application and User Flows
 
 ### C4
